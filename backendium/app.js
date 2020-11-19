@@ -1,3 +1,5 @@
+require('dotenv').config();
+const MongoClient = require('mongodb').MongoClient;
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -40,5 +42,16 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// connect to mongo
+const uri = process.env.MONGO_URI;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  console.log("Connected to MongoDB");
+  // perform actions on the collection object
+  client.close();
+});
+
 
 module.exports = app;

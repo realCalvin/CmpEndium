@@ -5,7 +5,7 @@ const indeed = require('indeed-scraper');
 const queryOptions = {
     host: 'www.indeed.com',
     query: 'software engineer',
-    city: 'Seattle, WA',
+    city: 'san jose, ca',
     radius: '25',
     level: 'entry_level',
     jobType: 'fulltime',
@@ -15,11 +15,11 @@ const queryOptions = {
 };
 
 indeed.query(queryOptions).then(res => {
-    console.log(res); // An array of Job objects
+    //console.log(res); // An array of Job objects
 });
 
 router.get('/', function (req, res, next) {
-    res.send('API is working properly');
+    res.send('API is working properly sike');
 });
 
 module.exports = router;
