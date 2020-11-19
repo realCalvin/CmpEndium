@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './components/Header.js';
+import Home from './components/Home.js';
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +22,11 @@ class App extends Component {
 
   render() {
     return (
-      <p className="App-intro">{this.state.apiResponse}</p>
+      <div className="App">
+        <Header/>
+        <Home/>
+        <p className="App-intro">{this.state.apiResponse}</p>
+    </div>
     );
   }
 }
