@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/Header.js';
-import Home from './components/Home.js';
+import Landing from './pages/landing/Landing.js';
+import Navbar from './components/navbar/Navbar.js';
 
 class App extends Component {
   constructor(props) {
@@ -23,10 +23,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header/>
-        <Home/>
-        <p className="App-intro">{this.state.apiResponse}</p>
-    </div>
+        <Navbar />
+        <Landing />
+      </div>
     );
   }
 }
