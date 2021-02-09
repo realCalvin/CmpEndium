@@ -1,11 +1,12 @@
 import './Navbar.css';
 import { Nav, Navbar } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import Logo from '../../images/logo.png';
 
 function Header() {
     return (
         <Navbar id="transparent-navbar" collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand href="#">
+            <Navbar.Brand href="/">
                 <span className='logo'>
                     <img
                         src={Logo}
@@ -19,10 +20,12 @@ function Header() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="#">Search Jobs</Nav.Link>
-                    <Nav.Link href="/Resumes">Resume</Nav.Link>
-                    <Nav.Link href="#">Account</Nav.Link>
+                    <Link className="nav-link" to="/">Home</Link>
+                    <Link className="nav-link" to="/search">Search Jobs</Link>
+                    <Link className="nav-link" to="/resumes">Resume</Link>
+                    <Link className="nav-link" to="/account">Account</Link>
+                    <Link className="nav-link" to="/signin">Log In</Link>
+                    <Link className="nav-link" to="/signup">Sign Up</Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
