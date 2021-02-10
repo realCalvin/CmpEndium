@@ -2,7 +2,9 @@ import './Landing.css';
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap';
 import Particles from '../../components/particles/particles';
 import Astronaut from '../../images/Astronaut.png';
-import Logo from '../../images/logo.png';
+import Find from '../../images/Find.png';
+import Build from '../../images/Build.png';
+import Track from '../../images/Track.png';
 
 function Landing() {
     return (
@@ -31,12 +33,11 @@ function Landing() {
                 </Row>
                 <Row className="align-items-center" style={{paddingTop: "150px"}}>
                     <Col lg={4}>
-                        <Card>
+                        <Card style={{ backgroundColor: "#FEC272" }}>
                             <Container>
                                 <Row className="align-items-center">
                                     <Col>
-                                        <Card.Img src={Logo} width="50" />
-                                        {/*Gonna have to replace with actual pic later*/}
+                                        <Card.Img src={Find} width="50" />
                                     </Col>
                                     <Col>
                                         <Card.Title className="info-card-title">
@@ -48,12 +49,11 @@ function Landing() {
                         </Card>
                     </Col>
                     <Col lg={4}>
-                        <Card>
+                        <Card style={{ backgroundColor: "#FEC272" }}>
                             <Container>
                                 <Row className="align-items-center">
                                     <Col>
-                                        <Card.Img src={Logo} />
-                                        {/*Gonna have to replace with actual pic later*/}
+                                        <Card.Img src={Build} />
                                     </Col>
                                     <Col>
                                         <Card.Title className="info-card-title">
@@ -65,12 +65,11 @@ function Landing() {
                         </Card>
                     </Col>
                     <Col lg={4}>
-                        <Card>
+                        <Card style={{ backgroundColor: "#FEC272" }}>
                             <Container>
                                 <Row className="align-items-center">
                                     <Col>
-                                        <Card.Img src={Logo} />
-                                        {/*Gonna have to replace with actual pic later*/}
+                                        <Card.Img src={Track} />
                                     </Col>
                                     <Col>
                                         <Card.Title className="info-card-title">
