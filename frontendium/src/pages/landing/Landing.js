@@ -33,7 +33,7 @@ function Landing() {
                 </Row>
                 <Row className="align-items-center" style={{paddingTop: "150px"}}>
                     <Col lg={4}>
-                        <Card style={{ backgroundColor: "#FEC272" }}>
+                        <Card className="info-card">
                             <Container>
                                 <Row className="align-items-center">
                                     <Col>
@@ -49,7 +49,7 @@ function Landing() {
                         </Card>
                     </Col>
                     <Col lg={4}>
-                        <Card style={{ backgroundColor: "#FEC272" }}>
+                        <Card className="info-card">
                             <Container>
                                 <Row className="align-items-center">
                                     <Col>
@@ -65,7 +65,7 @@ function Landing() {
                         </Card>
                     </Col>
                     <Col lg={4}>
-                        <Card style={{ backgroundColor: "#FEC272" }}>
+                        <Card className="info-card">
                             <Container>
                                 <Row className="align-items-center">
                                     <Col>
