@@ -3,6 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Landing from './pages/landing/Landing.js';
 import Navbar from './components/navbar/Navbar.js';
+import Resumes from './pages/resumes/Resumes.js';
 
 class App extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
-        <Landing />
+        <Resumes />
       </div>
     );
   }

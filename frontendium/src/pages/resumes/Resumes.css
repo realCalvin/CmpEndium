@@ -1,0 +1,12 @@
+.resume-content{
+    align-items: center;
+    text-align: center;
+}
+
+p{
+    margin: 0;
+}
+
+.resume-modal{
+    height: 50vh;
+}

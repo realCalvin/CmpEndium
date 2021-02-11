@@ -1,0 +1,14 @@
+.resume-sample{
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.resume-sample-text{
+    background-color: rgb(73, 73, 73);
+    color: white;
+}
+
+.resume-sample-text p{
+    margin: 0;
+}
