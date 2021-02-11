@@ -1,7 +1,17 @@
 #Landing {
-    padding-top: 50px;
+  padding-top: 50px;
 }
 
 .landing-content {
-    text-align: center;
+  text-align: center;
+}
+
+.info-card {
+  background-color: #fec272;
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.25);
+  transition: transform 300ms, box-shadow 300ms;
+}
+
+.info-card-title {
+  font-size: 20px;
 }
