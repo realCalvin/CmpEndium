@@ -26,21 +26,17 @@ export default function Routing() {
     ];
 
     return (
-        <div>
-            <Router>
-                <Switch>
-                    {allRoutes.map(({ path, Component }, index) => {
-                        return (
-                            <Route
-                                key={index}
-                                exact
-                                path={path}
-                                component={Component}
-                            />
-                        );
-                    })}
-                </Switch>
-            </Router>
-        </div>
+        <Switch>
+            {allRoutes.map(({ path, Component }, index) => {
+                return (
+                    <Route
+                        key={index}
+                        exact
+                        path={path}
+                        component={Component}
+                    />
+                );
+            })}
+        </Switch>
     );
 }

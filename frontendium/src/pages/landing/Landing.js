@@ -10,83 +10,84 @@ function Landing() {
     return (
         <div id="Landing">
             <Particles />
-            <Container>
-                <Row className="align-items-center">
+            <Container id="landing-container">
+                <Row id="landing-page-1" className="align-items-center">
                     <Col className="landing-content" lg={6}>
                         <div>
                             <p style={{ fontSize: "40px" }}>Land Your Next Job Efficiently</p>
                             <p style={{ fontSize: "20px" }}> We pull job listings from multiple websites</p>
-                            <Button style={{ backgroundColor: "#FF97C9" }}>Get Started</Button>
+                            <Button href="#search" id="landing-page-btn" style={{ backgroundColor: "#FF97C9" }}>Get Started</Button>
                         </div>
                     </Col>
                     <Col className="landing-content" lg={6}>
-                        <div>
-                            <Image
-                                src={Astronaut}
-                                alt="astronaut"
-                                width="500px"
-                                height="500px"
-                                fluid
-                            />
-                        </div>
+                        <Image
+                            src={Astronaut}
+                            id="landing-astronaut-img"
+                            alt="astronaut"
+                            fluid
+                        />
                     </Col>
-                </Row>
-                <Row className="align-items-center" style={{paddingTop: "150px"}}>
-                    <Col lg={4}>
-                        <Card className="info-card">
-                            <Container>
-                                <Row className="align-items-center">
-                                    <Col>
-                                        <Card.Img src={Find} width="50" />
-                                    </Col>
-                                    <Col>
-                                        <Card.Title className="info-card-title">
-                                            Find Your Dream Job
-                                        </Card.Title>
-                                    </Col>
-                                </Row>
-                            </Container>
-                        </Card>
-                    </Col>
-                    <Col lg={4}>
-                        <a href="/Resumes" style={{ textDecoration: "none" }}>
-                            <Card className="info-card">
-                                <Container>
-                                    <Row className="align-items-center">
-                                        <Col>
-                                            <Card.Img src={Build} />
-                                        </Col>
-                                        <Col>
-                                            <Card.Title className="info-card-title">
-                                                Build Your Resume
+                    <Row id="landing-page-card">
+                        <Col className="info-card-col" s={4}>
+                            <a href="#search" style={{ textDecoration: "none" }}>
+                                <Card className="info-card">
+                                    <Container>
+                                        <Row className="align-items-center">
+                                            <Col lg={4}>
+                                                <Card.Img src={Find} />
+                                            </Col>
+                                            <Col lg={8}>
+                                                <Card.Title className="info-card-title">
+                                                    Search For Jobs
                                             </Card.Title>
-                                        </Col>
-                                    </Row>
-                                </Container>
-                            </Card>
-                        </a>
-                    </Col>
-                    <Col lg={4}>
-                        <Card className="info-card">
-                            <Container>
-                                <Row className="align-items-center">
-                                    <Col>
-                                        <Card.Img src={Track} />
-                                    </Col>
-                                    <Col>
-                                        <Card.Title className="info-card-title">
-                                            Track Your Job Applications
-                                        </Card.Title>
-                                    </Col>
-                                </Row>
-                            </Container>
-                        </Card>
-                    </Col>
+                                            </Col>
+                                        </Row>
+                                    </Container>
+                                </Card>
+                            </a>
+                        </Col>
+                        <Col className="info-card-col" s={4}>
+                            <a href="#build" style={{ textDecoration: "none" }}>
+                                <Card className="info-card">
+                                    <Container>
+                                        <Row className="align-items-center">
+                                            <Col lg={4}>
+                                                <Card.Img src={Build} />
+                                            </Col>
+                                            <Col lg={8}>
+                                                <Card.Title className="info-card-title">
+                                                    Build Your Resume
+                                                </Card.Title>
+                                            </Col>
+                                        </Row>
+                                    </Container>
+                                </Card>
+                            </a>
+                        </Col>
+                        <Col className="info-card-col" s={4}>
+                            <a href="#track" style={{ textDecoration: "none" }}>
+                                <Card className="info-card">
+                                    <Container>
+                                        <Row className="align-items-center">
+                                            <Col lg={4}>
+                                                <Card.Img src={Track} />
+                                            </Col>
+                                            <Col lg={8}>
+                                                <Card.Title className="info-card-title">
+                                                    Track Applications
+                                            </Card.Title>
+                                            </Col>
+                                        </Row>
+                                    </Container>
+                                </Card>
+                            </a>
+                        </Col>
+                    </Row>
                 </Row>
-                <Row style={{paddingTop: "75px"}}>
+                <Row id="search" style={{ paddingTop: "75px" }}>
                     <Col lg={6}>
                         <p style={{ fontSize: "30px" }}>Find Your Dream Job</p>
-                        <ul style={{ fontSize: "20px "}}>
+                        <ul style={{ fontSize: "20px " }}>
                             <li>Filter out the job listings to find the job of your choice</li>
                             <li>Read through the job description and requirements</li>
                             <li>See if it is a fit for you</li>
@@ -106,7 +107,7 @@ function Landing() {
                         </div>
                     </Col>
                 </Row>
-                <Row style={{paddingTop: "75px"}}>
+                <Row id="build" style={{ paddingTop: "75px" }}>
                     <Col lg={6}>
                         <div>
                             <p style={{ fontSize: "20px", textAlign: "center" }}>Astronaut Gang (Replace With Actual Pic Later)</p>
@@ -121,17 +122,17 @@ function Landing() {
                     </Col>
                     <Col lg={6}>
                         <p style={{ fontSize: "30px" }}>Build Your Resume</p>
-                        <ul style={{ fontSize: "20px "}}>
+                        <ul style={{ fontSize: "20px " }}>
                             <li>Reference the resume of others who are or have been in your position to better your own</li>
                             <li>Cater your resume to fit the specific role of which you are applying for</li>
                             <li>Share your resume to help others who are and will be in your current position</li>
                         </ul>
                     </Col>
                 </Row>
-                <Row style={{paddingTop: "75px"}}>
+                <Row id="track" style={{ paddingTop: "75px" }}>
                     <Col lg={6}>
                         <p style={{ fontSize: "30px" }}>Track Your Job Applications</p>
-                        <ul style={{ fontSize: "20px "}}>
+                        <ul style={{ fontSize: "20px " }}>
                             <li>Add the jobs you applied to onto your profile</li>
                             <li>Keep track of the status of the jobs you applied to</li>
                         </ul>

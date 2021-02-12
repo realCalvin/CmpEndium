@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './Routes.js';
 import Navbar from './components/navbar/Navbar.js';
+import Landing from './pages/landing/Landing.js';
+import Signin from './pages/auth/signin/Signin.js';
+import Signup from './pages/auth/signup/Signup.js';
 
 const browserHistory = createBrowserHistory();
 
