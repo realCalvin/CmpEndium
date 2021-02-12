@@ -1,18 +1,70 @@
 #Landing {
-  padding-top: 50px;
+    background-color: #5D63D5;
+}
+
+#landing-page-1 {
+  height: 85vh;
+  position: relative;
+}
+
+#landing-page-card {
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0px 5px;
+}
+
+#landing-page-card .card-img {
+  padding: 10px;
 }
 
 .landing-content {
   text-align: center;
 }
 
+#landing-page-btn {
+  margin-top: 10px;
+  border: none;
+  color: white;
+  width: 35%;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+#landing-page-btn:hover {
+  transform: scale(1.05);
+  background-color: #fd85bf;
+  transition: 0.3s;
+}
+
 .info-card {
   background-color: #fec272;
+  border: none;
+  border-radius: 5px;
   box-shadow: 0 5px 20px rgba(255, 255, 255, 0.25);
   transition: transform 300ms, box-shadow 300ms;
 }
 
+.info-card:hover {
+  transform: scale(1.05);
+  background-color: #ffbe6a;
+  transition: 0.3s;
+}
+
 .info-card-title {
-  font-size: 20px;
+  font-size: 85%;
+  padding-top: 15px;
   color: white;
+}
+
+@media only screen and (max-width: 993px) {
+  #landing-astronaut-img {
+    height: 300px;
+    margin-top: -250px;
+  }
+  
+  #landing-page-card .card-img {
+    width: 60%;
+  }
 }
