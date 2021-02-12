@@ -49,20 +49,22 @@ function Landing() {
                         </Card>
                     </Col>
                     <Col lg={4}>
-                        <Card className="info-card">
-                            <Container>
-                                <Row className="align-items-center">
-                                    <Col>
-                                        <Card.Img src={Build} />
-                                    </Col>
-                                    <Col>
-                                        <Card.Title className="info-card-title">
-                                            Build Your Resume
-                                        </Card.Title>
-                                    </Col>
-                                </Row>
-                            </Container>
-                        </Card>
+                        <a href="/Resumes" style={{ textDecoration: "none" }}>
+                            <Card className="info-card">
+                                <Container>
+                                    <Row className="align-items-center">
+                                        <Col>
+                                            <Card.Img src={Build} />
+                                        </Col>
+                                        <Col>
+                                            <Card.Title className="info-card-title">
+                                                Build Your Resume
+                                            </Card.Title>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </Card>
+                        </a>
                     </Col>
                     <Col lg={4}>
                         <Card className="info-card">
