@@ -5,7 +5,7 @@ import Logo from '../../images/logo.png';
 
 function Header() {
     return (
-        <Navbar id="transparent-navbar" collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar id="navbar" collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Navbar.Brand href="/">
                 <span className='logo'>
                     <img

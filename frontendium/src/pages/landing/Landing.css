@@ -1,35 +1,31 @@
 #Landing {
-    background-color: #5D63D5;
+    background-color: rgb(251, 251, 251);
+    height: 100%;
+    width: 100%;
+    position: relative;
 }
 
-#landing-page-1 {
-  height: 85vh;
+#landing-page {
+  background-color: #5D63D5;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
   position: relative;
 }
 
-#landing-page-card {
-  text-align: center;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin: 0px 5px;
-}
-
-#landing-page-card .card-img {
-  padding: 10px;
-}
-
 .landing-content {
-  text-align: center;
+  display: inline-block;
+}
+
+#landing-content-text {
+  margin-bottom: 20px;
 }
 
 #landing-page-btn {
-  margin-top: 10px;
-  border: none;
-  color: white;
-  width: 35%;
-  border-radius: 5px;
-  padding: 10px 0;
+  background-color: #FF97C9;
+  margin-top: 15px;
+  margin-bottom: 90px;
 }
 
 #landing-page-btn:hover {
@@ -38,33 +34,117 @@
   transition: 0.3s;
 }
 
-.info-card {
-  background-color: #fec272;
+#landing-astronaut-img {
+  height: 120px;
+}
+
+#landing-page-card {
+  text-align: center;
+  padding-bottom: 100px;
+  position: relative;
+  background: #5D63D5;
+  height: 30vh;
+  border-bottom-left-radius: 50% 20%;
+  border-bottom-right-radius: 50% 20%;
+}
+
+.landing-card {
+  display: inline-block;
+  width: 20em;
+  background: #fec272;
+  margin: 10px 10px 0px 10px;
+  padding: 10px;
   border: none;
   border-radius: 5px;
   box-shadow: 0 5px 20px rgba(255, 255, 255, 0.25);
   transition: transform 300ms, box-shadow 300ms;
 }
 
-.info-card:hover {
+.landing-card:hover {
   transform: scale(1.05);
   background-color: #ffbe6a;
   transition: 0.3s;
 }
 
-.info-card-title {
-  font-size: 85%;
-  padding-top: 15px;
-  color: white;
+.landing-card img {
+  height: 3em;
 }
 
-@media only screen and (max-width: 993px) {
-  #landing-astronaut-img {
-    height: 300px;
-    margin-top: -250px;
+.landing-card-text {
+  margin-top: 15px;
+}
+
+.landing-page-descriptions {
+  background-color: rgb(251, 251, 251);
+  color: #183055;
+  height: 70vh;  
+  padding: 10rem 20%;
+}
+
+.landing-page-descriptions h3 {
+  text-align: center;
+}
+
+.landing-page-descriptions li {
+  font-size: 18px;
+}
+
+.image-left {
+  display: block;
+}
+
+.image-right {
+  display: none;
+}
+
+/* PC DEVICES */
+@media only screen and (max-width: 1090px) {
+  .landing-card {
+    margin-top: 20px;
+  }
+
+  #landing-page-btn {
+    margin-bottom: 0px;
+  }
+
+  #landing-page-card {
+    height: 50vh;
+  }
+
+  .landing-page-descriptions {
+    height: 100vh;
+  }
+
+  .image-left {
+    display: none;
   }
   
-  #landing-page-card .card-img {
-    width: 60%;
+  .image-right {
+    display: block;
+  }
+}
+
+/* MOBILE DEVICES */
+@media only screen and (max-width: 500px) {
+  .landing-content-h1 {
+    font-size: 40px;
+  }
+
+  .landing-content-p {
+    font-size: 20px;
+  }
+
+  .landing-card {
+    width: 18em;
+    margin-top: 20px;
+  }
+
+  .landing-card img {
+    height: 2em;
+  }
+
+  .landing-card-text {
+    margin-top: 10px;
+    font-size: 15px;
   }
 }

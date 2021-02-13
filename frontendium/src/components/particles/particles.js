@@ -11,7 +11,7 @@ class particles extends Component {
                 params={{
                     "particles": {
                         "number": {
-                            "value": 160,
+                            "value": 110,
                             "density": {
                                 "enable": false
                             }

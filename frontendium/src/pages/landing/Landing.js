@@ -1,157 +1,166 @@
+import React, { useState } from 'react';
 import './Landing.css';
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap';
 import Particles from '../../components/particles/particles';
-import Astronaut from '../../images/Astronaut.png';
-import Find from '../../images/Find.png';
-import Build from '../../images/Build.png';
-import Track from '../../images/Track.png';
+import Lottie from 'react-lottie';
+import AstronautData from '../../images/astronaut';
+import FindData from '../../images/find';
+import BuildData from '../../images/build';
+import TrackData from '../../images/track';
+import AstronautImage from '../../images/Astronaut.png';
+import FindImage from '../../images/Find.png';
+import BuildImage from '../../images/Build.png';
+import TrackImage from '../../images/Track.png';
 
 function Landing() {
+    const Astronaut = {
+        loop: true,
+        autoplay: true,
+        animationData: AstronautData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice"
+        }
+    };
+    const Find = {
+        loop: true,
+        autoplay: true,
+        animationData: FindData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice"
+        }
+    };
+    const Build = {
+        loop: true,
+        autoplay: true,
+        animationData: BuildData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice"
+        }
+    };
+    const Track = {
+        loop: true,
+        autoplay: true,
+        animationData: TrackData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice"
+        }
+    };
+
     return (
         <div id="Landing">
-            <Particles />
-            <Container id="landing-container">
-                <Row id="landing-page-1" className="align-items-center">
-                    <Col className="landing-content" lg={6}>
-                        <div>
-                            <p style={{ fontSize: "40px" }}>Land Your Next Job Efficiently</p>
-                            <p style={{ fontSize: "20px" }}> We pull job listings from multiple websites</p>
-                            <Button href="#search" id="landing-page-btn" style={{ backgroundColor: "#FF97C9" }}>Get Started</Button>
-                        </div>
-                    </Col>
-                    <Col className="landing-content" lg={6}>
-                        <Image
-                            src={Astronaut}
-                            id="landing-astronaut-img"
-                            alt="astronaut"
-                            fluid
+            <Row id="landing-page">
+                <Particles />
+                <Col sm={12}>
+                    <div className="landing-content">
+                        <h1 className="landing-content-h1">Land Your Next Job Efficiently</h1>
+                        <p className="landing-content-p"> We pull job listings from multiple websites</p>
+                        <Button href="#search" id="landing-page-btn">Get Started</Button>
+                    </div>
+                    <div className="landing-content">
+                        <Lottie
+                            options={Astronaut}
+                            height={300}
+                            width={300}
                         />
-                    </Col>
-                    <Row id="landing-page-card">
-                        <Col className="info-card-col" s={4}>
-                            <a href="#search" style={{ textDecoration: "none" }}>
-                                <Card className="info-card">
-                                    <Container>
-                                        <Row className="align-items-center">
-                                            <Col lg={4}>
-                                                <Card.Img src={Find} />
-                                            </Col>
-                                            <Col lg={8}>
-                                                <Card.Title className="info-card-title">
-                                                    Search For Jobs
-                                            </Card.Title>
-                                            </Col>
-                                        </Row>
-                                    </Container>
-                                </Card>
-                            </a>
+                    </div>
+                </Col>
+            </Row>
+            <div id="landing-page-card">
+                <Row className="landing-card">
+                    <Row>
+                        <Col xs={6} md={4}>
+                            <Image src={FindImage} fluid />
                         </Col>
-                        <Col className="info-card-col" s={4}>
-                            <a href="#build" style={{ textDecoration: "none" }}>
-                                <Card className="info-card">
-                                    <Container>
-                                        <Row className="align-items-center">
-                                            <Col lg={4}>
-                                                <Card.Img src={Build} />
-                                            </Col>
-                                            <Col lg={8}>
-                                                <Card.Title className="info-card-title">
-                                                    Build Your Resume
-                                                </Card.Title>
-                                            </Col>
-                                        </Row>
-                                    </Container>
-                                </Card>
-                            </a>
-                        </Col>
-                        <Col className="info-card-col" s={4}>
-                            <a href="#track" style={{ textDecoration: "none" }}>
-                                <Card className="info-card">
-                                    <Container>
-                                        <Row className="align-items-center">
-                                            <Col lg={4}>
-                                                <Card.Img src={Track} />
-                                            </Col>
-                                            <Col lg={8}>
-                                                <Card.Title className="info-card-title">
-                                                    Track Applications
-                                            </Card.Title>
-                                            </Col>
-                                        </Row>
-                                    </Container>
-                                </Card>
-                            </a>
+                        <Col xs={5} md={8} className="landing-card-text">
+                            Search For Jobs
                         </Col>
                     </Row>
                 </Row>
-                <Row id="search" style={{ paddingTop: "75px" }}>
-                    <Col lg={6}>
-                        <p style={{ fontSize: "30px" }}>Find Your Dream Job</p>
-                        <ul style={{ fontSize: "20px " }}>
-                            <li>Filter out the job listings to find the job of your choice</li>
-                            <li>Read through the job description and requirements</li>
-                            <li>See if it is a fit for you</li>
-                            <li>Hit apply to be redirected to the company's website to apply for this position</li>
-                        </ul>
-                    </Col>
-                    <Col lg={6}>
-                        <div>
-                            <p style={{ fontSize: "20px", textAlign: "center" }}>Astronaut Gang (Replace With Actual Pic Later)</p>
-                            <Image
-                                src={Astronaut}
-                                alt="astronaut"
-                                width="500px"
-                                height="500px"
-                                fluid
-                            />
-                        </div>
-                    </Col>
-                </Row>
-                <Row id="build" style={{ paddingTop: "75px" }}>
-                    <Col lg={6}>
-                        <div>
-                            <p style={{ fontSize: "20px", textAlign: "center" }}>Astronaut Gang (Replace With Actual Pic Later)</p>
-                            <Image
-                                src={Astronaut}
-                                alt="astronaut"
-                                width="500px"
-                                height="500px"
-                                fluid
-                            />
-                        </div>
-                    </Col>
-                    <Col lg={6}>
-                        <p style={{ fontSize: "30px" }}>Build Your Resume</p>
-                        <ul style={{ fontSize: "20px " }}>
-                            <li>Reference the resume of others who are or have been in your position to better your own</li>
-                            <li>Cater your resume to fit the specific role of which you are applying for</li>
-                            <li>Share your resume to help others who are and will be in your current position</li>
-                        </ul>
-                    </Col>
-                </Row>
-                <Row id="track" style={{ paddingTop: "75px" }}>
-                    <Col lg={6}>
-                        <p style={{ fontSize: "30px" }}>Track Your Job Applications</p>
-                        <ul style={{ fontSize: "20px " }}>
-                            <li>Add the jobs you applied to onto your profile</li>
-                            <li>Keep track of the status of the jobs you applied to</li>
-                        </ul>
-                    </Col>
-                    <Col lg={6}>
-                        <div>
-                            <p style={{ fontSize: "20px", textAlign: "center" }}>Astronaut Gang (Replace With Actual Pic Later)</p>
-                            <Image
-                                src={Astronaut}
-                                alt="astronaut"
-                                width="500px"
-                                height="500px"
-                                fluid
-                            />
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
+                <Row className="landing-card">
+                    <Row>
 
+                        <Col xs={6} md={4}>
+                            <Image src={BuildImage} fluid />
+                        </Col>
+                        <Col xs={5} md={8} className="landing-card-text">
+                            Build Your Resume
+                        </Col>
+                    </Row>
+                </Row>
+                <Row className="landing-card">
+                    <Row>
+                        <Col xs={6} md={4}>
+                            <Image src={TrackImage} fluid />
+                        </Col>
+                        <Col xs={5} md={8} className="landing-card-text">
+                            Track Applications
+                        </Col>
+                    </Row>
+                </Row>
+            </div>
+            <Row className="landing-page-descriptions" id="landing-find-page">
+                <Col md={12} lg={6}>
+                    <div className="lottie-icon-left">
+                        <Lottie
+                            options={Find}
+                            height={150}
+                            width={150}
+                        />
+                    </div>
+                    <h3>Find Your Dream Job</h3>
+                    <ul>
+                        <li>Filter out the job listings to find the job of your choice</li>
+                        <li>Read through the job description and requirements</li>
+                        <li>See if it is a fit for you</li>
+                        <li>Hit apply to be redirected to the company's website to apply for this position</li>
+                    </ul>
+                </Col>
+                <Col md={12} lg={6}>
+                    <Image src={AstronautImage} fluid />
+                </Col>
+            </Row>
+            <Row className="landing-page-descriptions" id="landing-build-page">
+                <Col className="image-left" md={12} lg={6}>
+                    <Image src={AstronautImage} fluid />
+                </Col>
+                <Col md={12} lg={6}>
+                    <div className="lottie-icon-right">
+                        <Lottie
+                            options={Build}
+                            height={150}
+                            width={150}
+                        />
+                    </div>
+                    <h3>Build Your Resume</h3>
+                    <ul>
+                        <li>Reference the resume of others who are or have been in your position to better your own</li>
+                        <li>Cater your resume to fit the specific role of which you are applying for</li>
+                        <li>Share your resume to help others who are and will be in your current position</li>
+                    </ul>
+                </Col>
+                <Col className="image-right" md={12} lg={6}>
+                    <Image src={AstronautImage} fluid />
+                </Col>
+            </Row>
+            <Row className="landing-page-descriptions" id="landing-track-page">
+                <Col md={12} lg={6}>
+                    <div className="lottie-icon-left">
+                        <Lottie
+                            options={Track}
+                            height={150}
+                            width={150}
+                        />
+                    </div>
+                    <h3>Track Your Job Applications</h3>
+                    <ul>
+                        <li>Add the jobs you applied to onto your profile</li>
+                        <li>Keep track of the status of the jobs you applied to</li>
+                    </ul>
+                </Col>
+                <Col md={12} lg={6}>
+                    <Image src={AstronautImage} fluid />
+                </Col>
+            </Row>
         </div>
     )
 }

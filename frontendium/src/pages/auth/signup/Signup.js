@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
+import Lottie from 'react-lottie';
 import { Link } from "react-router-dom";
 import { Row, Col, InputGroup, Form, FormControl } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import UFOData from '../../../images/ufo';
 import './Signup.css';
 
 function Signup() {
+
+    const UFO = {
+        loop: true,
+        autoplay: true,
+        animationData: UFOData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice"
+        }
+    };
 
     return (
         <div id="Signup">
@@ -77,6 +88,13 @@ function Signup() {
                 <Row className="bottom-signup-form-row">
                     <p>Already have an account? <Link to="signin">Sign In</Link></p>
                 </Row>
+            </div>
+            <div className="auth-lottie-img">
+                <Lottie
+                    options={UFO}
+                    height={300}
+                    width={300}
+                />
             </div>
         </div>
     );
