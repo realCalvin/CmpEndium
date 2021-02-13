@@ -2,7 +2,7 @@
     font-size: 30px;
 }
 
-#transparent-navbar {
+#navbar {
     z-index: 100;
-    background: rgba(0,0,0,0) !important;
+    background: #5D63D5 !important;
  }

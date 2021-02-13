@@ -1,5 +1,5 @@
 #Login {
-    height: 80%;
+    height: 85%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,6 +52,17 @@
     font-size: 14px;
 }
 
+.auth-lottie-img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+@media only screen and (max-width: 1050px) {
+    .auth-lottie-img {
+        display: none;
+    }
+}
 
 @media only screen and (max-width: 620px) {
     #login-auth-box {
