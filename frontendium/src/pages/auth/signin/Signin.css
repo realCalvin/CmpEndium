@@ -13,6 +13,7 @@
     padding: 45px;
     box-shadow: 0 5px 20px rgba(255, 255, 255, 0.25);
     transition: transform 300ms, box-shadow 300ms;
+    z-index: 2;
 }
 
 #login-form h4 {
@@ -56,6 +57,7 @@
     position: absolute;
     bottom: 0;
     right: 0;
+    z-index: 2;
 }
 
 @media only screen and (max-width: 1050px) {
