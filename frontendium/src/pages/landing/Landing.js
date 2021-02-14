@@ -3,10 +3,10 @@ import './Landing.css';
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap';
 import Particles from '../../components/particles/particles';
 import Lottie from 'react-lottie';
-import AstronautData from '../../images/astronaut';
-import FindData from '../../images/find';
-import BuildData from '../../images/build';
-import TrackData from '../../images/track';
+import AstronautData from '../../images/lottie/astronaut';
+import FindData from '../../images/lottie/find';
+import BuildData from '../../images/lottie/build';
+import TrackData from '../../images/lottie/track';
 import AstronautImage from '../../images/Astronaut.png';
 import FindImage from '../../images/Find.png';
 import BuildImage from '../../images/Build.png';
@@ -78,7 +78,6 @@ function Landing() {
                 </Row>
                 <Row className="landing-card">
                     <Row>
-
                         <Col xs={6} md={4}>
                             <Image src={BuildImage} fluid />
                         </Col>

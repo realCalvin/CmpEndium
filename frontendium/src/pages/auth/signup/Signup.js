@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { Row, Col, InputGroup, Form, FormControl } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import UFOData from '../../../images/ufo';
+import Wave from '../../../components/wave/Wave';
+import UFOData from '../../../images/lottie/ufo';
 import './Signup.css';
 
 function Signup() {
@@ -96,6 +97,7 @@ function Signup() {
                     width={300}
                 />
             </div>
+            <Wave />
         </div>
     );
 }

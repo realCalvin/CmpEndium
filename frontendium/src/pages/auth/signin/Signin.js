@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { Row, InputGroup, FormControl } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-import UFOData from '../../../images/ufo';
+import Wave from '../../../components/wave/Wave';
+import UFOData from '../../../images/lottie/ufo';
 import './Signin.css';
 
 function Signin() {
@@ -61,6 +62,7 @@ function Signin() {
                     width={300}
                 />
             </div>
+            <Wave />
         </div>
     );
 }

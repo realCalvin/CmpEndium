@@ -4,6 +4,7 @@ import Landing from './pages/landing/Landing.js';
 import Resumes from './pages/resumes/Resumes.js';
 import Signin from './pages/auth/signin/Signin.js';
 import Signup from './pages/auth/signup/Signup.js';
+import Search from './pages/search/Search.js';
 
 export default function Routing() {
     const allRoutes = [
@@ -22,6 +23,10 @@ export default function Routing() {
         {
             Component: Signup,
             path: '/signup'
+        },
+        {
+            Component: Search,
+            path: '/search'
         }
     ];
 
