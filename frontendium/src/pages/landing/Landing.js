@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import './Landing.css';
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap';
 import Particles from '../../components/particles/particles';
@@ -66,36 +67,43 @@ function Landing() {
                 </Col>
             </Row>
             <div id="landing-page-card">
-                <Row className="landing-card">
-                    <Row>
-                        <Col xs={6} md={4}>
-                            <Image src={FindImage} fluid />
+                <Particles />
+                <a className="card-link" href="#landing-find-page">
+                    <Row className="landing-card">
+                        <Row>
+                            <Col xs={6} md={4}>
+                                <Image src={FindImage} fluid />
+                            </Col>
+                            <Col xs={5} md={8} className="landing-card-text">
+                                Search For Jobs
                         </Col>
-                        <Col xs={5} md={8} className="landing-card-text">
-                            Search For Jobs
-                        </Col>
+                        </Row>
                     </Row>
-                </Row>
-                <Row className="landing-card">
-                    <Row>
-                        <Col xs={6} md={4}>
-                            <Image src={BuildImage} fluid />
+                </a>
+                <a className="card-link" href="#landing-build-page">
+                    <Row className="landing-card">
+                        <Row>
+                            <Col xs={6} md={4}>
+                                <Image src={BuildImage} fluid />
+                            </Col>
+                            <Col xs={5} md={8} className="landing-card-text">
+                                Build Your Resume
                         </Col>
-                        <Col xs={5} md={8} className="landing-card-text">
-                            Build Your Resume
-                        </Col>
+                        </Row>
                     </Row>
-                </Row>
-                <Row className="landing-card">
-                    <Row>
-                        <Col xs={6} md={4}>
-                            <Image src={TrackImage} fluid />
+                </a>
+                <a className="card-link" href="#landing-track-page">
+                    <Row className="landing-card">
+                        <Row>
+                            <Col xs={6} md={4}>
+                                <Image src={TrackImage} fluid />
+                            </Col>
+                            <Col xs={5} md={8} className="landing-card-text">
+                                Track Applications
                         </Col>
-                        <Col xs={5} md={8} className="landing-card-text">
-                            Track Applications
-                        </Col>
+                        </Row>
                     </Row>
-                </Row>
+                </a>
             </div>
             <Row className="landing-page-descriptions" id="landing-find-page">
                 <Col md={12} lg={6}>

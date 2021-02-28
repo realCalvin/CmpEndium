@@ -14,6 +14,14 @@
   position: relative;
 }
 
+.card-link {
+  color: white;
+}
+
+.card-link:hover {
+  color: white;
+}
+
 .landing-content {
   display: inline-block;
 }
