@@ -1,0 +1,52 @@
+.resume-nav-content {
+    padding: 20px 0px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.resume-nav-row {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
+
+.job-buttons {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.job-button {
+    padding: 0px;
+    margin: 5px 0px;
+    font-size: 85%;
+}
+
+.dropdown-toggle {
+    width: 8.5em !important;
+    background-color: white !important;
+    color: rgb(53, 61, 211);
+    border-color: white;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.dropdown-toggle:hover {
+    background-color: transparent !important;
+    color: white;
+    border-color: white !important;
+}
+
+.dropdown-toggle:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: rgb(255, 255, 255) !important;
+    color: rgb(118, 118, 250) !important;
+}
+
+@media only screen and (max-width: 575px) {
+    .dropdown-toggle {
+        width: 16em !important;
+    }
+}
