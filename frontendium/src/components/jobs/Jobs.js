@@ -1,9 +1,6 @@
 export const businessItems = ["Accounting", "Business Analytics", "Accounting", "Entrepreneurship",
     "Finance", "Operation Management", "Human Resource", "Management", "Marketing"];
 
-export const educationItems = ["Special Education", "Teaching", "Elementary Education",
-    "Child and Adolescent Development", "Counseling and Guidance", "Curriculum and Instruction"];
-
 export const engineeringItems = ["Aerospace Engineering", "Aviation and Technology", "Biomedical Engineering",
     "Chemical and Materials", "Civil and Environmental",
     "Computer Engineering", "Electrical Engineering", "General Engineering",
@@ -21,3 +18,7 @@ export const scienceItems = ["Biology", "Chemistry", "Computer Science", "Neuros
 
 export const socialScienceItems = ["Anthropology", "Communication",
     "Economics", "Environmental", "History", "Justice", "Political Science", "Psychology", "Sociology"];
+
+export const jobMapping = [["Business", businessItems],
+["Engineering", engineeringItems], ["Health", healthItems], ["Humanities", humanitiesItems],
+["Science", scienceItems], ["Social Science", socialScienceItems]];

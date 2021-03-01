@@ -1,24 +1,52 @@
-.tab-panel-content {
+.resume-nav-content {
+    padding: 20px 0px;
     display: flex;
     justify-content: center;
     width: 100%;
 }
 
-.tab-panel-item {
-    border: 1px solid #d8d8d8 !important;
-    background-color: #f5f5f5;
-    color: #888888;
-    border-radius: 5px;
-    padding: 5px 8px;
-    margin: 5px 10px;
-    font-size: 85%;
-    float: left;
-    box-shadow: 0 5px 20px rgba(236, 236, 236, 0.281);
-    transition: transform 300ms, box-shadow 300ms;
+.resume-nav-row {
+    display: flex;
+    justify-content: center;
+    width: 90%;
 }
 
-.tab-panel-item:hover {
-    cursor: pointer;
-    box-shadow: 0 5px 20px rgba(211, 211, 211, 0.664);
-    transition: transform 300ms, box-shadow 300ms;
+.job-buttons {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.job-button {
+    padding: 0px;
+    margin: 5px 0px;
+    font-size: 85%;
+}
+
+.dropdown-toggle {
+    width: 8.5em !important;
+    background-color: white !important;
+    color: rgb(53, 61, 211);
+    border-color: white;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.dropdown-toggle:hover {
+    background-color: transparent !important;
+    color: white;
+    border-color: white !important;
+}
+
+.dropdown-toggle:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: rgb(255, 255, 255) !important;
+    color: rgb(118, 118, 250) !important;
+}
+
+@media only screen and (max-width: 575px) {
+    .dropdown-toggle {
+        width: 16em !important;
+    }
 }
