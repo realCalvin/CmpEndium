@@ -1,7 +1,6 @@
 import React from 'react';
 import './ResumeNav.css';
 import { Row, Col, DropdownButton, Dropdown } from 'react-bootstrap';
-
 import { jobMapping } from '../../components/jobs/Jobs';
 
 export default function ResumeNav() {

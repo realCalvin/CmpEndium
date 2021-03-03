@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from "framer-motion";
 import Lottie from 'react-lottie';
-import { Link } from "react-router-dom";
-import { Row, Col, InputGroup, Form, FormControl } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import SignupBox1 from './SignupBox1';
+import SignupBox2 from './SignupBox2';
 import Wave from '../../../components/wave/Wave';
 import UFOData from '../../../images/lottie/ufo';
 import './Signup.css';
@@ -19,77 +18,33 @@ function Signup() {
         }
     };
 
+    const [toggle, setToggle] = useState(true);
+
     return (
         <div id="Signup">
-            <div id="signup-auth-box">
-                <form id="signup-form">
-                    <h4>Sign up</h4>
-                    <Row>
-                        <Col id="signup-form-name">
-                            <p className="input-label">Name</p>
-                            <InputGroup className="mb-3">
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>
-                                        <FontAwesomeIcon className="signup-fa-icon" icon={faUser} />
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl id="form-email-address" />
-                            </InputGroup>
-                        </Col>
-                        <Col>
-                            <p className="input-label">Username</p>
-                            <InputGroup className="mb-3">
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>
-                                        <FontAwesomeIcon className="signup-fa-icon" icon={faUser} />
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl id="form-email-address" />
-                            </InputGroup>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <p className="input-label">Email Address</p>
-                        <InputGroup className="mb-3">
-                            <InputGroup.Prepend>
-                                <InputGroup.Text>
-                                    <FontAwesomeIcon className="signup-fa-icon" icon={faEnvelope} />
-                                </InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <FormControl id="form-email-address" />
-                        </InputGroup>
-                    </Row>
-                    <Row>
-                        <p className="input-label">Password</p>
-                        <InputGroup className="mb-3">
-                            <InputGroup.Prepend>
-                                <InputGroup.Text>
-                                    <FontAwesomeIcon className="signup-fa-icon" icon={faLock} />
-                                </InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <FormControl id="form-password" />
-                        </InputGroup>
-                    </Row>
-                    <Row>
-                        <p className="input-label">Confirm Password</p>
-                        <InputGroup className="mb-3">
-                            <InputGroup.Prepend>
-                                <InputGroup.Text>
-                                    <FontAwesomeIcon className="signup-fa-icon" icon={faLock} />
-                                </InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <FormControl id="form-password" />
-                        </InputGroup>
-                    </Row>
-                    <Row>
-                        <button type="submit" id="form-signup-btn">Register</button>
-                    </Row>
-                </form>
-                <hr></hr>
-                <Row className="bottom-signup-form-row">
-                    <p>Already have an account? <Link to="signin">Sign In</Link></p>
-                </Row>
-            </div>
+
+            { toggle ?
+                <AnimatePresence>
+                    <motion.div
+                        initial={{ x: 300, opacity: 0.5, zIndex: 2 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={{ x: -300, opacity: 0.5 }}
+                    >
+                        <SignupBox1 setToggle={setToggle} />
+                    </motion.div>
+                </AnimatePresence>
+                :
+                <AnimatePresence>
+                    <motion.section
+                        id="sign-box-2"
+                        initial={{ x: -300, opacity: 0.5, zIndex: 2 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={{ x: 300, opacity: 0.5 }}
+                    >
+                        <SignupBox2 setToggle={setToggle} />
+                    </motion.section>
+                </AnimatePresence>
+            }
             <div className="auth-lottie-img">
                 <Lottie
                     options={UFO}
@@ -98,7 +53,7 @@ function Signup() {
                 />
             </div>
             <Wave />
-        </div>
+        </div >
     );
 }
 

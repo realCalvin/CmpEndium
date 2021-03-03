@@ -51,6 +51,7 @@
 .bottom-login-form-row {
     color: #6b7280;
     font-size: 14px;
+    display: inline-block;
 }
 
 .auth-lottie-img {
@@ -68,8 +69,6 @@
 
 @media only screen and (max-width: 620px) {
     #login-auth-box {
-        border: none;
-        box-shadow: none;
         margin: 15px;
     }
 }
