@@ -5,3 +5,7 @@
   color: white;
   overflow-x: hidden;
 }
+
+#root > div > div {
+  margin-top: 90px;
+}

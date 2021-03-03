@@ -6,9 +6,8 @@ export const engineeringItems = ["Aerospace Engineering", "Aviation and Technolo
     "Computer Engineering", "Electrical Engineering", "General Engineering",
     "Industrial and Systems Engineering", "Mechanical Engineering", "Software Engineering"];
 
-export const healthItems = ["Nurse", "Physician", "Therapist", "Pharmacist", "Dentist", "EMT",
-    "Family Doctor", "Veterinarian", "Dietician", "Surgeon", "Pediatrician"
-    , "Anesthesiologist", "Optometrist", "Chiropractor"];
+export const healthItems = ["Nurse", "Physician", "Therapist", "Pharmacist", "Dentist", "Veterinarian",
+    "Dietician", "Pediatrician", "Anesthesiologist", "Optometrist"];
 
 export const humanitiesItems = ["Art", "Design", "English Literature", "Linguistics", "Music", "Dance",
     "Philosophy", "Film and Theatre", "World Languages", "Journalism"];
