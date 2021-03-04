@@ -20,12 +20,12 @@ function Header() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">
-                    <Link className="nav-link" to="/">Home</Link>
-                    <Link className="nav-link" to="/search">Search Jobs</Link>
-                    <Link className="nav-link" to="/resumes">Resume</Link>
-                    <Link className="nav-link" to="/account">Account</Link>
-                    <Link className="nav-link" to="/signin">Log In</Link>
-                    <Link className="nav-link" to="/signup">Sign Up</Link>
+                    <Nav.Link className="nav-link" as={Link} eventKey="1" to="/">Home</Nav.Link>
+                    <Nav.Link className="nav-link" as={Link} eventKey="2" to="/search">Search Jobs</Nav.Link>
+                    <Nav.Link className="nav-link" as={Link} eventKey="3" to="/resumes">Resume</Nav.Link>
+                    <Nav.Link className="nav-link" as={Link} eventKey="4" to="/account">Account</Nav.Link>
+                    <Nav.Link className="nav-link" as={Link} eventKey="5" to="/signin">Log In</Nav.Link>
+                    <Nav.Link className="nav-link" as={Link} eventKey="6" to="/signup">Sign Up</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
