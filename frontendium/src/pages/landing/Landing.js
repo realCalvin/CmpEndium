@@ -49,6 +49,7 @@ function Landing() {
 
     return (
         <div id="Landing">
+            <div className="white"></div>
             <Row id="landing-page">
                 <Particles />
                 <Col sm={12}>
