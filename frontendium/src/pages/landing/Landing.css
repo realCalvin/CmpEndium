@@ -1,8 +1,13 @@
 #Landing {
-    background-color: rgb(251, 251, 251);
-    height: 100%;
+    background-color: #5D63D5;
+    height: 90%;
     width: 100%;
-    position: relative;
+}
+
+.white {
+  position: absolute;
+  background-color: rgb(251, 251, 251);;
+  height: 100%;
 }
 
 #landing-page {
@@ -15,6 +20,7 @@
 }
 
 .card-link {
+  margin: 0 !important;
   color: white;
 }
 

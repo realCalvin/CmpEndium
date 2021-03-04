@@ -14,6 +14,7 @@
     "http-errors": "~1.6.3",
     "indeed-scraper": "^3.1.2",
     "mongodb": "^3.6.3",
+    "mongoose": "^5.11.18",
     "morgan": "^1.10.0"
   }
 }
