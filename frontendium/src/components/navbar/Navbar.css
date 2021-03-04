@@ -3,8 +3,6 @@
 }
 
 #navbar {
-    position: absolute;
-    width: 100%;
-    z-index: 100;
     background: #5D63D5 !important;
- }
+    width: 100%;
+}
