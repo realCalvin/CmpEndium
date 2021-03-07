@@ -1,5 +1,5 @@
-export const businessItems = ["Accounting", "Business Analytics", "Accounting", "Entrepreneurship",
-    "Finance", "Operation Management", "Human Resource", "Management", "Marketing"];
+export const businessItems = ["Accounting", "Business Analytics", "Entrepreneurship",
+    "Finance", "Operation Management", "Human Resource", "Management Info System", "Marketing"];
 
 export const engineeringItems = ["Aerospace Engineering", "Aviation and Technology", "Biomedical Engineering",
     "Chemical and Materials", "Civil and Environmental",

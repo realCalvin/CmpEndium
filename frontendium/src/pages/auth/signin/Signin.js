@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Lottie from 'react-lottie';
 import { Link } from "react-router-dom";
+import { login } from '../../../api/Auth';
 import { Row, InputGroup, FormControl } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +13,8 @@ import './Signin.css';
 
 function Signin() {
 
+    const history = useHistory();
+
     const UFO = {
         loop: true,
         autoplay: true,
@@ -19,6 +23,44 @@ function Signin() {
             preserveAspectRatio: "xMidYMid slice"
         }
     };
+
+    const [user, setUser] = useState({
+        email: '',
+        password: ''
+    })
+
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+
+    const handleChange = e => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    async function handleLogin(e) {
+        e.preventDefault();
+        const loginStatus = await login(user);
+        if (loginStatus.data.success) {
+            history.push("/");
+            window.location.reload(false);
+        }
+        else {
+            if (loginStatus.data.error === 'email') {
+                setEmailErrorMessage('Email does not exist');
+            }
+            else {
+                setEmailErrorMessage('');
+            }
+            if (loginStatus.data.error === 'password') {
+                setPasswordErrorMessage('Password is incorrect');
+            }
+            else {
+                setPasswordErrorMessage('');
+            }
+        }
+    }
 
     return (
         <div id="Login">
@@ -30,8 +72,8 @@ function Signin() {
                 >
 
                     <div id="login-auth-box">
-                        <form id="login-form">
-                            <h4>Sign in</h4>
+                        <form id="login-form" onSubmit={handleLogin}>
+                            <h4>Sign In</h4>
                             <Row>
                                 <p className="input-label">Email Address</p>
                                 <InputGroup className="mb-3">
@@ -40,8 +82,11 @@ function Signin() {
                                             <FontAwesomeIcon className="login-fa-icon" icon={faUser} />
                                         </InputGroup.Text>
                                     </InputGroup.Prepend>
-                                    <FormControl id="form-email-address" />
+                                    <FormControl type="email" id="form-email-address" onChange={handleChange} name="email" />
                                 </InputGroup>
+                            </Row>
+                            <Row className="signin-error-message">
+                                {(emailErrorMessage.length) ? <p>Error: {emailErrorMessage}</p> : ''}
                             </Row>
                             <Row>
                                 <p className="input-label">Password</p>
@@ -51,11 +96,14 @@ function Signin() {
                                             <FontAwesomeIcon className="login-fa-icon" icon={faLock} />
                                         </InputGroup.Text>
                                     </InputGroup.Prepend>
-                                    <FormControl id="form-password" />
+                                    <FormControl type="password" id="form-password" onChange={handleChange} name="password" />
                                 </InputGroup>
                             </Row>
+                            <Row className="signin-error-message">
+                                {(passwordErrorMessage.length) ? <p>Error: {passwordErrorMessage}</p> : ''}
+                            </Row>
                             <Row>
-                                <button type="submit" id="form-login-btn">Login</button>
+                                <button type="submit" className="btn-hover-effect" id="form-login-btn">Login</button>
                             </Row>
                         </form>
                         <hr></hr>

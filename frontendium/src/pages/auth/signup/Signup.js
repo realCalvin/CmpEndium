@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { register } from '../../../api/Auth';
 import Lottie from 'react-lottie';
 import SignupBox1 from './SignupBox1';
 import SignupBox2 from './SignupBox2';
@@ -8,6 +10,17 @@ import UFOData from '../../../images/lottie/ufo';
 import './Signup.css';
 
 function Signup() {
+
+    const history = useHistory();
+
+    const [toggle, setToggle] = useState(true);
+    const [user, setUser] = useState({
+        username: '',
+        email: '',
+        password: '',
+        name: '',
+        major: ''
+    });
 
     const UFO = {
         loop: true,
@@ -18,11 +31,33 @@ function Signup() {
         }
     };
 
-    const [toggle, setToggle] = useState(true);
+    function handleUserInfo(userInfo) {
+        setUser({
+            username: userInfo.username,
+            email: userInfo.email,
+            password: userInfo.password,
+            name: userInfo.name,
+            major: user.major
+        })
+    }
+
+    function handleUserMajor(userInfo) {
+        setUser({
+            ...user,
+            major: userInfo.major
+        })
+    }
+
+    async function handleRegister() {
+        const registerStatus = await register(user);
+        if (registerStatus.data.success) {
+            history.push("/");
+            window.location.reload(false);
+        }
+    }
 
     return (
         <div id="Signup">
-
             { toggle ?
                 <AnimatePresence>
                     <motion.div
@@ -30,7 +65,7 @@ function Signup() {
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: -300, opacity: 0.5 }}
                     >
-                        <SignupBox1 setToggle={setToggle} />
+                        <SignupBox1 setToggle={setToggle} user={user} handleUserInfo={handleUserInfo} />
                     </motion.div>
                 </AnimatePresence>
                 :
@@ -41,7 +76,7 @@ function Signup() {
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: 300, opacity: 0.5 }}
                     >
-                        <SignupBox2 setToggle={setToggle} />
+                        <SignupBox2 setToggle={setToggle} user={user} handleUserMajor={handleUserMajor} handleRegister={handleRegister} />
                     </motion.section>
                 </AnimatePresence>
             }

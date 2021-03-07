@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React from 'react';
 import './Landing.css';
-import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap';
+import { Row, Col, Button, Image } from 'react-bootstrap';
 import Particles from '../../components/particles/particles';
 import Lottie from 'react-lottie';
 import AstronautData from '../../images/lottie/astronaut';

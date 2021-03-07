@@ -27,6 +27,17 @@
     border-radius: 5px;
 }
 
+.list-group-item {
+    margin: 0;
+    padding: 5px;
+}
+.list-group-item.active {
+    background-color: white !important;
+    color: rgb(118, 118, 250);
+    border-color: rgba(0,0,0,.125);
+    font-weight: 600;
+}
+
 .signup-job-card {
     width: 400px;
     background: rgb(118, 118, 250);
@@ -37,6 +48,11 @@
 
 .signup-job-card .card-header button {
     color: white;
+}
+
+.signup-job-card .card-header button:focus {
+    outline: none !important;
+    box-shadow: none;
 }
 
 #signup-auth-box {
@@ -59,9 +75,20 @@
 }
 
 #signup-form h4 {
-    color: black;
+    color: #5D63D5;
     text-align: center;
     font-weight: 700;
+}
+
+#signup-job-info {
+    display: block;
+    color: white;
+    border: 1px solid #8a8fec;
+    background-color: #898ef0;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 550;
+    margin: 20px 15%;
 }
 
 .input-label {
@@ -96,6 +123,28 @@
     display: inline-block;
 }
 
+#signup-job-x-btn {
+    border: none;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+#signup-job-x-btn:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+.signup-error-message {
+    color: red;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+#signup-error-box-2 {
+    padding-left: 15px;;
+}
 
 @media only screen and (max-width: 620px) {
     #signup-auth-box {
@@ -112,5 +161,8 @@
     }
     .form-signup-btn {
         margin: 5px 0px;
+    }
+    #signup-job-info {
+        width: 80%;
     }
 }

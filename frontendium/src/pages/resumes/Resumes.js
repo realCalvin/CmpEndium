@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Container, Row, Col, Modal, Image } from 'react-bootstrap';
 import './Resumes.css';
-import SearchBar from '../../components/searchbar/Searchbar.js';
-import Particles from '../../components/particles/particles';
 import Resume from '../../components/resume/resume.js';
 import ResumeNav from './ResumeNav.js';
 import Lottie from 'react-lottie';
@@ -71,20 +69,20 @@ function Resumes() {
     ]
 
     const rows = [
-        <Row className="justify-content-center mb-3">
+        <Row className="justify-content-center mb-3" key={1}>
             <Col onClick={() => handleShow(0)}><Resume image={img} name="Anne Smith" title="Registered Nurse" /></Col>
             <Col onClick={() => handleShow(1)}><Resume image={img2} name="Angela Wilkinson" title="Data Analyst" /></Col>
             <Col onClick={() => handleShow(2)}><Resume image={img3} name="Samantha Jansen" title="Product Manager" /></Col>
             <Col onClick={() => handleShow(3)}><Resume image={img4} name="Samantha Cerio" title="Property Manager" /></Col>
         </Row>,
-        <Row className="justify-content-center mb-3">
+        <Row className="justify-content-center mb-3" key={2}>
             <Col onClick={() => handleShow(4)}><Resume image={img5} name="Lilibeth Andrada" title="Data Analyst" /></Col>
             <Col onClick={() => handleShow(5)}><Resume image={img6} name="Darla Demarco" title="Cashier" /></Col>
         </Row>
     ]
 
     return (
-        <div class="resume-content">
+        <div className="resume-content">
             <div id="resume-landing-page">
                 <div className="resume-landing-content">
                     <h1 className="resume-landing-content-h1">View Successful Resumes</h1>
@@ -98,7 +96,7 @@ function Resumes() {
                     />
                 </div>
                 <ResumeNav />
-                <div class="downArrow bounce">
+                <div className="downArrow bounce">
                     <a href="#resumes"><img src={Arrow} alt="" /></a>
                 </div>
             </div>
