@@ -17,7 +17,7 @@
 }
 
 #login-form h4 {
-    color: black;
+    color: #5D63D5;
     text-align: center;
     font-weight: 700;
 }
@@ -42,7 +42,7 @@
     padding: 10px 0;
 }
 
-#form-login-btn:hover {
+.btn-hover-effect:hover {
     transform: scale(1.01);
     background-color: rgb(109, 109, 255);
     transition: 0.3s;
@@ -52,6 +52,12 @@
     color: #6b7280;
     font-size: 14px;
     display: inline-block;
+}
+
+.signin-error-message {
+    color: red;
+    font-size: 15px;
+    margin-bottom: 15px;
 }
 
 .auth-lottie-img {

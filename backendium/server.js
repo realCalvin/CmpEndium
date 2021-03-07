@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.use('/user', userRoute);
+app.use(require("./routes/userRoute"));
 
 // Connect to the MongoDB cluster
 const uri = process.env.MONGO_URI;
@@ -31,8 +31,24 @@ try {
     { useNewUrlParser: true, useUnifiedTopology: true },
     () => console.log("Mongoose is connected")
   );
+
 } catch (e) {
   console.log("Mongoose could not connect ", e);
 }
+
+var gracefulExit = function () {
+  mongoose.connection.close(function () {
+    console.log('Mongoose default connection with DB :' + db_server + ' is disconnected through app termination');
+    process.exit(0);
+  });
+}
+
+// If the Node process ends, close the Mongoose connection
+process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
+
+const port = 9000;
+app.listen(port, function () {
+  console.log('Express server is running on port 9000')
+})
 
 module.exports = app;
