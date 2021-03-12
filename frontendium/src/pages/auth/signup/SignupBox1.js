@@ -107,17 +107,6 @@ function SignupBox1(props) {
                 <form id="signup-form" onSubmit={handleValid}>
                     <h4>Sign Up</h4>
                     <Row>
-                        <Col id="signup-form-name">
-                            <p className="input-label">Name</p>
-                            <InputGroup className="mb-3">
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>
-                                        <FontAwesomeIcon className="signup-fa-icon" icon={faUser} />
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl type="text" id="form-name" onChange={handleChange} name="name" value={userInfo.name} required />
-                            </InputGroup>
-                        </Col>
                         <Col>
                             <p className="input-label">Username</p>
                             <InputGroup className="mb-3">
@@ -127,6 +116,17 @@ function SignupBox1(props) {
                                     </InputGroup.Text>
                                 </InputGroup.Prepend>
                                 <FormControl type="text" id="form-username" onChange={handleChange} name="username" value={userInfo.username} required />
+                            </InputGroup>
+                        </Col>
+                        <Col id="signup-form-name">
+                            <p className="input-label">Name</p>
+                            <InputGroup className="mb-3">
+                                <InputGroup.Prepend>
+                                    <InputGroup.Text>
+                                        <FontAwesomeIcon className="signup-fa-icon" icon={faUser} />
+                                    </InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <FormControl type="text" id="form-name" onChange={handleChange} name="name" value={userInfo.name} required />
                             </InputGroup>
                         </Col>
                     </Row>
