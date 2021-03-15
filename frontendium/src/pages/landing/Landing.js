@@ -55,7 +55,7 @@ function Landing() {
                     <div className="landing-content">
                         <h1 className="landing-content-h1">Land Your Next Job Efficiently</h1>
                         <p className="landing-content-p"> We pull job listings from multiple websites</p>
-                        <Button href="#search" id="landing-page-btn">Get Started</Button>
+                        <Button href="search" id="landing-page-btn">Get Started</Button>
                     </div>
                     <div className="landing-content">
                         <Lottie

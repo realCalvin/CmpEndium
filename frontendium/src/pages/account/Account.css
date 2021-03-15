@@ -1,0 +1,35 @@
+#Account {
+    background-color: #5D63D5;
+    height: 100%;
+    width: 100%;
+}
+
+#prof-pic-and-name {
+    margin-left: 5%;
+    margin-bottom: 5px;
+}
+
+#profile {
+    margin-left: 5%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#jobs-applied-to {
+    margin-left: 5%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#resume {
+    margin-left: 5%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.lines {
+    background-color: white;
+    height: 2px;
+    width: 95%;
+    margin-right: 3%;
+}

@@ -5,6 +5,7 @@ import Resumes from './pages/resumes/Resumes.js';
 import Signin from './pages/auth/signin/Signin.js';
 import Signup from './pages/auth/signup/Signup.js';
 import Search from './pages/search/Search.js';
+import Account from './pages/account/Account.js';
 import AuthenticatedRoute from './components/route/AuthenticatedRoute';
 import UnauthenticatedRoute from './components/route/UnauthenticatedRoute';
 import { isAuthenticated } from './api/Auth';
@@ -33,7 +34,12 @@ export default function Routing() {
             Component: Search,
             authentication: true,
             path: '/search'
-        }
+        },
+        {
+            Component: Account,
+            authentication: true,
+            path: '/account'
+        },
     ];
 
     return (
