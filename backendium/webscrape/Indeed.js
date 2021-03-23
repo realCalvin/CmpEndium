@@ -1,6 +1,5 @@
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
-const indeed = require('indeed-scraper');
 
 async function indeedScraper(jobInfo) {
     let indeedJobs = [];
@@ -10,7 +9,7 @@ async function indeedScraper(jobInfo) {
     let indeedLink = "https://www.indeed.com/jobs?q=" + keywords + "&l=" + location;
 
     // Set Up Puppeteer Browser
-    puppeteer.launch({ headless: true })
+    await puppeteer.launch({ headless: true })
         .then(async (browser) => {
             let page = await browser.newPage();
             // Visit Up To Page N Of Indeed Job Search
@@ -61,14 +60,14 @@ async function indeedScraper(jobInfo) {
                         })
                     })
                     .catch((err) => {
-                        console.log("Error: ", error);
+                        console.log("Error: ", err);
                     })
             }
-            return filteredJobs;
         })
         .catch(err => {
             console.log("Error: ", err);
         })
+    return filteredJobs;
 };
 
 exports.indeedScraper = indeedScraper;

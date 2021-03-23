@@ -6,7 +6,7 @@ export function searchIndeedJobs(search) {
         location
     } = search;
 
-    return axios.post('/api/indeed/search', {
+    return axios.post('/api/simplyhired/search', {
         keywords,
         location
     }).then(res => {
