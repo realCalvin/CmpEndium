@@ -104,7 +104,7 @@ app.post("/api/getUserInfo", (req, res) => {
     const { email } = req.body;
     return User.findOne({ email: email })
         .then(result => {
-            return ({
+            return res.json({
                 username: result.username,
                 email: result.email,
                 name: result.name,

@@ -6,20 +6,22 @@ import { UserInfo } from '../../api/UserInfo';
 import './Account.css';
 import TempPfp from '../../images/Astronaut.png';
 
-async function getUserInfo() {
-    const userEmail = currentEmail();
-    const userInfo = await UserInfo({ email: userEmail });
-    console.log('check' + userInfo);
-}
-
 function Account() {
     const [info, setInfo] = useState();
-    getUserInfo();
+
+    useEffect(() => {
+        async function getUserInfo() {
+            const userEmail = currentEmail();
+            const userInfo = await UserInfo(userEmail);
+            setInfo(userInfo.data);
+        }
+        getUserInfo();
+    }, [])
 
     return (
         <div id="Account">
             <div id="prof-pic-and-name">
-                <ReactRoundedImage 
+                <ReactRoundedImage
                     image={TempPfp}
                     roundedColor="white"
                     imageWidth="120"
@@ -32,7 +34,7 @@ function Account() {
             <div id="profile">
                 <h2>Profile</h2>
                 <div id="profile-content">
-                    <h5>Name:</h5>
+                    <h5>Name: {info.name}</h5>
                     <h5>Email:</h5>
                     <h5>Major:</h5>
                 </div>
