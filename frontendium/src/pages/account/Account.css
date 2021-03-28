@@ -1,35 +1,53 @@
 #Account {
-    background-color: #5D63D5;
-    height: 100%;
-    width: 100%;
+  background-color: #5d63d5;
+  height: 100%;
+  width: 100%;
 }
 
 #prof-pic-and-name {
-    margin-left: 5%;
-    margin-bottom: 5px;
+  margin-left: 5%;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
 }
 
 #profile {
-    margin-left: 5%;
-    margin-top: 5px;
-    margin-bottom: 5px;
+  margin-left: 5%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#profile-content {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#edit-profile-btn {
+  background-color: #ff97c9;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 20px;
 }
 
 #jobs-applied-to {
-    margin-left: 5%;
-    margin-top: 5px;
-    margin-bottom: 5px;
+  margin-left: 5%;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 #resume {
-    margin-left: 5%;
-    margin-top: 5px;
-    margin-bottom: 5px;
+  margin-left: 5%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.username {
+  margin-left: 3%;
 }
 
 .lines {
-    background-color: white;
-    height: 2px;
-    width: 95%;
-    margin-right: 3%;
+  background-color: white;
+  height: 2px;
+  width: 95%;
+  margin-right: 3%;
 }
