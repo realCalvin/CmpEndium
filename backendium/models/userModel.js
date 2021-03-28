@@ -22,7 +22,7 @@ const userSchema = {
     major: {
         type: String,
         required: true
-    }
+    },
 }
 
 const User = mongoose.model("User", userSchema);

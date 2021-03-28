@@ -100,4 +100,17 @@ app.post("/api/checkUniqueEmail", (req, res) => {
         .then(result => { return res.json(result) })
 })
 
+app.post("/api/getUserInfo", (req, res) => {
+    const { email } = req.body;
+    return User.findOne({ email: email })
+        .then(result => {
+            return ({
+                username: result.username,
+                email: result.email,
+                name: result.name,
+                major: result.major
+            })
+        })
+})
+
 module.exports = app;
