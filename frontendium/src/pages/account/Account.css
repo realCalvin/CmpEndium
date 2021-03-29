@@ -11,6 +11,10 @@
   align-items: center;
 }
 
+#controlled-tab-example {
+  margin-left: 5%;
+}
+
 #profile {
   margin-left: 5%;
   margin-top: 5px;
@@ -55,11 +59,4 @@
 
 .username {
   margin-left: 3%;
-}
-
-.lines {
-  background-color: white;
-  height: 2px;
-  width: 95%;
-  margin-right: 3%;
 }
