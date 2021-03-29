@@ -72,15 +72,15 @@ const bucketParams = { Bucket: bucketName };
 
 // Create an S3 client service object
 const s3 = new S3Client({
-  accessKeyId: "AKIAYYABHORWBZ5UPQ5F",
-  secretAccessKey: "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",
+  accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
   region: REGION
 });
 
 const listBuckets = async () => {
   try {
     const data = await s3.send(new ListBucketsCommand({}));
-    console.log("Success", data.Buckets);
+    //console.log("Success", data.Buckets);
   } catch (err) {
     console.log("Error", err);
   }
@@ -99,6 +99,8 @@ const upload = async () => {
     console.log("Error", err);
   }
 }
+
+upload();
 
 const port = 9000;
 app.listen(port, function () {
