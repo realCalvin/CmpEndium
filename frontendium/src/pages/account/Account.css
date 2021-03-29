@@ -1,22 +1,38 @@
-#Account {
+#account {
   background-color: #5d63d5;
-  height: 100%;
+  height: 91%;
   width: 100%;
 }
 
 #prof-pic-and-name {
   margin-left: 5%;
-  margin-bottom: 5px;
+  margin-bottom: 40px;
   display: flex;
   align-items: center;
 }
 
-#controlled-tab-example {
-  margin-left: 5%;
+#content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#account-info {
+  width: 90%;
+  min-height: 35vh;
+  max-height: 70vh;
+  background-color: white;
+  color: #5d63d5;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 5px;
+  overflow: auto;
+  padding: 45px;
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.25);
+  transition: transform 300ms, box-shadow 300ms;
+  z-index: 2;
 }
 
 #profile {
-  margin-left: 5%;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -34,13 +50,11 @@
 }
 
 #jobs-applied-to {
-  margin-left: 5%;
   margin-top: 5px;
   margin-bottom: 15px;
 }
 
 #resume {
-  margin-left: 5%;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -55,6 +69,8 @@
 #dropdown-basic-button {
   min-width: 75px;
   max-width: 75px;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 5px;
 }
 
 .username {
