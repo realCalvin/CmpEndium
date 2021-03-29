@@ -4,6 +4,7 @@ const indeed = require("../webscrape/Indeed");
 const linkedin = require("../webscrape/Linkedin");
 const careerbuilder = require("../webscrape/CareerBuilder");
 const simplyhired = require("../webscrape/SimplyHired");
+const themuse = require("../webscrape/TheMuse");
 
 const app = express();
 
