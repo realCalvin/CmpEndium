@@ -1,12 +1,13 @@
 #account {
   background-color: #5d63d5;
-  height: 91%;
+  height: 95%;
   width: 100%;
 }
 
 #prof-pic-and-name {
   margin-left: 5%;
   margin-bottom: 40px;
+  padding-top: 30px;
   display: flex;
   align-items: center;
 }
@@ -44,6 +45,8 @@
 
 #edit-profile-btn {
   background-color: #ff97c9;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
   font-size: 20px;
@@ -61,6 +64,8 @@
 
 #upload-resume-btn {
   background-color: #ff97c9;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
   font-size: 20px;
@@ -75,4 +80,10 @@
 
 .username {
   margin-left: 3%;
+}
+
+@media only screen and (max-width: 820px) {
+  #account-info {
+    min-height: 27vh;
+  }
 }

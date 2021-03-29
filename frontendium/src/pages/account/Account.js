@@ -98,7 +98,7 @@ function Account() {
                             </div>
                         </Tab>
                         <Tab eventKey="resume" title="Resume">
-                            <div id="resume">
+                            <div id="resume" classname="d-flex justify-content-center">
                                 <h2>Resume</h2>
                                 <Row>
                                     <Col xs={6} md={6}>
