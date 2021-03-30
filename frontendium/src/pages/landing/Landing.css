@@ -1,17 +1,164 @@
 #Landing {
-  padding-top: 50px;
+    background-color: #5D63D5;
+    height: 90%;
+    width: 100%;
+}
+
+.white {
+  position: absolute;
+  background-color: rgb(251, 251, 251);;
+  height: 100%;
+}
+
+#landing-page {
+  background-color: #5D63D5;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.card-link {
+  margin: 0 !important;
+  color: white;
+}
+
+.card-link:hover {
+  color: white;
 }
 
 .landing-content {
-  text-align: center;
+  display: inline-block;
 }
 
-.info-card {
-  background-color: #fec272;
+#landing-content-text {
+  margin-bottom: 20px;
+}
+
+#landing-page-btn {
+  background-color: #FF97C9;
+  margin-top: 15px;
+  margin-bottom: 90px;
+}
+
+#landing-page-btn:hover {
+  transform: scale(1.05);
+  background-color: #fd85bf;
+  transition: 0.3s;
+}
+
+#landing-astronaut-img {
+  height: 120px;
+}
+
+#landing-page-card {
+  text-align: center;
+  padding-bottom: 100px;
+  position: relative;
+  background: #5D63D5;
+  height: 30vh;
+  border-bottom-left-radius: 50% 20%;
+  border-bottom-right-radius: 50% 20%;
+}
+
+.landing-card {
+  display: inline-block;
+  width: 20em;
+  background: #fec272;
+  margin: 10px 10px 0px 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
   box-shadow: 0 5px 20px rgba(255, 255, 255, 0.25);
   transition: transform 300ms, box-shadow 300ms;
 }
 
-.info-card-title {
-  font-size: 20px;
+.landing-card:hover {
+  transform: scale(1.05);
+  background-color: #ffbe6a;
+  transition: 0.3s;
+}
+
+.landing-card img {
+  height: 3em;
+}
+
+.landing-card-text {
+  margin-top: 15px;
+}
+
+.landing-page-descriptions {
+  background-color: rgb(251, 251, 251);
+  color: #183055;
+  height: 70vh;  
+  padding: 10rem 20%;
+}
+
+.landing-page-descriptions h3 {
+  text-align: center;
+}
+
+.landing-page-descriptions li {
+  font-size: 18px;
+}
+
+.image-left {
+  display: block;
+}
+
+.image-right {
+  display: none;
+}
+
+/* PC DEVICES */
+@media only screen and (max-width: 1090px) {
+  .landing-card {
+    margin-top: 20px;
+  }
+
+  #landing-page-btn {
+    margin-bottom: 0px;
+  }
+
+  #landing-page-card {
+    height: 50vh;
+  }
+
+  .landing-page-descriptions {
+    height: 100vh;
+  }
+
+  .image-left {
+    display: none;
+  }
+  
+  .image-right {
+    display: block;
+  }
+}
+
+/* MOBILE DEVICES */
+@media only screen and (max-width: 500px) {
+  .landing-content-h1 {
+    font-size: 40px;
+  }
+
+  .landing-content-p {
+    font-size: 20px;
+  }
+
+  .landing-card {
+    width: 18em;
+    margin-top: 20px;
+  }
+
+  .landing-card img {
+    height: 2em;
+  }
+
+  .landing-card-text {
+    margin-top: 10px;
+    font-size: 15px;
+  }
 }

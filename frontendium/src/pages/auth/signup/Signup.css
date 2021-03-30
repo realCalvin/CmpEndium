@@ -1,0 +1,168 @@
+#Signup {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    color: black;
+}
+
+.signup-box {
+    position: relative;
+    z-index: 1;
+}
+
+.signup-job-accordion {
+    height: 400px;
+    overflow-y: auto;
+    margin-bottom: 40px;
+}
+
+.signup-job-accordion::-webkit-scrollbar {
+    width: 18px;
+}
+   
+.signup-job-accordion::-webkit-scrollbar-thumb {
+    background-color: rgb(145, 145, 255);
+    border-radius: 5px;
+}
+
+.list-group-item {
+    margin: 0;
+    padding: 5px;
+}
+.list-group-item.active {
+    background-color: white !important;
+    color: rgb(118, 118, 250);
+    border-color: rgba(0,0,0,.125);
+    font-weight: 600;
+}
+
+.signup-job-card {
+    width: 400px;
+    background: rgb(118, 118, 250);
+    margin: 5px;
+    border-radius: 5px !important;
+    text-align: center;
+}
+
+.signup-job-card .card-header button {
+    color: white;
+}
+
+.signup-job-card .card-header button:focus {
+    outline: none !important;
+    box-shadow: none;
+}
+
+#signup-auth-box {
+    background-color: white;
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 5px;
+    overflow: auto;
+    padding: 45px;
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.25);
+    transition: transform 300ms, box-shadow 300ms;
+    z-index: 2;
+}
+#signup-form .col {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#signup-form #signup-form-name {
+    padding-left: 10px;
+}
+
+#signup-form h4 {
+    color: #5D63D5;
+    text-align: center;
+    font-weight: 700;
+}
+
+#signup-job-info {
+    display: block;
+    color: white;
+    border: 1px solid #8a8fec;
+    background-color: #898ef0;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 550;
+    margin: 20px 15%;
+}
+
+.input-label {
+    font-size: 15px;
+    color: #6b7280;
+    font-weight: 600;
+    margin: 5px 0px 5px 0px;
+}
+
+.signup-fa-icon {
+    font-size: 15px;
+}
+
+.form-signup-btn {
+    border: none;
+    background-color: rgb(118, 118, 250);
+    color: white;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px 0;
+}
+
+#form-signup-btn:hover {
+    transform: scale(1.01);
+    background-color: rgb(109, 109, 255);
+    transition: 0.3s;
+}
+
+.bottom-signup-form-row {
+    color: #6b7280;
+    font-size: 14px;
+    display: inline-block;
+}
+
+#signup-job-x-btn {
+    border: none;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+#signup-job-x-btn:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+.signup-error-message {
+    color: red;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+#signup-error-box-2 {
+    padding-left: 15px;;
+}
+
+@media only screen and (max-width: 620px) {
+    #signup-auth-box {
+        margin: 15px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .signup-job-accordion {
+        height: 200px;
+    }
+    .signup-job-card {
+        width: 250px;
+    }
+    .form-signup-btn {
+        margin: 5px 0px;
+    }
+    #signup-job-info {
+        width: 80%;
+    }
+}
