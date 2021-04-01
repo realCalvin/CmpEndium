@@ -1,12 +1,7 @@
 require('dotenv').config();
 const https = require('https');
-const locations = require('./Locations');
-const mongoose = require("mongoose");
+const locations = require('./util/Locations');
 const Job = require("../models/jobModel");
-
-async function timer(time) {
-    await new Promise(resolve => setTimeout(resolve, time));
-}
 
 async function getTheMuseJobs() {
     // Clear database of jobs
@@ -72,28 +67,33 @@ async function getTheMuseJobs() {
             await new Promise(resolve => setTimeout(resolve, 80));
         }
     }
-
-    /* TEST LIMIT OF MUSE API */
-    // let theMuseApi = 'https://www.themuse.com/api/public/jobs?page=1' + '&api_key=' + process.env.THE_MUSE_API_KEY;
-    // https.get(theMuseApi, res => {
-    //     let data = '';
-
-    //     res.on('data', (chunk) => {
-    //         data += chunk;
-    //     })
-
-    //     res.on('end', () => {
-    //         try {
-    //             let jobs = JSON.parse(data);
-    //             console.log(res.headers)
-    //         } catch (err) {
-    //             console.log("Error trying to use JSON.parse with the data: ", data);
-    //         }
-    //     })
-    // }).on("error", (err) => {
-    //     console.log("TheMuse Error: " + err.message);
-    //     timer(1000);
-    // })
 }
-getTheMuseJobs();
+/*
+    TODO: Put code below in a function to periodically check limit
+          Function should return that limit, and continue scraping if
+          it surpasses a threshold
+*/
+/* TEST LIMIT OF MUSE API */
+// let theMuseApi = 'https://www.themuse.com/api/public/jobs?page=1' + '&api_key=' + process.env.THE_MUSE_API_KEY;
+// https.get(theMuseApi, res => {
+//     let data = '';
+
+//     res.on('data', (chunk) => {
+//         data += chunk;
+//     })
+
+//     res.on('end', () => {
+//         try {
+//             let jobs = JSON.parse(data);
+//             console.log(res.headers)
+//         } catch (err) {
+//             console.log("Error trying to use JSON.parse with the data: ", data);
+//         }
+//     })
+// }).on("error", (err) => {
+//     console.log("TheMuse Error: " + err.message);
+//     timer(1000);
+// })
+
+// getTheMuseJobs();
 console.log("** DONE FETCHING JOBS FROM THEMUSE **")

@@ -1,0 +1,71 @@
+#JobListing {
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#job-listing-content {
+    width: 70%;
+}
+
+#job-listing-header {
+    background: linear-gradient(90deg,#5555e3,rgb(121, 134, 231)) !important;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    height: 400px;
+    margin: 30px 0px;
+}
+
+#job-listing-header .row {
+    height: 100%;
+}
+
+#job-listing-header .col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#job-listing-body {
+    background-color: white;
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 5px;
+    overflow: auto;
+    padding: 45px;
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.25);
+    transition: transform 300ms, box-shadow 300ms;
+    z-index: 2;
+}
+
+.job-listing-cards {
+    width: 100%;
+    margin: 15px 0;
+}
+
+.job-listing-cards .card-link {
+    color: rgb(86, 86, 250);
+}
+
+.job-listing-btn {
+    border: none;
+    background-color: rgb(118, 118, 250);
+    color: white;
+    margin-right: 10px;
+    width: 25%;
+    border-radius: 5px;
+    padding: 10px 0;
+}
+
+.job-listing-btn:hover {
+    transform: scale(1.01);
+    background-color: rgb(105, 105, 253);
+    transition: 0.4s;
+}
+
+@media only screen and (max-width: 1100px) {
+    #job-listing-content {
+        width: 90%;
+    }
+}

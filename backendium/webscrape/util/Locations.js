@@ -89,9 +89,6 @@ module.exports = [
         "state": "CO"
     },
     {
-        "city": "Washington"
-    },
-    {
         "city": "Boston",
         "state": "MA"
     },

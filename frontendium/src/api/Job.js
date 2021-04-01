@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-export function searchIndeedJobs(query) {
+export function searchJobs(query) {
     const {
         keywords,
         location
     } = query;
 
-    return axios.post('/api/simplyhired/search', {
+    return axios.post('/api/database/search', {
         keywords,
         location
     }).then(res => {

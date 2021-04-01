@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Lottie from 'react-lottie';
 import { Row, Col, InputGroup, FormControl } from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faLocationArrow } from '@fortawesome/free-solid-svg-icons';
-import { searchIndeedJobs } from '../../api/Job';
+import { searchJobs } from '../../api/Job';
 import Wave from '../../components/wave/Wave';
 import RocketData from '../../images/lottie/rocket';
 import './Search.css';
@@ -19,6 +20,8 @@ function Search() {
         }
     };
 
+    const history = useHistory();
+
     const [info, setInfo] = useState({
         keywords: '',
         location: ''
@@ -31,9 +34,13 @@ function Search() {
         });
     }
 
-    const handleSearch = e => {
+    async function handleSearch(e) {
         e.preventDefault();
-        searchIndeedJobs(info);
+        // TODO: Reorder job listings to display the location first, rather than 'remote'
+        let jobs = await searchJobs(info);
+        await sessionStorage.clear('jobs');
+        await sessionStorage.setItem('jobs', JSON.stringify(jobs.data.jobs));
+        history.push('/jobs');
     }
 
     return (
