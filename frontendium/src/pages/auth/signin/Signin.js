@@ -27,7 +27,7 @@ function Signin() {
     const [user, setUser] = useState({
         email: '',
         password: ''
-    })
+    });
 
     const [emailErrorMessage, setEmailErrorMessage] = useState('');
     const [passwordErrorMessage, setPasswordErrorMessage] = useState('');

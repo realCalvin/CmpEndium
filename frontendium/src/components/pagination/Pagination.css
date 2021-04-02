@@ -1,0 +1,33 @@
+#Pagination .page-item {
+    margin: 0px 20px !important;
+}
+
+#Pagination .page-link {
+    border-radius: 50%;
+    width: 55px;
+    line-height: 35px;
+    text-align: center;
+}
+
+#Pagination .active .page-link {
+    background-color: rgb(134, 134, 251) !important;
+    border-color: rgb(134, 134, 251);
+}
+
+@media only screen and (max-width: 1000px) {
+    #Pagination .page-item {
+        margin: 0px 10px !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #Pagination .page-item {
+        margin: 0px 5px !important;
+    }
+
+    #Pagination .page-link {
+        width: 45px;
+        line-height: 25px;
+        font-size: 14px;
+    }
+}

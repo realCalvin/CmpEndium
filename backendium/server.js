@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cors = require("cors");
 var mongoose = require('mongoose');
 var userRoute = require('./routes/userRoute');
+var jobRoute = require('./routes/jobRoute');
 
 var app = express();
 
@@ -21,7 +22,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.use(require("./routes/userRoute"));
+app.use(userRoute);
+app.use(jobRoute);
 
 // Connect to the MongoDB cluster
 const uri = process.env.MONGO_URI;

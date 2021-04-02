@@ -2,6 +2,7 @@ html, body {
   scroll-behavior: smooth !important;
   width: 100% !important;
   overflow-x: hidden;
+  background-color: rgb(251, 251, 251) !important;
 }
 
 body {
