@@ -1,5 +1,8 @@
 const cheerio = require('cheerio');
-const puppeteer = require('puppeteer');
+// const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
 
 async function simplyHiredScraper(jobInfo) {
     let simplyHiredJobs = [];
@@ -12,7 +15,7 @@ async function simplyHiredScraper(jobInfo) {
         .then(async (browser) => {
             let page = await browser.newPage();
             // Visit Up To Page N Of SimplyHired Job Search
-            for (var N = 1; N < 2; N++) {
+            for (var N = 1; N < 3; N++) {
                 let currentSimplyHiredLink = simplyHiredLink + "&pn=" + N;
                 // Load SimplyHired Job Search Page
                 await page.goto(currentSimplyHiredLink, { waitUntil: 'domcontentloaded' })
@@ -32,6 +35,7 @@ async function simplyHiredScraper(jobInfo) {
                                 }
                             });
                         })
+                        await page.screenshot({ path: 'simply.png' });
                     })
             }
             // Loop Through Each Saved Job To Retrieve External Job Link And Job Description

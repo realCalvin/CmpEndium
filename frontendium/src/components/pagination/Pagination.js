@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Pagination } from 'react-bootstrap';
+import './Pagination.css';
 
 function PaginationComponent(props) {
     let currentPage = props.currentPage;
     let totalPages = props.totalPages;
-    let numOfPages = 5;
-
+    let numOfPages = (window.innerWidth > 700) ? 5 : 3;
+    // eslint-disable-next-line
     let [page, setPage] = useState({ start: 1, end: numOfPages })
 
     if (currentPage > page.end) {
@@ -49,7 +50,7 @@ function PaginationComponent(props) {
     }
 
     return (
-        <div>
+        <div id="Pagination">
             <Pagination>
                 <Pagination.Prev onClick={handlePrevPage} />
                 {items}

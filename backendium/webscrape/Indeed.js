@@ -1,5 +1,11 @@
 const cheerio = require('cheerio');
-const puppeteer = require('puppeteer');
+// const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
+
+puppeteer.use(StealthPlugin());
+puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
 
 async function indeedScraper(jobInfo) {
     let indeedJobs = [];
@@ -13,7 +19,7 @@ async function indeedScraper(jobInfo) {
         .then(async (browser) => {
             let page = await browser.newPage();
             // Visit Up To Page N Of Indeed Job Search
-            for (var N = 1; N < 2; N++) {
+            for (var N = 1; N < 3; N++) {
                 let currentIndeedLink = indeedLink + "&start=" + N * 10;
                 // Load Indeed Job Search Page
                 await page.goto(currentIndeedLink, { waitUntil: 'domcontentloaded' })
@@ -36,6 +42,7 @@ async function indeedScraper(jobInfo) {
                             });
                         })
                     })
+                await page.screenshot({ path: 'imdeed.png' });
             }
             // Loop Through Each Saved Job To Retrieve External Job Link And Job Description
             for (var i = 0; i < indeedJobs.length; i++) {
