@@ -74,41 +74,40 @@ app.post("/api/delete", async (req, res) => {
 app.post("/api/retrieve", async (req, res) => {
     const { major } = req.body;
     // console.log(major);
-    // const keyName = major;
-    // const objectParams = { Bucket: bucketName, Key: keyName };
-
-    const keyName = `Computer_Science/${path.basename("C:\\Projects\\DummyTHICCC\\frontendium\\src\\images\\samples\\cocoa_touch.jpg")}`;
-    const objectParams = { Bucket: bucketName, Key: keyName };
-
+    const objectParams = { Bucket: bucketName, Prefix: major };
     try {
-        const results = await s3.send(new GetObjectCommand(objectParams));
-        console.log(results.body)
-        // getResume().then(results => {
-        //     const results_base64 = encode(results);
-        //     console.log(results_base64)
-        //     res.send(results_base64)
-        // })
-        // console.log("Successfully uploaded data to " + bucketName + "/" + keyName);
+        aws3.listObjects(objectParams, (err, data) => {
+            if (err) console.log(err, err.stack);
+            else{
+                for (var d in data.Contents){
+                    // delete useless data
+                    delete data.Contents[d].LastModified;
+                    delete data.Contents[d].ETag;
+                    delete data.Contents[d].Size;
+                    delete data.Contents[d].StorageClass;
+                    delete data.Contents[d].Owner; 
+
+                    /**
+                     * dis shit dont work
+                     * the console.log inside the headObject callback prints out the metadata
+                     * but the console.log(data.Contents) doesnt have the name in it
+                     */
+                    const params = { Bucket: bucketName, Key: data.Contents[d].Key }
+                    // get metadata for each object and add the name from metadata to object
+                    aws3.headObject(params, (err, metadata) => {
+                        // console.log(metadata.Metadata.name)
+                        // add Name field to object
+                        data.Contents[d]["Name"] = metadata.Metadata.name
+                    })
+                }
+                console.log(data.Contents);               
+                return data.Contents;
+            }
+        });
     } catch (err) {
         console.log("Error", err);
     }
 })
-
-async function getResume(){
-    const keyName = `Computer_Science/${path.basename("C:\\Projects\\DummyTHICCC\\frontendium\\src\\images\\samples\\cocoa_touch.jpg")}`;
-    const objectParams = { Bucket: bucketName, Key: keyName };
-    const data = aws3.getObject(objectParams);
-    console.log(data)
-    return data;
-}
-
-function encode(data){
-    let buf = Buffer.from(data);
-    let base64 = buf.toString('base64');
-    return base64;
-    // var str = data.reduce(function(a,b){ return a+String.fromCharCode(b) },'');
-    // return btoa(str).replace(/.{76}(?=.)/g,'$&\n');
-}
 
 // Create name for uploaded object key
 // const keyName = `Computer_Science/${path.basename("C:\\Projects\\DummyTHICCC\\frontendium\\src\\images\\samples\\cocoa_touch.jpg")}`;
