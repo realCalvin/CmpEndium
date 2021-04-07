@@ -2,12 +2,22 @@ import React from 'react';
 import './ResumeNav.css';
 import { Row, Col, DropdownButton, Dropdown } from 'react-bootstrap';
 import { jobMapping } from '../../components/jobs/Jobs';
+import { upload, deleteResume, retrieve } from '../../api/AWS';
 
 export default function ResumeNav() {
+
+    async function retrieveResumes(e) {
+        var major = e.target.id;
+        major = major.replace(/ /g, "_")
+        console.log(major);
+        const resumes = await retrieve(major);
+        console.log(resumes);
+    }
+
     var jobDropdownButtons = jobMapping.map((jobItem, itr) => {
         var dropdownItems = jobItem[1].map((dropdownItem, dropdownItr) => {
             return (
-                <Dropdown.Item eventKey={dropdownItr} key={dropdownItr} >{dropdownItem}</Dropdown.Item>
+                <Dropdown.Item eventKey={dropdownItr} key={dropdownItr} id={dropdownItem} onClick={retrieveResumes}>{dropdownItem}</Dropdown.Item>
             );
         });
         return (

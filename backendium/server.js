@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cors = require("cors");
 var mongoose = require('mongoose');
 var userRoute = require('./routes/userRoute');
+var resumeRoute = require('./routes/resumeRoute');
 
 var app = express();
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use(require("./routes/userRoute"));
+app.use(require("./routes/resumeRoute"))
 
 // Connect to the MongoDB cluster
 const uri = process.env.MONGO_URI;
@@ -46,61 +48,19 @@ var gracefulExit = function () {
 // If the Node process ends, close the Mongoose connection
 process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
 
-// Verify credentials were passed in correctly
+// Verify AWS credentials were passed in correctly
 var AWS = require("aws-sdk");
-AWS.config.getCredentials(function (err) {
-  if (err) console.log(err.stack);
-  else {
-    console.log("Access key", AWS.config.credentials.accessKeyId);
-  }
-})
-
-// Import required AWS SDK clients and commands for Node.js
-const {
-  S3Client,
-  PutObjectCommand,
-  CreateBucketCommand,
-  ListBucketsCommand
-} = require("@aws-sdk/client-s3");
-
-// Set the AWS region
-const REGION = "us-west-1"; // e.g., "us-east-1"
-
-// Set the bucket parameters
-const bucketName = "cmpendium";
-const bucketParams = { Bucket: bucketName };
-
-// Create an S3 client service object
-const s3 = new S3Client({
+AWS.config.update({
   accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
-  region: REGION
-});
-
-const listBuckets = async () => {
-  try {
-    const data = await s3.send(new ListBucketsCommand({}));
-    //console.log("Success", data.Buckets);
-  } catch (err) {
-    console.log("Error", err);
+  region: "us-west-1"
+})
+AWS.config.getCredentials(function (err) {
+  if (err) console.log("Error: ", err);
+  else {
+    console.log("AWS credentials passed correctly");
   }
-}
-listBuckets();
-
-// Create name for uploaded object key
-const keyName = "hello_world.txt";
-const objectParams = { Bucket: bucketName, Key: keyName, Body: "Hello World!" };
-
-const upload = async () => {
-  try {
-    const results = await s3.send(new PutObjectCommand(objectParams));
-    console.log("Successfully uploaded data to " + bucketName + "/" + keyName);
-  } catch (err) {
-    console.log("Error", err);
-  }
-}
-
-upload();
+})
 
 const port = 9000;
 app.listen(port, function () {
