@@ -29,6 +29,7 @@ function JobListing(props) {
 
     const jobsPerPage = 10;
 
+    // eslint-disable-next-line
     useEffect(async () => {
         // TODO: Reorder job listings to display the location first, rather than 'remote'
         let jobs = await searchJobs(location.state);
@@ -40,7 +41,7 @@ function JobListing(props) {
         }
         setJobs(JSON.parse(sessionStorage.getItem('jobs')));
         setLoaded(true);
-    }, []);
+    }, [location.state]);
 
     // logic and calculation for the current page indexing
     const indexOfLastJob = currentPage * jobsPerPage;

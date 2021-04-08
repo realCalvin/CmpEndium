@@ -31,20 +31,17 @@ async function getJobs(data) {
 }
 
 app.post("/api/database/search", async (req, res) => {
-    console.log("Searching mongodb", req.body);
     let jobs = await getJobs(req.body);
     return res.json({ jobs: jobs });
 })
 
 app.post("/api/indeed/search", async (req, res) => {
     const indeedJobs = await indeed.indeedScraper(req.body);
-    console.log(indeedJobs);
     return;
 })
 
 app.post("/api/simplyhired/search", async (req, res) => {
     const simplyHiredJobs = await simplyhired.simplyHiredScraper(req.body);
-    console.log(simplyHiredJobs);
     return;
 })
 

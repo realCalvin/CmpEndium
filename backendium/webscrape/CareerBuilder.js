@@ -37,7 +37,6 @@ async function careerBuilderScraper(jobInfo) {
                                     });
                                 }
                             });
-                            console.log(careerBuilderJobs);
                         })
                     })
             }
