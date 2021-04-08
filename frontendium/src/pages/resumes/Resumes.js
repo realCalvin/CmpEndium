@@ -1,20 +1,12 @@
 import { useState } from 'react';
-import { Container, Row, Col, Modal, Image } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import './Resumes.css';
-import Resume from '../../components/resume/resume.js';
+import Resume from '../../components/resume/Resume.js';
 import ResumeNav from './ResumeNav.js';
 import Lottie from 'react-lottie';
 import CometData from '../../images/lottie/comet';
 import Arrow from '../../images/arrow.png';
-
-// hardcoded images, delete once the backend is setup
-import img from '../../images/samples/sample1.png';
-import img2 from '../../images/samples/sample2.png';
-import img3 from '../../images/samples/sample3.jpg';
-import img4 from '../../images/samples/sample4.png';
-import img5 from '../../images/samples/sample5.png';
-import img6 from '../../images/samples/sample6.jpg';
-
+import { upload, deleteResume, retrieve } from '../../api/AWS';
 
 function Resumes() {
     const Comet = {
@@ -26,60 +18,60 @@ function Resumes() {
         }
     };
 
-    const [show, setShow] = useState(false);
-    const [id, setId] = useState(0);
-
-    const handleClose = () => setShow(false);
-    const handleShow = (id) => {
-        setId(id);
-        setShow(true);
+    const [data, setData] = useState({});
+    const [major, setMajor] = useState("");
+    
+    async function retrieveResumes(e) {
+        var major = e.target.id;
+        setMajor(major);
+        major = major.replace(/ /g, "_");
+        const data = await retrieve(major);
+        console.log(data.data)
+        setData(data.data);
     }
 
-    const sampleJson = [
-        {
-            "image": img,
-            "name": "Anne Smith",
-            "title": "Registered Nurse"
-        },
-        {
-            "image": img2,
-            "name": "Anne Smith",
-            "title": "Registered Nurse"
-        },
-        {
-            "image": img3,
-            "name": "Anne Smith",
-            "title": "Registered Nurse"
-        },
-        {
-            "image": img4,
-            "name": "Anne Smith",
-            "title": "Registered Nurse"
-        },
-        {
-            "image": img5,
-            "name": "Anne Smith",
-            "title": "Registered Nurse"
-        },
-        {
-            "image": img6,
-            "name": "Anne Smith",
-            "title": "Registered Nurse"
+    // if someone has a better solution to this block of code, plz change
+    const cols = [];
+    var i;
+    var j = 0;
+    for (i = 0; i < data.length; i+=4){
+        if(data.length-i < 4){
+            break;
         }
-    ]
-
-    const rows = [
-        <Row className="justify-content-center mb-3" key={1}>
-            <Col onClick={() => handleShow(0)}><Resume image={img} name="Anne Smith" title="Registered Nurse" /></Col>
-            <Col onClick={() => handleShow(1)}><Resume image={img2} name="Angela Wilkinson" title="Data Analyst" /></Col>
-            <Col onClick={() => handleShow(2)}><Resume image={img3} name="Samantha Jansen" title="Product Manager" /></Col>
-            <Col onClick={() => handleShow(3)}><Resume image={img4} name="Samantha Cerio" title="Property Manager" /></Col>
-        </Row>,
-        <Row className="justify-content-center mb-3" key={2}>
-            <Col onClick={() => handleShow(4)}><Resume image={img5} name="Lilibeth Andrada" title="Data Analyst" /></Col>
-            <Col onClick={() => handleShow(5)}><Resume image={img6} name="Darla Demarco" title="Cashier" /></Col>
-        </Row>
-    ]
+        cols.push(
+            <Row className="justify-content-center mb-3" key={j}>
+                <Col><Resume image={data[i].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i+1].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i+2].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i+3].Key} name="" title="" /></Col>
+            </Row>
+        )
+        j++;
+    }
+    if(data.length-i === 3){
+        cols.push(
+            <Row className="justify-content-center mb-3" key={j}>
+                <Col><Resume image={data[i].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i+1].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i+2].Key} name="" title="" /></Col>
+            </Row>
+        )
+    }
+    else if(data.length-i === 2){
+        cols.push(
+            <Row className="justify-content-center mb-3" key={j}>
+                <Col><Resume image={data[i].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i+1].Key} name="" title="" /></Col>
+            </Row>
+        )
+    }
+    else if(data.length-i === 1){
+        cols.push(
+            <Row className="justify-content-center mb-3" key={j}>
+                <Col><Resume image={data[i].Key} name="" title="" /></Col>
+            </Row>
+        )
+    }
 
     return (
         <div className="resume-content">
@@ -95,19 +87,15 @@ function Resumes() {
                         width={300}
                     />
                 </div>
-                <ResumeNav />
+                <ResumeNav retrieveResumes={retrieveResumes}/>
                 <div className="downArrow bounce">
                     <a href="#resumes"><img src={Arrow} alt="" /></a>
                 </div>
             </div>
             <Container className="resume-content-container" id="resumes">
-                {rows}
+                <u><h3>{major} Resumes</h3></u>
+                {cols}
             </Container>
-            <Modal show={show} onHide={handleClose} dialogClassName="resume-modal" centered>
-                <Modal.Body>
-                    <Image src={sampleJson[id].image} fluid />
-                </Modal.Body>
-            </Modal>
         </div>
     )
 }
