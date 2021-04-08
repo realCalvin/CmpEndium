@@ -20,7 +20,7 @@ function Resumes() {
 
     const [data, setData] = useState({});
     const [major, setMajor] = useState("");
-    
+
     async function retrieveResumes(e) {
         var major = e.target.id;
         setMajor(major);
@@ -34,38 +34,38 @@ function Resumes() {
     const cols = [];
     var i;
     var j = 0;
-    for (i = 0; i < data.length; i+=4){
-        if(data.length-i < 4){
+    for (i = 0; i < data.length; i += 4) {
+        if (data.length - i < 4) {
             break;
         }
         cols.push(
             <Row className="justify-content-center mb-3" key={j}>
                 <Col><Resume image={data[i].Key} name="" title="" /></Col>
-                <Col><Resume image={data[i+1].Key} name="" title="" /></Col>
-                <Col><Resume image={data[i+2].Key} name="" title="" /></Col>
-                <Col><Resume image={data[i+3].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i + 1].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i + 2].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i + 3].Key} name="" title="" /></Col>
             </Row>
         )
         j++;
     }
-    if(data.length-i === 3){
+    if (data.length - i === 3) {
         cols.push(
             <Row className="justify-content-center mb-3" key={j}>
                 <Col><Resume image={data[i].Key} name="" title="" /></Col>
-                <Col><Resume image={data[i+1].Key} name="" title="" /></Col>
-                <Col><Resume image={data[i+2].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i + 1].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i + 2].Key} name="" title="" /></Col>
             </Row>
         )
     }
-    else if(data.length-i === 2){
+    else if (data.length - i === 2) {
         cols.push(
             <Row className="justify-content-center mb-3" key={j}>
                 <Col><Resume image={data[i].Key} name="" title="" /></Col>
-                <Col><Resume image={data[i+1].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i + 1].Key} name="" title="" /></Col>
             </Row>
         )
     }
-    else if(data.length-i === 1){
+    else if (data.length - i === 1) {
         cols.push(
             <Row className="justify-content-center mb-3" key={j}>
                 <Col><Resume image={data[i].Key} name="" title="" /></Col>
@@ -87,7 +87,7 @@ function Resumes() {
                         width={300}
                     />
                 </div>
-                <ResumeNav retrieveResumes={retrieveResumes}/>
+                <ResumeNav retrieveResumes={retrieveResumes} />
                 <div className="downArrow bounce">
                     <a href="#resumes"><img src={Arrow} alt="" /></a>
                 </div>
