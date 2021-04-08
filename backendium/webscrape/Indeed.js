@@ -42,7 +42,6 @@ async function indeedScraper(jobInfo) {
                             });
                         })
                     })
-                await page.screenshot({ path: 'imdeed.png' });
             }
             // Loop Through Each Saved Job To Retrieve External Job Link And Job Description
             for (var i = 0; i < indeedJobs.length; i++) {

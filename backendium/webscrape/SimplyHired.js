@@ -35,7 +35,6 @@ async function simplyHiredScraper(jobInfo) {
                                 }
                             });
                         })
-                        await page.screenshot({ path: 'simply.png' });
                     })
             }
             // Loop Through Each Saved Job To Retrieve External Job Link And Job Description

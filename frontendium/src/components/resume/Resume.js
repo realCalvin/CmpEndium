@@ -1,5 +1,5 @@
 import { Image } from 'react-bootstrap';
-import './resume.css';
+import './Resume.css';
 
 function resume(props) {
 

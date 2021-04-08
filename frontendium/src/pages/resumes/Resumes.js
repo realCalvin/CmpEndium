@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Container, Row, Col, Modal, Image } from 'react-bootstrap';
 import './Resumes.css';
-import Resume from '../../components/resume/resume.js';
+import Resume from '../../components/resume/Resume.js';
 import ResumeNav from './ResumeNav.js';
 import Lottie from 'react-lottie';
 import CometData from '../../images/lottie/comet';
