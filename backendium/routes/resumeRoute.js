@@ -73,14 +73,18 @@ app.post("/api/delete", async (req, res) => {
 
 app.post("/api/retrieve", async (req, res) => {
     const { major } = req.body;
-    // console.log(major);
     const objectParams = { Bucket: bucketName, Prefix: major };
     try {
         aws3.listObjects(objectParams, (err, data) => {
             if (err) console.log(err, err.stack);
             else{
+
                 for (var d in data.Contents){
                     // delete useless data
+                    if(data.Contents[d].Size == 0){
+                        data.Contents.splice(d, 1);
+                    }
+
                     delete data.Contents[d].LastModified;
                     delete data.Contents[d].ETag;
                     delete data.Contents[d].Size;
@@ -99,9 +103,13 @@ app.post("/api/retrieve", async (req, res) => {
                         // add Name field to object
                         data.Contents[d]["Name"] = metadata.Metadata.name
                     })
+                    data.Contents[d].Key = "https://cmpendium.s3-us-west-1.amazonaws.com/" + data.Contents[d].Key;
+
                 }
-                console.log(data.Contents);               
-                return data.Contents;
+                console.log(data.Contents);
+
+                res.send(data.Contents);
+                // return data.Contents;
             }
         });
     } catch (err) {
