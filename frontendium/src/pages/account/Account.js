@@ -18,8 +18,8 @@ function Account() {
         email: '',
         major: ''
     });
-    const [edit, setEdit] = useState(false);
     const [share, setShare] = useState(false);
+    const [submitResume, setSubmitResume] = useState(true);
 
     useEffect(() => {
         async function getUserInfo() {
@@ -31,20 +31,27 @@ function Account() {
         console.log(info);
     }, [])
 
-    function handleEdit() {
-        if (edit) {
-            setEdit(false)
+    function handleResumeUpload(event) {
+        if (event.target.files[0].type !== 'application/pdf') {
+            setSubmitResume(false);
         } else {
-            setEdit(true)
+            setSubmitResume(true);
         }
+        setResume(event.target.files);
     }
 
-    function handleResumeUpload() {
+    function handleResumeSubmit() {
         if (resume) {
             var reader = new FileReader();
-            const response = reader.readAsBinaryString(resume, "UTF-8");
-            console.log(response);
-            uploadResume(response);
+            reader.readAsDataURL(resume[0])
+            reader.onload = function (e) {
+                let json = JSON.stringify({
+                    dataURL: reader.result
+                })
+                let base64 = JSON.parse(json).dataURL;
+                let newBase64 = base64.replace('data:application/pdf;base64,', '');
+                uploadResume(newBase64);
+            }
         }
     }
 
@@ -95,12 +102,7 @@ function Account() {
                                         </Col>
                                     </Row>
                                 </div>
-                                <Row>
-                                    <Button id="edit-profile-btn" onClick={handleEdit}>Edit Profile</Button>
-                                </Row>
-                                <Row>
-                                    <Button id="edit-major-btn">Change Major</Button>
-                                </Row>
+                                <Button id="edit-major-btn">Change Major</Button>
                             </div>
                         </Tab>
                         <Tab eventKey="job-apps" title="Jobs Applied To">
@@ -129,7 +131,7 @@ function Account() {
                                 <h2>Resume</h2>
                                 <Row>
                                     <Col xs={6} md={6}>
-                                        <input type="file" onChange={(e) => setResume(e.target.files[0]) } />
+                                        <input type="file" onChange={handleResumeUpload} />
                                     </Col>
                                     <Col xs={6} md={6}>
                                         <h5>Allow Others to View Resume?</h5>
@@ -137,7 +139,12 @@ function Account() {
                                 </Row>
                                 <Row>
                                     <Col xs={6} md={6}>
-                                        <Button id="upload-resume-btn" onClick={handleResumeUpload}>Upload Resume</Button>
+                                        <Button id="upload-resume-btn" onClick={handleResumeSubmit} disabled={!submitResume}>Upload Resume</Button>
+                                        {!submitResume ?
+                                            <span style={{color: "red"}}>Please submit a pdf file</span>
+                                            :
+                                            ''
+                                        }
                                     </Col>
                                     <Col xs={6} md={6}>
                                     <DropdownButton
