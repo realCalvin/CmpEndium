@@ -118,5 +118,3 @@ async function getTheMuseJobsHelper(link) {
 
 // TODO: Create CRON Job for the function call
 // getTheMuseJobs();
-
-console.log("** DONE FETCHING JOBS FROM THEMUSE **")
