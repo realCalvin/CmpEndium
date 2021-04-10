@@ -6,7 +6,7 @@ import ResumeNav from './ResumeNav.js';
 import Lottie from 'react-lottie';
 import CometData from '../../images/lottie/comet';
 import Arrow from '../../images/arrow.png';
-import { upload, deleteResume, retrieve } from '../../api/AWS';
+import { uploadResume, deleteResume, retrieve } from '../../api/AWS';
 
 function Resumes() {
     const Comet = {

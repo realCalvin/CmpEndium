@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import ReactRoundedImage from 'react-rounded-image';
 import { Row, Col, Button, Dropdown, DropdownButton, Tab, Tabs } from 'react-bootstrap';
 import { currentEmail } from '../../api/Auth';
 import { UserInfo } from '../../api/UserInfo';
+import { uploadResume } from '../../api/AWS';
+import SignupBox2 from '../auth/signup/SignupBox2';
 import TempPfp from '../../images/Astronaut.png';
 import './Account.css';
 
 function Account() {
     const [key, setKey] = useState('profile');
+    const [resume, setResume] = useState(undefined);
     const [info, setInfo] = useState({
         username: '',
         name: '',
         email: '',
         major: ''
     });
+    const [edit, setEdit] = useState(false);
     const [share, setShare] = useState(false);
 
     useEffect(() => {
@@ -25,7 +30,24 @@ function Account() {
         getUserInfo();
         console.log(info);
     }, [])
-    
+
+    function handleEdit() {
+        if (edit) {
+            setEdit(false)
+        } else {
+            setEdit(true)
+        }
+    }
+
+    function handleResumeUpload() {
+        if (resume) {
+            var reader = new FileReader();
+            const response = reader.readAsBinaryString(resume, "UTF-8");
+            console.log(response);
+            uploadResume(response);
+        }
+    }
+
     return (
         <div id="account">         
             <div id="prof-pic-and-name">
@@ -73,7 +95,12 @@ function Account() {
                                         </Col>
                                     </Row>
                                 </div>
-                                <Button id="edit-profile-btn">Edit Profile</Button>
+                                <Row>
+                                    <Button id="edit-profile-btn" onClick={handleEdit}>Edit Profile</Button>
+                                </Row>
+                                <Row>
+                                    <Button id="edit-major-btn">Change Major</Button>
+                                </Row>
                             </div>
                         </Tab>
                         <Tab eventKey="job-apps" title="Jobs Applied To">
@@ -102,7 +129,7 @@ function Account() {
                                 <h2>Resume</h2>
                                 <Row>
                                     <Col xs={6} md={6}>
-                                        <h5>Insert Resume Name Here.pdf</h5>
+                                        <input type="file" onChange={(e) => setResume(e.target.files[0]) } />
                                     </Col>
                                     <Col xs={6} md={6}>
                                         <h5>Allow Others to View Resume?</h5>
@@ -110,7 +137,7 @@ function Account() {
                                 </Row>
                                 <Row>
                                     <Col xs={6} md={6}>
-                                        <Button id="upload-resume-btn">Upload Resume</Button>
+                                        <Button id="upload-resume-btn" onClick={handleResumeUpload}>Upload Resume</Button>
                                     </Col>
                                     <Col xs={6} md={6}>
                                     <DropdownButton

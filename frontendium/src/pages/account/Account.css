@@ -52,6 +52,15 @@
   font-size: 20px;
 }
 
+#edit-major-btn {
+  background-color: #ff97c9;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
 #jobs-applied-to {
   margin-top: 5px;
   margin-bottom: 15px;
