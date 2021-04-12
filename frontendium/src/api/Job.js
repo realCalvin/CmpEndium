@@ -13,3 +13,25 @@ export function searchJobs(query) {
     return res;
   });
 }
+
+export function saveJob(data) {
+  const {
+    email,
+    title,
+    company,
+    link,
+    date,
+    status
+  } = data;
+
+  return axios.post('/api/savejob', {
+    email,
+    title,
+    company,
+    link,
+    date,
+    status
+  }).then(res => {
+    return res;
+  });
+}

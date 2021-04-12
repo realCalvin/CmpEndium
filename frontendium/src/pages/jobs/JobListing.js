@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import SearchData from '../../images/lottie/search.json';
 import Pagination from '../../components/pagination/Pagination';
-import { searchJobs } from '../../api/Job';
+import { searchJobs, saveJob } from '../../api/Job';
+import { currentEmail } from '../../api/Auth';
 import './JobListing.css';
 
 function JobListing(props) {
@@ -28,15 +29,40 @@ function JobListing(props) {
 
   const jobsPerPage = 10;
 
+  async function handleSaveJob(job) {
+    let date = new Date();
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const yyyy = date.getFullYear();
+    date = mm + '/' + dd + '/' + yyyy;
+
+    const jobData = {
+      email: currentEmail(),
+      title: job.title,
+      company: job.company,
+      link: job.link,
+      date: date,
+      status: 'Applied'
+    };
+    await saveJob(jobData);
+    // TODO: Add animation when job is successfully saved
+  }
+
   // eslint-disable-next-line
-    useEffect(async () => {
-    // TODO: Reorder job listings to display the location first, rather than 'remote'
-    const jobs = await searchJobs(location.state);
-    await sessionStorage.clear('jobs');
-    if (jobs.data.jobs.length) {
-      await sessionStorage.setItem('jobs', JSON.stringify(jobs.data.jobs));
-    } else {
-      await sessionStorage.setItem('jobs', '[]');
+  useEffect(async () => {
+    // implement "caching" logic
+    const savedKeywords = await sessionStorage.getItem('keywords');
+    const savedLocation = await sessionStorage.getItem('location');
+    if (savedKeywords !== location.state.keywords || savedLocation !== location.state.location) {
+      const jobs = await searchJobs(location.state);
+      await sessionStorage.clear('jobs');
+      if (jobs.data.jobs.length) {
+        await sessionStorage.setItem('jobs', JSON.stringify(jobs.data.jobs));
+      } else {
+        await sessionStorage.setItem('jobs', '[]');
+      }
+      await sessionStorage.setItem('keywords', location.state.keywords);
+      await sessionStorage.setItem('location', location.state.location);
     }
     setJobs(JSON.parse(sessionStorage.getItem('jobs')));
     setLoaded(true);
@@ -78,13 +104,11 @@ function JobListing(props) {
               </Card.Text>
             </Col>
             <Col md={4} className="job-listing-btns">
-              <button className="job-listing-btn">Details</button>
-              <br></br>
-              <button className="job-listing-btn">Save Job</button>
+              <button className="job-listing-btn" onClick={() => { handleSaveJob(job); }}>Save Job</button>
               <br></br>
               <a target="_blank" rel="noreferrer" href={job.link}>
                 <button className="job-listing-btn">
-                                    Apply <FontAwesomeIcon className="login-fa-icon" icon={faExternalLinkAlt} />
+                  Apply <FontAwesomeIcon className="login-fa-icon" icon={faExternalLinkAlt} />
                 </button>
               </a>
             </Col>

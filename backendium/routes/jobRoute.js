@@ -6,6 +6,7 @@ const careerbuilder = require("../webscrape/CareerBuilder");
 const simplyhired = require("../webscrape/SimplyHired");
 const themuse = require("../webscrape/TheMuse");
 const Job = require("../models/jobModel");
+const User = require("../models/userModel");
 
 const app = express();
 
@@ -31,18 +32,17 @@ async function getJobs(data) {
 }
 
 app.post("/api/database/search", async (req, res) => {
+    console.log(req.body)
     let jobs = await getJobs(req.body);
     return res.json({ jobs: jobs });
 })
 
-app.post("/api/indeed/search", async (req, res) => {
-    const indeedJobs = await indeed.indeedScraper(req.body);
-    return;
-})
-
-app.post("/api/simplyhired/search", async (req, res) => {
-    const simplyHiredJobs = await simplyhired.simplyHiredScraper(req.body);
-    return;
+app.post("/api/savejob", async (req, res) => {
+    let currentUser = await User.findOne({ email: req.body.email });
+    let jobs = currentUser.savedJobs;
+    jobs.push(req.body);
+    currentUser.savedJobs = jobs;
+    await currentUser.save();
 })
 
 module.exports = app;

@@ -1,3 +1,4 @@
+const savedJobSchema = require('./savedJobModel').schema;
 const mongoose = require("mongoose");
 
 const userSchema = {
@@ -23,6 +24,7 @@ const userSchema = {
         type: String,
         required: true
     },
+    savedJobs: [savedJobSchema]
 }
 
 const User = mongoose.model("User", userSchema);

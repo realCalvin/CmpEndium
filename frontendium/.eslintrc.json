@@ -33,14 +33,6 @@
         "comma-spacing": "error",
         "react/no-unescaped-entities": 0,
         "react/prop-types": 0,
-        "no-console": [
-            "error",
-            {
-                "allow": [
-                    "debug"
-                ]
-            }
-        ],
         "no-empty": [
             "error",
             {

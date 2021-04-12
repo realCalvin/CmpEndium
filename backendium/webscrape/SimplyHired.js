@@ -1,5 +1,5 @@
 const cheerio = require('cheerio');
-// const puppeteer = require('puppeteer');
+const { Cluster } = require('puppeteer-cluster');
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
@@ -37,24 +37,46 @@ async function simplyHiredScraper(jobInfo) {
                         })
                     })
             }
-            // Loop Through Each Saved Job To Retrieve External Job Link And Job Description
-            for (var i = 0; i < simplyHiredJobs.length; i++) {
-                const job = simplyHiredJobs[i];
-                // Load SimplyHired Job Information Page
-                await page.goto(job.link, { waitUntil: 'domcontentloaded' })
-                    .then(async () => {
-                        const content = page.content();
-                        await content.then((success) => {
-                            const $ = cheerio.load(success);
-                            // Retrieve External Job Link and Job Description
-                            simplyHiredJobs[i].link = "https://www.simplyhired.com" + $(".viewjob-buttons .apply a").attr('href');
-                            simplyHiredJobs[i].description = $(".viewjob-jobDescription").html();
+
+            await (async () => {
+                const cluster = await Cluster.launch({
+                    concurrency: Cluster.CONCURRENCY_CONTEXT,
+                    maxConcurrency: 15
+                });
+
+                await cluster.task(async ({ page, data }) => {
+                    await page.setViewport({
+                        width: 1920,
+                        height: 1080,
+                    });
+                    // Load SimplyHired Job Information Page
+                    await page.goto(data.url, { waitUntil: 'domcontentloaded' })
+                        .then(async () => {
+                            const content = page.content();
+                            await content.then((success) => {
+                                const $ = cheerio.load(success);
+                                // Retrieve External Job Link and Job Description
+                                simplyHiredJobs[data.pos].link = "https://www.simplyhired.com" + $(".viewjob-buttons .apply a").attr('href');
+                                simplyHiredJobs[data.pos].description = $(".viewjob-jobDescription").html();
+                            })
                         })
-                    })
-                    .catch((err) => {
-                        console.log("Error: ", err);
-                    })
-            }
+                        .catch((err) => {
+                            console.log("Error: ", err);
+                        })
+                });
+
+                // Loop Through Each Saved Job To Retrieve External Job Link And Job Description
+                for (var i = 0; i < simplyHiredJobs.length; i++) {
+                    const job = simplyHiredJobs[i];
+                    cluster.queue({
+                        url: job.link,
+                        pos: i
+                    });
+                }
+
+                await cluster.idle();
+                await cluster.close();
+            })();
         })
         .catch(err => {
             console.log("Error: ", err);

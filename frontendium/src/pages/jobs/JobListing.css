@@ -83,6 +83,10 @@
     color: rgb(101, 101, 255);
 }
 
+#job-listing-body-content h4{
+    color: black !important;
+}
+
 #job-listing-loader {
     text-align: center;
 }

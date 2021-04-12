@@ -6,7 +6,7 @@ import ResumeNav from './ResumeNav.js';
 import Lottie from 'react-lottie';
 import CometData from '../../images/lottie/comet';
 import Arrow from '../../images/arrow.png';
-import { uploadResume, deleteResume, retrieve } from '../../api/AWS';
+import { retrieve } from '../../api/AWS';
 
 function Resumes() {
   const Comet = {
@@ -26,7 +26,6 @@ function Resumes() {
     setMajor(major);
     major = major.replace(/ /g, '_');
     const data = await retrieve(major);
-    console.log(data.data);
     setData(data.data);
   }
 
