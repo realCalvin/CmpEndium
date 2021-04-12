@@ -34,10 +34,7 @@ AWS.config.update({
     secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
     region: "us-west-1"
   })
-let aws3 = new AWS.S3({
-    apiVersion: "2006-03-01",
-    params: { Bucket: bucketName }
-});
+let aws3 = new AWS.S3({ params: { Bucket: bucketName } });
 
 //Check connection by listing bucket(s)
 const listBuckets = async () => {
@@ -51,15 +48,19 @@ const listBuckets = async () => {
 // listBuckets();
 
 app.post("/api/upload", async (req, res) => {
-    const keyName = req.name;
-    const objectParams = { Bucket: bucketName, Key: 'xd.pdf' };
-    var base64data = new Buffer.from(req.body, 'binary');
+    var content = Buffer.from(req.body.data, 'base64');
+    const params = {
+        Bucket: bucketName,
+        Key: 'xd.pdf',
+        Body: content,
+        ContentType: 'application/pdf'
+    }
     try {
-        const results = new AWS.S3.ManagedUpload({ params: { Bucket: bucketName, Key: 'xd.pdf', Body: base64data }});
-        const promise = results.promise()
-        promise.then((data) => console.log('i did something'), (error) => console.log(error));
-        console.log("Successfully uploaded data to " + bucketName + "/" + keyName);
-
+        const results = new AWS.S3.ManagedUpload({ params: params });
+        results.send(function (err, data) {
+            console.log(err, data)
+        })
+        console.log("Successfully uploaded data");
     } catch (err) {
         console.log("Error", err);
     }
