@@ -11,66 +11,64 @@ import UnauthenticatedRoute from './components/route/UnauthenticatedRoute';
 import { isAuthenticated } from './api/Auth';
 
 export default function Routing() {
+  const [authenticated, setAuthenticated] = useState(isAuthenticated());
 
-    const [authenticated, setAuthenticated] = useState(isAuthenticated());
+  const allRoutes = [
+    {
+      Component: Resumes,
+      authentication: true,
+      path: '/resumes'
+    },
+    {
+      Component: Signin,
+      authentication: false,
+      path: '/signin'
+    },
+    {
+      Component: Signup,
+      authentication: false,
+      path: '/signup'
+    },
+    {
+      Component: Search,
+      authentication: true,
+      path: '/search'
+    },
+    {
+      Component: JobListing,
+      authentication: true,
+      path: '/jobs'
+    }
+  ];
 
-    const allRoutes = [
-        {
-            Component: Resumes,
-            authentication: true,
-            path: '/resumes'
-        },
-        {
-            Component: Signin,
-            authentication: false,
-            path: '/signin'
-        },
-        {
-            Component: Signup,
-            authentication: false,
-            path: '/signup'
-        },
-        {
-            Component: Search,
-            authentication: true,
-            path: '/search'
-        },
-        {
-            Component: JobListing,
-            authentication: true,
-            path: '/jobs'
+  return (
+    <Switch>
+      <Route exact path="/" component={Landing}></Route>
+      {allRoutes.map(({ Component, authentication, path }, index) => {
+        if (authentication) {
+          return (
+            <AuthenticatedRoute
+              key={index}
+              exact
+              path={path}
+              component={Component}
+              appProps={{ authenticated, setAuthenticated }}
+            />
+          );
+        } else {
+          return (
+            <UnauthenticatedRoute
+              key={index}
+              exact
+              path={path}
+              component={Component}
+              appProps={{ authenticated, setAuthenticated }}
+            />
+          );
         }
-    ];
-
-    return (
-        <Switch>
-            <Route exact path="/" component={Landing}></Route>
-            {allRoutes.map(({ Component, authentication, path }, index) => {
-                if (authentication) {
-                    return (
-                        <AuthenticatedRoute
-                            key={index}
-                            exact
-                            path={path}
-                            component={Component}
-                            appProps={{ authenticated, setAuthenticated }}
-                        />
-                    );
-                }
-                else {
-                    return (
-                        <UnauthenticatedRoute
-                            key={index}
-                            exact
-                            path={path}
-                            component={Component}
-                            appProps={{ authenticated, setAuthenticated }}
-                        />
-                    );
-                }
-            })}
-            {/* TODO: Replace the path="/*" component to an "Error" page */}
-            <Route path="/*" component={Landing} />
-        </Switch>
-    );
+      })}
+      {/* TODO: Replace the path="/*" component to an "Error" page */}
+      <Route path="/*" component={Landing} />
+    </Switch>
+  );
 }

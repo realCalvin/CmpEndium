@@ -1,6 +1,6 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './Routes.js';
