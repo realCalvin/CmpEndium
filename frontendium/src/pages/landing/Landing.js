@@ -55,7 +55,7 @@ function Landing() {
           <div className="landing-content">
             <h1 className="landing-content-h1">Land Your Next Job Efficiently</h1>
             <p className="landing-content-p"> We pull job listings from multiple websites</p>
-            <Button href="#search" id="landing-page-btn">Get Started</Button>
+            <Button href="search" id="landing-page-btn">Get Started</Button>
           </div>
           <div className="landing-content">
             <Lottie
@@ -75,7 +75,7 @@ function Landing() {
                 <Image src={FindImage} fluid />
               </Col>
               <Col xs={5} md={8} className="landing-card-text">
-                Search For Jobs
+                                Search For Jobs
               </Col>
             </Row>
           </Row>
@@ -87,7 +87,7 @@ function Landing() {
                 <Image src={BuildImage} fluid />
               </Col>
               <Col xs={5} md={8} className="landing-card-text">
-                Build Your Resume
+                                Build Your Resume
               </Col>
             </Row>
           </Row>
@@ -99,7 +99,7 @@ function Landing() {
                 <Image src={TrackImage} fluid />
               </Col>
               <Col xs={5} md={8} className="landing-card-text">
-                Track Applications
+                                Track Applications
               </Col>
             </Row>
           </Row>

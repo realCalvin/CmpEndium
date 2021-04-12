@@ -1,0 +1,89 @@
+#account {
+  background-color: #5d63d5;
+  height: 95%;
+  width: 100%;
+}
+
+#prof-pic-and-name {
+  margin-left: 5%;
+  margin-bottom: 40px;
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+}
+
+#content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#account-info {
+  width: 90%;
+  min-height: 35vh;
+  max-height: 70vh;
+  background-color: white;
+  color: #5d63d5;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 5px;
+  overflow: auto;
+  padding: 45px;
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.25);
+  transition: transform 300ms, box-shadow 300ms;
+  z-index: 2;
+}
+
+#profile {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#profile-content {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#edit-major-btn {
+  background-color: #ff97c9;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+#jobs-applied-to {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+#resume {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#upload-resume-btn {
+  background-color: #ff97c9;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+#dropdown-basic-button {
+  min-width: 75px;
+  max-width: 75px;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 5px;
+}
+
+.username {
+  margin-left: 3%;
+}
+
+@media only screen and (max-width: 820px) {
+  #account-info {
+    min-height: 27vh;
+  }
+}
