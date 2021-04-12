@@ -5,6 +5,7 @@ import Resumes from './pages/resumes/Resumes.js';
 import Signin from './pages/auth/signin/Signin.js';
 import Signup from './pages/auth/signup/Signup.js';
 import Search from './pages/search/Search.js';
+import JobListing from './pages/jobs/JobListing.js';
 import Account from './pages/account/Account.js';
 import AuthenticatedRoute from './components/route/AuthenticatedRoute';
 import UnauthenticatedRoute from './components/route/UnauthenticatedRoute';
@@ -38,6 +39,11 @@ export default function Routing() {
       Component: Account,
       authentication: true,
       path: '/account'
+    },
+    {
+      Component: JobListing,
+      authentication: true,
+      path: '/jobs'
     }
   ];
 

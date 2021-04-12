@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('events').EventEmitter.prototype._maxListeners = 100;
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -6,7 +7,9 @@ var logger = require('morgan');
 var cors = require("cors");
 var mongoose = require('mongoose');
 var userRoute = require('./routes/userRoute');
+var jobRoute = require('./routes/jobRoute');
 var resumeRoute = require('./routes/resumeRoute');
+
 
 var app = express();
 
@@ -25,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use(require("./routes/userRoute"));
+app.use(require("./routes/jobRoute"));
 app.use(require("./routes/resumeRoute"))
 
 // Connect to the MongoDB cluster

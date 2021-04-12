@@ -46,7 +46,7 @@ async function indeedScraper(jobInfo) {
 
             await (async () => {
                 const cluster = await Cluster.launch({
-                    concurrency: Cluster.CONCURRENCY_BROWSER,
+                    concurrency: Cluster.CONCURRENCY_CONTEXT,
                     maxConcurrency: 15
                 });
 

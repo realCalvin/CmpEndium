@@ -11,7 +11,7 @@ export function searchJobs(query) {
     location
   }).then(res => {
     return res;
-  })
+  });
 }
 
 export function saveJob(data) {
@@ -33,5 +33,5 @@ export function saveJob(data) {
     status
   }).then(res => {
     return res;
-  })
+  });
 }
