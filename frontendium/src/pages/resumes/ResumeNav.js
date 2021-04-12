@@ -3,11 +3,11 @@ import './ResumeNav.css';
 import { Row, Col, DropdownButton, Dropdown } from 'react-bootstrap';
 import { jobMapping } from '../../components/jobs/Jobs';
 
-export default function ResumeNav() {
+export default function ResumeNav(props) {
   const jobDropdownButtons = jobMapping.map((jobItem, itr) => {
     const dropdownItems = jobItem[1].map((dropdownItem, dropdownItr) => {
       return (
-        <Dropdown.Item eventKey={dropdownItr} key={dropdownItr} >{dropdownItem}</Dropdown.Item>
+        <Dropdown.Item eventKey={dropdownItr} key={dropdownItr} id={dropdownItem} onClick={props.retrieveResumes}>{dropdownItem}</Dropdown.Item>
       );
     });
     return (
