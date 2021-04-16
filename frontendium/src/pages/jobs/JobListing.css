@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 #job-listing-content {
@@ -83,8 +84,8 @@
     color: rgb(101, 101, 255);
 }
 
-#job-listing-body-content h4{
-    color: black !important;
+.job-listing-cards h4{
+    color: #6c757d !important;
 }
 
 #job-listing-loader {
