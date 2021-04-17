@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Card, Row, Col } from 'react-bootstrap';
-import Lottie from 'react-lottie';
-import BeatLoader from 'react-spinners/BeatLoader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import SearchData from '../../images/lottie/search.json';
-import Pagination from '../../components/pagination/Pagination';
 import { searchJobs, saveJob } from '../../api/Job';
 import { currentEmail } from '../../api/Auth';
+import SearchData from '../../images/lottie/search.json';
+import Pagination from '../../components/pagination/Pagination';
+import Lottie from 'react-lottie';
+import party from 'party-js';
+import BeatLoader from 'react-spinners/BeatLoader';
 import './JobListing.css';
 
 function JobListing(props) {
@@ -29,7 +30,16 @@ function JobListing(props) {
 
   const jobsPerPage = 10;
 
-  async function handleSaveJob(job) {
+  async function handleSaveJob(e, job) {
+    let siteColors = ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a', '#ff7373'];
+    party.element(e.target, {
+      color: siteColors,
+      count: party.variation(25, 0.5),
+      size: party.minmax(6, 10),
+      velocity: party.minmax(-300, -600),
+      angularVelocity: party.minmax(6, 9)
+    });
+
     let date = new Date();
     const dd = String(date.getDate()).padStart(2, '0');
     const mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -45,7 +55,6 @@ function JobListing(props) {
       status: 'Applied'
     };
     await saveJob(jobData);
-    // TODO: Add animation when job is successfully saved
   }
 
   // eslint-disable-next-line
@@ -104,7 +113,9 @@ function JobListing(props) {
               </Card.Text>
             </Col>
             <Col md={4} className="job-listing-btns">
-              <button className="job-listing-btn" onClick={() => { handleSaveJob(job); }}>Save Job</button>
+              <button className="job-listing-btn" id={'job-listing-btn-' + itr} onClick={() => { handleSaveJob(event, job); }}>
+                Save Job
+              </button>
               <br></br>
               <a target="_blank" rel="noreferrer" href={job.link}>
                 <button className="job-listing-btn">
