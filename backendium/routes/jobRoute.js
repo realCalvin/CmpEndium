@@ -45,4 +45,23 @@ app.post("/api/savejob", async (req, res) => {
     await currentUser.save();
 })
 
+app.post("/api/database/getsavedjobs", async (req, res) => {
+    let currentUser = await User.findOne({ email: req.body.email });
+    let jobs = currentUser.savedJobs;
+    return res.json({ jobs: jobs });
+})
+
+app.post("/api/database/changejobstatus", async (req, res) => {
+    let currentUser = await User.findOne({ email: req.body.email });
+    let jobs = currentUser.savedJobs;
+    for (let i = 0; i < jobs.length; i++) {
+        if (jobs[i]._id == req.body.id) {
+            jobs[i].status = req.body.status;
+            await currentUser.save();
+            return res.json({ response: "success" });
+        }
+    }
+    return res.json({ response: "fail" });
+})
+
 module.exports = app;

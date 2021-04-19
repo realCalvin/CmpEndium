@@ -19,7 +19,8 @@
     border-bottom-left-radius: 50% 20%;
     border-bottom-right-radius: 50% 20%;
 }
-.resume-landing-content-p {
+
+#resume-landing-page h6 {
     margin-bottom: 120px;
 }
 

@@ -9,92 +9,92 @@ import Arrow from '../../images/arrow.png';
 import { retrieve } from '../../api/AWS';
 
 function Resumes() {
-  const Comet = {
-    loop: true,
-    autoplay: true,
-    animationData: CometData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
+    const Comet = {
+        loop: true,
+        autoplay: true,
+        animationData: CometData,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+
+    const [data, setData] = useState({});
+    const [major, setMajor] = useState('');
+
+    async function retrieveResumes(e) {
+        let major = e.target.id;
+        setMajor(major);
+        major = major.replace(/ /g, '_');
+        const data = await retrieve(major);
+        setData(data.data);
     }
-  };
 
-  const [data, setData] = useState({});
-  const [major, setMajor] = useState('');
-
-  async function retrieveResumes(e) {
-    let major = e.target.id;
-    setMajor(major);
-    major = major.replace(/ /g, '_');
-    const data = await retrieve(major);
-    setData(data.data);
-  }
-
-  // if someone has a better solution to this block of code, plz change
-  const cols = [];
-  let i;
-  let j = 0;
-  for (i = 0; i < data.length; i += 4) {
-    if (data.length - i < 4) {
-      break;
+    // if someone has a better solution to this block of code, plz change
+    const cols = [];
+    let i;
+    let j = 0;
+    for (i = 0; i < data.length; i += 4) {
+        if (data.length - i < 4) {
+            break;
+        }
+        cols.push(
+            <Row className="justify-content-center mb-3" key={j}>
+                <Col><Resume image={data[i].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i + 1].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i + 2].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i + 3].Key} name="" title="" /></Col>
+            </Row>
+        );
+        j++;
     }
-    cols.push(
-      <Row className="justify-content-center mb-3" key={j}>
-        <Col><Resume image={data[i].Key} name="" title="" /></Col>
-        <Col><Resume image={data[i + 1].Key} name="" title="" /></Col>
-        <Col><Resume image={data[i + 2].Key} name="" title="" /></Col>
-        <Col><Resume image={data[i + 3].Key} name="" title="" /></Col>
-      </Row>
-    );
-    j++;
-  }
-  if (data.length - i === 3) {
-    cols.push(
-      <Row className="justify-content-center mb-3" key={j}>
-        <Col><Resume image={data[i].Key} name="" title="" /></Col>
-        <Col><Resume image={data[i + 1].Key} name="" title="" /></Col>
-        <Col><Resume image={data[i + 2].Key} name="" title="" /></Col>
-      </Row>
-    );
-  } else if (data.length - i === 2) {
-    cols.push(
-      <Row className="justify-content-center mb-3" key={j}>
-        <Col><Resume image={data[i].Key} name="" title="" /></Col>
-        <Col><Resume image={data[i + 1].Key} name="" title="" /></Col>
-      </Row>
-    );
-  } else if (data.length - i === 1) {
-    cols.push(
-      <Row className="justify-content-center mb-3" key={j}>
-        <Col><Resume image={data[i].Key} name="" title="" /></Col>
-      </Row>
-    );
-  }
+    if (data.length - i === 3) {
+        cols.push(
+            <Row className="justify-content-center mb-3" key={j}>
+                <Col><Resume image={data[i].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i + 1].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i + 2].Key} name="" title="" /></Col>
+            </Row>
+        );
+    } else if (data.length - i === 2) {
+        cols.push(
+            <Row className="justify-content-center mb-3" key={j}>
+                <Col><Resume image={data[i].Key} name="" title="" /></Col>
+                <Col><Resume image={data[i + 1].Key} name="" title="" /></Col>
+            </Row>
+        );
+    } else if (data.length - i === 1) {
+        cols.push(
+            <Row className="justify-content-center mb-3" key={j}>
+                <Col><Resume image={data[i].Key} name="" title="" /></Col>
+            </Row>
+        );
+    }
 
-  return (
-    <div className="resume-content">
-      <div id="resume-landing-page">
-        <div className="resume-landing-content">
-          <h1 className="resume-landing-content-h1">View Successful Resumes</h1>
-          <p className="resume-landing-content-p">Contact us if you do not see your field of study</p>
+    return (
+        <div className="resume-content">
+            <div id="resume-landing-page">
+                <div className="resume-landing-content">
+                    <h1 className="resume-landing-content-h1">View Successful Resumes</h1>
+                    <h6>Contact us if you do not see your field of study</h6>
+                </div>
+                <div className="resume-landing-content">
+                    <Lottie
+                        options={Comet}
+                        height={300}
+                        width={300}
+                    />
+                </div>
+                <ResumeNav retrieveResumes={retrieveResumes} />
+                <div className="downArrow bounce">
+                    <a href="#resumes"><img src={Arrow} alt="" /></a>
+                </div>
+            </div>
+            <Container className="resume-content-container" id="resumes">
+                <u><h3>{major} Resumes</h3></u>
+                {cols}
+            </Container>
         </div>
-        <div className="resume-landing-content">
-          <Lottie
-            options={Comet}
-            height={300}
-            width={300}
-          />
-        </div>
-        <ResumeNav retrieveResumes={retrieveResumes} />
-        <div className="downArrow bounce">
-          <a href="#resumes"><img src={Arrow} alt="" /></a>
-        </div>
-      </div>
-      <Container className="resume-content-container" id="resumes">
-        <u><h3>{major} Resumes</h3></u>
-        {cols}
-      </Container>
-    </div>
-  );
+    );
 }
 
 export default Resumes;
