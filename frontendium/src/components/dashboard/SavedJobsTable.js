@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
 import { Table, Menu, Dropdown } from 'antd';
 import { currentEmail } from '../../api/Auth';
-import { getSavedJobs, handleJobStatus } from '../../api/Job';
+import { getSavedJobs, handleJobStatus, handleDeleteJob } from '../../api/Job';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { DownOutlined } from '@ant-design/icons';
 import './SavedJobsTable.css';
 
-function SavedJobsTable(props) {
-    const history = useHistory();
-    const locations = useLocation();
-
+function SavedJobsTable() {
     const [jobs, setJobs] = useState([]);
-    const [page, setPage] = useState(1);
-
-    function handlePagination(page) {
-        setPage(page);
-    }
+    const [render, setRender] = useState(false);
 
     function dropdownMenu(status, id) {
         const menuItems = ['Applied', 'Interview', 'Rejected', 'Offer'];
@@ -31,28 +23,44 @@ function SavedJobsTable(props) {
                     }
                     return null;
                 })}
-                <Menu.Item danger>Delete Job</Menu.Item>
+                <Menu.Item danger onClick={() => { handleDeleteMenuItem(id); }}>Delete Job</Menu.Item>
             </Menu>
         );
+    }
+
+    function forceRender() {
+        setRender(!render);
     }
 
     async function handleMenuItem(status, id) {
         const res = await handleJobStatus({ email: currentEmail(), status: status, id: id });
         if (res.data.response === 'success') {
-            history.push({
-                pathname: '/',
-                state: {
-                    page: page
+            for (let i = 0; i < jobs.length; i++) {
+                if (jobs[i]._id === id) {
+                    const tempJobs = jobs;
+                    tempJobs[i].status = status;
+                    setJobs(tempJobs);
+                    forceRender();
                 }
-            });
-            location.reload();
+            }
+        }
+    }
+
+    async function handleDeleteMenuItem(id) {
+        const res = await handleDeleteJob({ email: currentEmail(), id: id });
+        if (res.data.response === 'success') {
+            for (let i = 0; i < jobs.length; i++) {
+                if (jobs[i]._id === id) {
+                    const tempJobs = jobs;
+                    tempJobs.splice(i, 1);
+                    setJobs(tempJobs);
+                    forceRender();
+                }
+            }
         }
     }
 
     useEffect(async () => {
-        if (locations.state) {
-            setPage(locations.state.page);
-        }
         const user = currentEmail();
         const res = await getSavedJobs({ email: user });
         setJobs(res.data.jobs);
@@ -98,14 +106,15 @@ function SavedJobsTable(props) {
         }
     ];
 
+    // eslint-disable-next-line
+    let data = [...jobs];
+
     return (
         <div id="SavedJobsTable">
             <Table
                 pagination={{ defaultPageSize: 10 }}
-                dataSource={jobs}
+                dataSource={data}
                 columns={columns}
-                // eslint-disable-next-line
-                pagination={{ current: page, onChange: handlePagination }}
             />
         </div>
     );

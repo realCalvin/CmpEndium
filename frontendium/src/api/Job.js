@@ -63,3 +63,17 @@ export function handleJobStatus(data) {
         return res;
     });
 }
+
+export function handleDeleteJob(data) {
+    const {
+        email,
+        id
+    } = data;
+
+    return axios.post('/api/database/deletejob', {
+        email,
+        id
+    }).then(res => {
+        return res;
+    });
+}
