@@ -1,3 +1,17 @@
-.ant-dropdown-link {
+#SavedJobsTable {
+    overflow-x: auto;
+}
+
+.saved-jobs-status {
     font-size: 14px;
+    width: 90px;
+    text-align: center;
+}
+
+.ant-tabs-tab .ant-tabs-tab-btn {
+    font-size: 16px;
+}
+
+.ant-table-content {
+    font-size: 15px;
 }

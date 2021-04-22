@@ -10,9 +10,8 @@ var resumeSchema = {
         type: Date,
         required: true
     },
-    username: {
+    email: {
         type: String,
-        unique: true,
         required: true
     },
     major: {

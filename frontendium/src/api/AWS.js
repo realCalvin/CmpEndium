@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export async function uploadResume(resume) {
-    return axios.post('/api/upload', { data: resume }).then(res => {
+export async function uploadResume(resume, email, info) {
+    return axios.post('/api/upload', { data: resume, email: email, major: info }).then(res => {
         return res;
     });
 }

@@ -23,7 +23,7 @@
     font-size: 85%;
 }
 
-.dropdown-toggle {
+.resume-nav-content .dropdown-toggle {
     width: 8.5em !important;
     background-color: white !important;
     color: rgb(53, 61, 211);
@@ -32,13 +32,13 @@
     box-shadow: none !important;
 }
 
-.dropdown-toggle:hover {
+.resume-nav-content .dropdown-toggle:hover {
     background-color: transparent !important;
     color: white;
     border-color: white !important;
 }
 
-.dropdown-toggle:focus {
+.resume-nav-content .dropdown-toggle:focus {
     outline: none !important;
     box-shadow: none !important;
     background-color: rgb(255, 255, 255) !important;

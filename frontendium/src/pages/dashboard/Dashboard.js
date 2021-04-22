@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Tabs } from 'antd';
+import { currentEmail } from '../../api/Auth';
+import { getSavedJobs } from '../../api/Job';
 import SavedJobsTable from '../../components/dashboard/SavedJobsTable';
+import MyProgressCharts from '../../components/dashboard/MyProgressCharts';
+import UserResumes from '../../components/dashboard/UserResumes';
 import Lottie from 'react-lottie';
 import CometData from '../../images/lottie/comet';
 import './Dashboard.css';
@@ -15,7 +19,17 @@ function Dashboard() {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+
+    const [jobs, setJobs] = useState([]);
     const { TabPane } = Tabs;
+
+    useEffect(async () => {
+        const user = currentEmail();
+        const res = await getSavedJobs({ email: user });
+        setJobs(res.data.jobs.reverse());
+        console.log(jobs);
+    }, []);
+
     return (
         <div id="Dashboard">
             <Row id="dashboard-banner">
@@ -35,13 +49,16 @@ function Dashboard() {
                 <div id="dashboard-tabs">
                     <Tabs defaultActiveKey="1">
                         <TabPane tab="Saved Jobs" key="1">
-                            <SavedJobsTable />
+                            <SavedJobsTable jobs={jobs} />
                         </TabPane>
                         <TabPane tab="Resumes" key="2">
-                            Content of Tab Pane 2
+                            <UserResumes />
                         </TabPane>
                         <TabPane tab="My Progress" key="3">
-                            Content of Tab Pane 3
+                            <MyProgressCharts jobs={jobs} />
+                        </TabPane>
+                        <TabPane tab="+ Add Job" key="4">
+                            manually add job
                         </TabPane>
                     </Tabs>
                 </div>

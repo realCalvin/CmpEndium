@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Menu, Dropdown } from 'antd';
+import { Table, Menu, Dropdown, Tag } from 'antd';
 import { currentEmail } from '../../api/Auth';
-import { getSavedJobs, handleJobStatus, handleDeleteJob } from '../../api/Job';
+import { handleJobStatus, handleDeleteJob } from '../../api/Job';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { DownOutlined } from '@ant-design/icons';
 import './SavedJobsTable.css';
 
-function SavedJobsTable() {
+function SavedJobsTable(props) {
     const [jobs, setJobs] = useState([]);
     const [render, setRender] = useState(false);
 
@@ -61,10 +61,15 @@ function SavedJobsTable() {
     }
 
     useEffect(async () => {
-        const user = currentEmail();
-        const res = await getSavedJobs({ email: user });
-        setJobs(res.data.jobs);
-    }, []);
+        setJobs(props.jobs);
+    }, [props.jobs]);
+
+    const tagColor = {
+        Applied: '#7676FA',
+        Rejected: '#FF512C',
+        Interview: '#FEBD30',
+        Offer: '#2eb82e'
+    };
 
     const columns = [
         {
@@ -75,12 +80,16 @@ function SavedJobsTable() {
         {
             title: 'Company',
             dataIndex: 'company',
-            key: 'company'
+            key: 'company',
+            sortDirections: ['ascend', 'descend', 'ascend'],
+            sorter: (a, b) => a.company > b.company ? 1 : -1
         },
         {
             title: 'Date Applied',
             dataIndex: 'date',
-            key: 'date'
+            key: 'date',
+            sortDirections: ['ascend', 'descend', 'ascend'],
+            sorter: (a, b) => new Date(a.date) - new Date(b.date)
         },
         {
             title: 'Link',
@@ -98,9 +107,11 @@ function SavedJobsTable() {
             // eslint-disable-next-line react/display-name
             render: (record) => (
                 <Dropdown overlay={dropdownMenu(record.status, record._id)}>
-                    <a className="ant-dropdown-link">
-                        {record.status} <DownOutlined />
-                    </a>
+                    <Tag color={tagColor[record.status]}>
+                        <a className="ant-dropdown-link saved-jobs-status">
+                            {record.status} <DownOutlined />
+                        </a>
+                    </Tag>
                 </Dropdown>
             )
         }

@@ -1,4 +1,4 @@
-const express = require("express"); 
+const express = require("express");
 const cors = require("cors");
 const Resume = require("../models/resumeModel.js");
 const path = require("path");
@@ -33,32 +33,37 @@ AWS.config.update({
     accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
     region: "us-west-1"
-  })
+})
 let aws3 = new AWS.S3({ params: { Bucket: bucketName } });
 
 //Check connection by listing bucket(s)
 const listBuckets = async () => {
     try {
-    const data = await s3.send(new ListBucketsCommand({}));
-    console.log("Success", data.Buckets);
+        const data = await s3.send(new ListBucketsCommand({}));
+        console.log("Success", data.Buckets);
     } catch (err) {
-    console.log("Error", err);
+        console.log("Error", err);
     }
 }
 // listBuckets();
 
 app.post("/api/upload", async (req, res) => {
-    var content = Buffer.from(req.body.data, 'base64');
+    const content = Buffer.from(req.body.data, 'base64');
+    const email = req.body.email;
+    const major = req.body.major;
+    const date_ob = new Date();
+    const date = (date_ob.getMonth() + 1) + '-' + date_ob.getDate() + '-' + date_ob.getFullYear();
+    const fileName = major + '/' + email + '/' + date + '.pdf';
     const params = {
         Bucket: bucketName,
-        Key: 'xd.pdf',
+        Key: fileName,
         Body: content,
         ContentType: 'application/pdf'
     }
     try {
         const results = new AWS.S3.ManagedUpload({ params: params });
         results.send(function (err, data) {
-            console.log(err, data)
+            return res.json({ s3Url: data.Location, uploadDate: date });
         })
         console.log("Successfully uploaded data");
     } catch (err) {
@@ -84,11 +89,11 @@ app.post("/api/retrieve", async (req, res) => {
     try {
         aws3.listObjects(objectParams, (err, data) => {
             if (err) console.log(err, err.stack);
-            else{
+            else {
 
-                for (var d in data.Contents){
+                for (var d in data.Contents) {
                     // delete useless data
-                    if(data.Contents[d].Size == 0){
+                    if (data.Contents[d].Size == 0) {
                         data.Contents.splice(d, 1);
                     }
 
@@ -96,7 +101,7 @@ app.post("/api/retrieve", async (req, res) => {
                     delete data.Contents[d].ETag;
                     delete data.Contents[d].Size;
                     delete data.Contents[d].StorageClass;
-                    delete data.Contents[d].Owner; 
+                    delete data.Contents[d].Owner;
 
                     /**
                      * dis shit dont work
@@ -124,18 +129,22 @@ app.post("/api/retrieve", async (req, res) => {
     }
 })
 
-// Create name for uploaded object key
-// const keyName = `Computer_Science/${path.basename("C:\\Projects\\DummyTHICCC\\frontendium\\src\\images\\samples\\cocoa_touch.jpg")}`;
-// const objectParams = { Bucket: bucketName, Key: keyName, Body:  };
+app.post('/api/database/saveresume', async (req, res) => {
+    const {
+        link,
+        uploadDate,
+        email,
+        major
+    } = req.body;
 
-// const upload = async () => {
-//     try {
-//         const results = await s3.send(new PutObjectCommand(objectParams));
-//         console.log("Successfully uploaded data to " + bucketName + "/" + keyName);
-//     } catch (err) {
-//         console.log("Error", err);
-//     }
-// }
-// upload();
+    const newResume = new Resume({
+        link,
+        uploadDate,
+        email,
+        major
+    });
+
+    newResume.save();
+})
 
 module.exports = app;
