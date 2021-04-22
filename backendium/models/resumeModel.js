@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var resumeSchema = {
     link: {
         type: String,
-        unique: true,
         required: true
     },
     uploadDate: {

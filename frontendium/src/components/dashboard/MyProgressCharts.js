@@ -44,6 +44,8 @@ function MyProgressCharts(props) {
         // start and end date
         const firstDate = new Date(jobs[0].date);
         const lastDate = new Date(jobs[jobs.length - 1].date);
+        console.log(lastDate);
+        console.log(firstDate);
 
         // count jobs applied for each day between start and end
         for (let i = 0; i < jobs.length; i++) {
@@ -58,7 +60,7 @@ function MyProgressCharts(props) {
         // generate label
         const days = (firstDate - lastDate) / 86400000;
         const tempLineLabel = [];
-        for (let i = 0; i < days; i++) {
+        for (let i = 0; i <= days; i++) {
             tempLineLabel.push(lastDate.toLocaleDateString());
             lastDate.setDate(lastDate.getDate() + 1);
         }

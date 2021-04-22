@@ -33,7 +33,7 @@ function JobListing(props) {
     const jobsPerPage = 10;
 
     async function handleSaveJob(e, job) {
-        let siteColors = ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a', '#ff7373'];
+        const siteColors = ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a', '#ff7373'];
         party.element(e.target, {
             color: siteColors,
             count: party.variation(25, 0.5),
@@ -122,7 +122,9 @@ function JobListing(props) {
                             </Card.Text>
                         </Col>
                         <Col md={4} className="job-listing-btns">
-                            <button className="job-listing-btn" onClick={() => { handleSaveJob(job); }}>Save Job</button>
+                            <button className="job-listing-btn" id={'job-listing-btn-' + itr} onClick={() => { handleSaveJob(event, job); }}>
+                                Save Job
+                            </button>
                             <br></br>
                             <a target="_blank" rel="noreferrer" href={job.link}>
                                 <button className="job-listing-btn">

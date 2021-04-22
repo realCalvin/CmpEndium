@@ -52,7 +52,7 @@ app.post("/api/upload", async (req, res) => {
     const email = req.body.email;
     const major = req.body.major;
     const date_ob = new Date();
-    const date = (date_ob.getMonth() + 1) + '-' + date_ob.getDate() + '-' + date_ob.getFullYear();
+    const date = date_ob.toISOString();
     const fileName = major + '/' + email + '/' + date + '.pdf';
     const params = {
         Bucket: bucketName,

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Button, Dropdown, DropdownButton } from 'react-bootstrap';
+import party from 'party-js';
 import { currentEmail } from '../../api/Auth';
 import { UserInfo } from '../../api/UserInfo';
 import { uploadResume } from '../../api/AWS';
@@ -9,8 +10,9 @@ import './UserResumes.css';
 function UserResumes() {
     const [resume, setResume] = useState(undefined);
     const [emptySubmit, setEmptySubmit] = useState(false);
-    const [share, setShare] = useState(false);
     const [submitResume, setSubmitResume] = useState(true);
+    const [successResume, setSuccessResume] = useState(false);
+    const [share, setShare] = useState(false);
     const [info, setInfo] = useState({
         username: '',
         name: '',
@@ -31,15 +33,17 @@ function UserResumes() {
 
     function handleResumeUpload(event) {
         setEmptySubmit(false);
-        if (event.target.files[0].type !== 'application/pdf') {
-            setSubmitResume(false);
-        } else {
-            setSubmitResume(true);
-            setResume(event.target.files);
+        if (event) {
+            if (event.target.files[0].type !== 'application/pdf') {
+                setSubmitResume(false);
+            } else {
+                setSubmitResume(true);
+                setResume(event.target.files);
+            }
         }
     }
 
-    function handleResumeSubmit() {
+    function handleResumeSubmit(e) {
         if (resume) {
             // upload resume to s3 bucket
             const reader = new FileReader();
@@ -60,6 +64,17 @@ function UserResumes() {
                 };
                 await saveResume(resumeData);
             };
+
+            // animation
+            const siteColors = ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a', '#ff7373'];
+            party.element(e.target, {
+                color: siteColors,
+                count: party.variation(25, 0.5),
+                size: party.minmax(6, 10),
+                velocity: party.minmax(-300, -600),
+                angularVelocity: party.minmax(6, 9)
+            });
+            setSuccessResume(true);
         } else {
             setEmptySubmit(true);
         }
@@ -82,6 +97,10 @@ function UserResumes() {
                 }
                 {(emptySubmit)
                     ? <span style={{ color: 'red' }}>Please upload a pdf file</span>
+                    : ''
+                }
+                {(successResume)
+                    ? <span style={{ color: 'green' }}>Successfully uploaded resume</span>
                     : ''
                 }
             </Row>
