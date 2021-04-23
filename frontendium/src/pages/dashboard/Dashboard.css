@@ -30,11 +30,11 @@
 }
 
 #dashboard-content {
-    min-height: 60%;
+    min-height: 70%;
     height: fit-content;
     width: 70%;
     border-radius: 9px;
-    margin: 10px 0px;
+    margin: 20px 0px;
     background-color: white;
     border: 1px solid rgb(206, 206, 206);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);

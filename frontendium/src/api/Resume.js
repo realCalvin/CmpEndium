@@ -17,3 +17,11 @@ export function saveResume(query) {
         return res;
     });
 }
+
+export function getUserResume(email) {
+    return axios.post('/api/database/getuserresume', {
+        email: email
+    }).then(res => {
+        return res;
+    });
+}

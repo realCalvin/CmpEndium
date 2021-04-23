@@ -147,4 +147,10 @@ app.post('/api/database/saveresume', async (req, res) => {
     newResume.save();
 })
 
+app.post('/api/database/getuserresume', async (req, res) => {
+    const { email } = req.body;
+    return Resume.find({ email: email })
+        .then(result => { return res.json(result) });
+})
+
 module.exports = app;

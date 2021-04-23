@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { Tabs } from 'antd';
+import { Tabs, Button as AntdButton } from 'antd';
+import { Document, Page, pdfjs } from 'react-pdf';
 import { currentEmail } from '../../api/Auth';
 import { getSavedJobs } from '../../api/Job';
+import { getUserResume } from '../../api/Resume';
 import SavedJobsTable from '../../components/dashboard/SavedJobsTable';
 import MyProgressCharts from '../../components/dashboard/MyProgressCharts';
 import UserResumes from '../../components/dashboard/UserResumes';
+import AddJob from '../../components/dashboard/AddJob';
 import Lottie from 'react-lottie';
 import CometData from '../../images/lottie/comet';
 import './Dashboard.css';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function Dashboard() {
     const Comet = {
@@ -27,7 +32,6 @@ function Dashboard() {
         const user = currentEmail();
         const res = await getSavedJobs({ email: user });
         setJobs(res.data.jobs.reverse());
-        console.log(jobs);
     }, []);
 
     return (
@@ -58,7 +62,7 @@ function Dashboard() {
                             <MyProgressCharts jobs={jobs} />
                         </TabPane>
                         <TabPane tab="+ Add Job" key="4">
-                            manually add job
+                            <AddJob />
                         </TabPane>
                     </Tabs>
                 </div>

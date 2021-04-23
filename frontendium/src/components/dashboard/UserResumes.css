@@ -4,6 +4,15 @@
     justify-content: center;
 }
 
+#UserResumes .user-resume-btn {
+    position: absolute;
+    text-align: center;
+    top: 92%;
+    transform: translateY(-50%);
+    width: 100%;
+    z-index: 99;
+}
+
 #resume-upload-input {
     border-radius: 8px !important;
     background-color: white !important;

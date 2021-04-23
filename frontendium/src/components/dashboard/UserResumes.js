@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Button, Dropdown, DropdownButton } from 'react-bootstrap';
-import party from 'party-js';
+import { Row, Col, Button, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Button as AntdButton } from 'antd';
+import { Document, Page, pdfjs } from 'react-pdf';
 import { currentEmail } from '../../api/Auth';
 import { UserInfo } from '../../api/UserInfo';
 import { uploadResume } from '../../api/AWS';
-import { saveResume } from '../../api/Resume';
+import { saveResume, getUserResume } from '../../api/Resume';
+import party from 'party-js';
 import './UserResumes.css';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function UserResumes() {
     const [resume, setResume] = useState(undefined);
+    const [userResumes, setUserResumes] = useState([]);
     const [emptySubmit, setEmptySubmit] = useState(false);
     const [submitResume, setSubmitResume] = useState(true);
     const [successResume, setSuccessResume] = useState(false);
@@ -22,13 +27,15 @@ function UserResumes() {
 
     const email = currentEmail();
 
-    useEffect(() => {
+    useEffect(async () => {
         async function getUserInfo() {
             const userEmail = currentEmail();
             const userInfo = await UserInfo(userEmail);
             setInfo(userInfo.data);
         }
         getUserInfo();
+        const resumes = await getUserResume(currentEmail());
+        setUserResumes(resumes.data.reverse());
     }, []);
 
     function handleResumeUpload(event) {
@@ -80,8 +87,34 @@ function UserResumes() {
         }
     }
 
+    const resumeList = userResumes.map((resume, itr) => {
+        const date = new Date(resume.uploadDate);
+        return (
+            <Col className='user-resume' key={itr}>
+                <Row className='user-resume-btn'>
+                    <AntdButton>View {date.toLocaleString()}</AntdButton>
+                </Row>
+                <Row>
+                    <Document
+                        file={resume.link}
+                        loading='Loading...'
+                    >
+                        <Page
+                            renderTextLayer={false}
+                            pageNumber={1}
+                            height='550'
+                        />
+                    </Document>
+                </Row>
+            </Col >
+        );
+    });
+
     return (
         <div id="UserResumes">
+            <Row>
+                {resumeList}
+            </Row>
             <Row id="resume-upload-input">
                 <label id="file-upload">
                     <input type="file" onChange={handleResumeUpload} />

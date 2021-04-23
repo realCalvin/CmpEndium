@@ -6,13 +6,13 @@ import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { searchJobs, saveJob } from '../../api/Job';
 import { currentEmail } from '../../api/Auth';
 import SearchData from '../../images/lottie/search.json';
-import Pagination from '../../components/pagination/Pagination';
+import { Pagination } from 'antd';
 import Lottie from 'react-lottie';
 import party from 'party-js';
 import BeatLoader from 'react-spinners/BeatLoader';
 import './JobListing.css';
 
-function JobListing(props) {
+function JobListing() {
     const location = useLocation();
 
     const Search = {
@@ -31,6 +31,10 @@ function JobListing(props) {
     const [jobLocation, setJobLocation] = useState('');
 
     const jobsPerPage = 10;
+
+    function handlePagination(current, size) {
+        setCurrentPage(current);
+    }
 
     async function handleSaveJob(e, job) {
         const siteColors = ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a', '#ff7373'];
@@ -161,7 +165,7 @@ function JobListing(props) {
                         ? (jobs.length
                             ? <>
                                 {jobCards}
-                                <Pagination totalPages={pageNumbers.length} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                                <Pagination defaultCurrent={currentPage} total={jobs.length} showSizeChanger={false} onChange={handlePagination} />
                             </>
                             : <div>
                                 <h4>No Jobs Found. Please try a different keyword or location.</h4>
