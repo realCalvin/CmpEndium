@@ -55,3 +55,15 @@ export function saveResumeComment(query) {
         return res;
     });
 }
+
+export function getResumes(query) {
+    const {
+        major
+    } = query;
+
+    return axios.post('/api/database/getresumes', {
+        major
+    }).then(res => {
+        return res;
+    });
+}

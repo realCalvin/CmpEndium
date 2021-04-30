@@ -172,4 +172,11 @@ app.post("/api/database/saveresumecomment", async (req, res) => {
     await currentResume.save();
 })
 
+app.post("/api/database/getresumes", (req, res) => {
+    let query = (req.body.major==='All') ? {visible: true} : {major: req.body.major, visible: true};
+    Resume.find(query).then((resume) => {
+        return res.json(resume);
+    })
+})
+
 module.exports = app;
