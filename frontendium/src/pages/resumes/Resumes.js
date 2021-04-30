@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import './Resumes.css';
-import Resume from '../../components/resume/Resume.js';
+import React, { useState, useEffect } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import { Divider, Button as AntdButton, Pagination } from 'antd';
+import { Document, Page, pdfjs } from 'react-pdf';
 import ResumeNav from './ResumeNav.js';
+import ResumeModal from '../../components/resume/ResumeModal';
 import Lottie from 'react-lottie';
 import CometData from '../../images/lottie/comet';
 import Arrow from '../../images/arrow.png';
-import { retrieve } from '../../api/AWS';
+import { getResumes } from '../../api/Resume';
+import './Resumes.css';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function Resumes() {
     const Comet = {
@@ -18,57 +22,70 @@ function Resumes() {
         }
     };
 
-    const [data, setData] = useState({});
+    const [currentResume, setCurrentResume] = useState({
+        email: '',
+        link: '',
+        major: '',
+        uploadDate: '',
+        _id: '',
+        __v: ''
+    });
     const [major, setMajor] = useState('');
+    const [resumes, setResumes] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [showModal, setShowModal] = useState(false);
+
+    const resumesPerPage = 12;
 
     async function retrieveResumes(e) {
-        let major = e.target.id;
-        setMajor(major);
-        major = major.replace(/ /g, '_');
-        const data = await retrieve(major);
-        setData(data.data);
+        setMajor(e.target.id);
+        let resumeList = await getResumes({ major: e.target.id });
+        setResumes(resumeList.data);
     }
 
-    // if someone has a better solution to this block of code, plz change
-    const cols = [];
-    let i;
-    let j = 0;
-    for (i = 0; i < data.length; i += 4) {
-        if (data.length - i < 4) {
-            break;
-        }
-        cols.push(
-            <Row className="justify-content-center mb-3" key={j}>
-                <Col><Resume image={data[i].Key} name="" title="" /></Col>
-                <Col><Resume image={data[i + 1].Key} name="" title="" /></Col>
-                <Col><Resume image={data[i + 2].Key} name="" title="" /></Col>
-                <Col><Resume image={data[i + 3].Key} name="" title="" /></Col>
-            </Row>
-        );
-        j++;
+    function handleViewModal(resume) {
+        setShowModal(true);
+        setCurrentResume(resume);
     }
-    if (data.length - i === 3) {
-        cols.push(
-            <Row className="justify-content-center mb-3" key={j}>
-                <Col><Resume image={data[i].Key} name="" title="" /></Col>
-                <Col><Resume image={data[i + 1].Key} name="" title="" /></Col>
-                <Col><Resume image={data[i + 2].Key} name="" title="" /></Col>
-            </Row>
-        );
-    } else if (data.length - i === 2) {
-        cols.push(
-            <Row className="justify-content-center mb-3" key={j}>
-                <Col><Resume image={data[i].Key} name="" title="" /></Col>
-                <Col><Resume image={data[i + 1].Key} name="" title="" /></Col>
-            </Row>
-        );
-    } else if (data.length - i === 1) {
-        cols.push(
-            <Row className="justify-content-center mb-3" key={j}>
-                <Col><Resume image={data[i].Key} name="" title="" /></Col>
-            </Row>
-        );
+
+    function handlePagination(current, size) {
+        setCurrentPage(current);
     }
+
+    // logic and calculation for the current page indexing
+    const indexOfLastResume = currentPage * resumesPerPage;
+    const indexOfFirstResume = indexOfLastResume - resumesPerPage;
+    const currentResumes = resumes.slice(indexOfFirstResume, indexOfLastResume);
+
+    // calculate how many pages are needed
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(resumes.length / resumesPerPage); i++) {
+        pageNumbers.push(i);
+    }
+
+    useEffect(async () => {
+        setMajor('All');
+        let resumeList = await getResumes({ major: 'All' });
+        setResumes(resumeList.data);
+    }, []);
+
+    const resumeList = currentResumes.map((resume, itr) => {
+        return (
+            <Col className="user-resume" key={itr}>
+                <Row>
+                    <Document
+                        file={resume.link}
+                        loading="Loading..."
+                    >
+                        <Page renderTextLayer={false} pageNumber={1} height={550} />
+                    </Document>
+                </Row>
+                <Row className="user-resume-btn">
+                    <AntdButton onClick={() => { handleViewModal(resume); }}>{resume.major}</AntdButton>
+                </Row>
+            </Col>
+        );
+    });
 
     return (
         <div className="resume-content">
@@ -89,10 +106,14 @@ function Resumes() {
                     <a href="#resumes"><img src={Arrow} alt="" /></a>
                 </div>
             </div>
-            <Container className="resume-content-container" id="resumes">
-                <u><h3>{major} Resumes</h3></u>
-                {cols}
-            </Container>
+            <div className="resume-content-container" id="resumes">
+                <Divider><h4>{major} Resumes</h4></Divider>
+                <Row>
+                    {resumeList}
+                </Row>
+                <Pagination defaultCurrent={currentPage} total={resumes.length} showSizeChanger={false} onChange={handlePagination} />
+            </div>
+            <ResumeModal currentResume={currentResume} showModal={showModal} setShowModal={setShowModal} />
         </div>
     );
 }

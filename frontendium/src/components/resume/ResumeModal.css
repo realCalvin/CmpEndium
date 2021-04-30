@@ -1,8 +1,11 @@
+.ant-modal {
+    width: 100%;
+    overflow-x: auto;
+}
+
 .ant-modal .react-pdf__Page__canvas {
     float:none; 
     margin:auto;
-    /* width: 100% !important;
-    height: 100% !important; */
 }
 
 .comment-section-list {
@@ -16,4 +19,11 @@
 
 .comment-section-footer button{
     margin-top: 5px;
+}
+
+@media only screen and (max-width: 680px) {
+    .ant-modal .react-pdf__Page__canvas {
+        width: 100% !important;
+        height: 100% !important;
+    }
 }
