@@ -37,7 +37,12 @@
     font-size: 14px;
   }
 
-#UserResumes #dropdown-basic-button {
+#share-resume-button {
+    border: 1px solid white;
     background-color: rgb(118, 118, 250);
+    font-size: 14px;
+}
+
+#UserResumes .dropdown-item{
     font-size: 14px;
 }

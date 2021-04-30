@@ -5,25 +5,36 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import { currentEmail } from '../../api/Auth';
 import { UserInfo } from '../../api/UserInfo';
 import { uploadResume } from '../../api/AWS';
-import { saveResume, getUserResume } from '../../api/Resume';
+import { saveResume, getUserResume, setShareResume } from '../../api/Resume';
+import ResumeModal from '../resume/ResumeModal';
 import party from 'party-js';
 import './UserResumes.css';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function UserResumes() {
+    const [currentResume, setCurrentResume] = useState({
+        email: '',
+        link: '',
+        major: '',
+        uploadDate: '',
+        _id: '',
+        __v: ''
+    });
+    const [info, setInfo] = useState({
+        username: '',
+        name: '',
+        email: '',
+        major: '',
+        visible: false
+    });
     const [resume, setResume] = useState(undefined);
     const [userResumes, setUserResumes] = useState([]);
     const [emptySubmit, setEmptySubmit] = useState(false);
     const [submitResume, setSubmitResume] = useState(true);
     const [successResume, setSuccessResume] = useState(false);
-    const [share, setShare] = useState(false);
-    const [info, setInfo] = useState({
-        username: '',
-        name: '',
-        email: '',
-        major: ''
-    });
+    const [showModal, setShowModal] = useState(false);
+    const [render, setRender] = useState(false);
 
     const email = currentEmail();
 
@@ -37,6 +48,23 @@ function UserResumes() {
         const resumes = await getUserResume(currentEmail());
         setUserResumes(resumes.data.reverse());
     }, []);
+
+    function forceRender() {
+        setRender(!render);
+    }
+
+    function handleViewModal(resume) {
+        setShowModal(true);
+        setCurrentResume(resume);
+    }
+
+    function handleShareResume(val) {
+        const tempInfo = info;
+        tempInfo.visible = val;
+        setInfo(tempInfo);
+        setShareResume({ email: currentEmail(), visible: val });
+        forceRender();
+    }
 
     function handleResumeUpload(event) {
         setEmptySubmit(false);
@@ -55,7 +83,7 @@ function UserResumes() {
             // upload resume to s3 bucket
             const reader = new FileReader();
             reader.readAsDataURL(resume[0]);
-            reader.onload = async e => {
+            reader.onload = async (e) => {
                 const json = JSON.stringify({
                     dataURL: reader.result
                 });
@@ -73,7 +101,14 @@ function UserResumes() {
             };
 
             // animation
-            const siteColors = ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a', '#ff7373'];
+            const siteColors = [
+                '#a864fd',
+                '#29cdff',
+                '#78ff44',
+                '#ff718d',
+                '#fdff6a',
+                '#ff7373'
+            ];
             party.element(e.target, {
                 color: siteColors,
                 count: party.variation(25, 0.5),
@@ -90,64 +125,74 @@ function UserResumes() {
     const resumeList = userResumes.map((resume, itr) => {
         const date = new Date(resume.uploadDate);
         return (
-            <Col className='user-resume' key={itr}>
-                <Row className='user-resume-btn'>
-                    <AntdButton>View {date.toLocaleString()}</AntdButton>
-                </Row>
+            <Col className="user-resume" key={itr}>
                 <Row>
                     <Document
                         file={resume.link}
-                        loading='Loading...'
+                        loading="Loading..."
                     >
-                        <Page
-                            renderTextLayer={false}
-                            pageNumber={1}
-                            height='550'
-                        />
+                        <Page renderTextLayer={false} pageNumber={1} height={550} />
                     </Document>
                 </Row>
-            </Col >
+                <Row className="user-resume-btn">
+                    <AntdButton onClick={() => { handleViewModal(resume); }}>View {date.toLocaleString()}</AntdButton>
+                </Row>
+            </Col>
         );
     });
 
     return (
         <div id="UserResumes">
-            <Row>
-                {resumeList}
-            </Row>
+            <Row>{resumeList}</Row>
             <Row id="resume-upload-input">
                 <label id="file-upload">
                     <input type="file" onChange={handleResumeUpload} />
                 </label>
             </Row>
             <Row>
-                <Button id="upload-resume-btn" onClick={handleResumeSubmit} disabled={!submitResume}>Upload Resume</Button>
+                <Button
+                    id="upload-resume-btn"
+                    onClick={handleResumeSubmit}
+                    disabled={!submitResume}
+                >
+                  Upload Resume
+                </Button>
             </Row>
             <Row>
                 {!submitResume
-                    ? <span style={{ color: 'red' }}>Please submit a pdf file</span>
-                    : ''
-                }
-                {(emptySubmit)
-                    ? <span style={{ color: 'red' }}>Please upload a pdf file</span>
-                    : ''
-                }
-                {(successResume)
-                    ? <span style={{ color: 'green' }}>Successfully uploaded resume</span>
-                    : ''
-                }
+                    ? (
+                        <span style={{ color: 'red' }}>Please submit a pdf file</span>
+                    )
+                    : (
+                        ''
+                    )}
+                {emptySubmit
+                    ? (
+                        <span style={{ color: 'red' }}>Please upload a pdf file</span>
+                    )
+                    : (
+                        ''
+                    )}
+                {successResume
+                    ? (
+                        <span style={{ color: 'green' }}>Successfully uploaded resume</span>
+                    )
+                    : (
+                        ''
+                    )}
             </Row>
             <Row>
                 <DropdownButton
-                    id="dropdown-basic-button"
+                    id="share-resume-button"
                     menuAlign="left"
                     drop="down"
-                    title={share ? 'Yes' : 'No'}
+                    title={info.visible ? 'Share Resume: Yes' : 'Share Resume: No'}
                 >
-                    <Dropdown.Item onClick={() => setShare(true)}>Yes</Dropdown.Item>
-                    <Dropdown.Item onClick={() => setShare(false)}>No</Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleShareResume(true)}>Yes</Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleShareResume(false)}>No</Dropdown.Item>
                 </DropdownButton>
             </Row>
+            <ResumeModal currentResume={currentResume} showModal={showModal} setShowModal={setShowModal} />
         </div>
     );
 }

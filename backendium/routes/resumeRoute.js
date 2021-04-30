@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const User = require("../models/userModel");
 const Resume = require("../models/resumeModel.js");
 const path = require("path");
 
@@ -141,7 +142,8 @@ app.post('/api/database/saveresume', async (req, res) => {
         link,
         uploadDate,
         email,
-        major
+        major,
+        visible: true
     });
 
     newResume.save();
@@ -151,6 +153,23 @@ app.post('/api/database/getuserresume', async (req, res) => {
     const { email } = req.body;
     return Resume.find({ email: email })
         .then(result => { return res.json(result) });
+})
+
+app.post('/api/database/setshareresume', async (req, res) => {
+    const { email, visible } = req.body;
+    await Resume.updateMany({ email: email }, {visible: visible});
+    let currentUser = await User.findOne({ email: email });
+    currentUser.visible = visible;
+    await currentUser.save();
+})
+
+app.post("/api/database/saveresumecomment", async (req, res) => {
+    const { _id, username, comment } = req.body;
+    let currentResume = await Resume.findOne({ _id: _id });
+    let comments = currentResume.comments;
+    comments.push({username: username, comment: comment});
+    currentResume.comments = comments;
+    await currentResume.save();
 })
 
 module.exports = app;

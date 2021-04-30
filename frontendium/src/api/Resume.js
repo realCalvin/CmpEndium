@@ -25,3 +25,33 @@ export function getUserResume(email) {
         return res;
     });
 }
+
+export function setShareResume(query) {
+    const {
+        email,
+        visible
+    } = query;
+
+    return axios.post('/api/database/setshareresume', {
+        email: email,
+        visible: visible
+    }).then(res => {
+        return res;
+    });
+}
+
+export function saveResumeComment(query) {
+    const {
+        _id,
+        username,
+        comment
+    } = query;
+
+    return axios.post('/api/database/saveresumecomment', {
+        _id,
+        username,
+        comment
+    }).then(res => {
+        return res;
+    });
+}

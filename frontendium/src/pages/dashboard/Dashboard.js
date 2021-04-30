@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { Tabs, Button as AntdButton } from 'antd';
-import { Document, Page, pdfjs } from 'react-pdf';
+import { Tabs } from 'antd';
+import { pdfjs } from 'react-pdf';
 import { currentEmail } from '../../api/Auth';
 import { getSavedJobs } from '../../api/Job';
-import { getUserResume } from '../../api/Resume';
 import SavedJobsTable from '../../components/dashboard/SavedJobsTable';
 import MyProgressCharts from '../../components/dashboard/MyProgressCharts';
 import UserResumes from '../../components/dashboard/UserResumes';
@@ -42,11 +41,7 @@ function Dashboard() {
                     <h6>Manage and track your saved jobs.</h6>
                 </Col>
                 <Col id="dashboard-banner-2" md={2}>
-                    <Lottie
-                        options={Comet}
-                        height={200}
-                        width={200}
-                    />
+                    <Lottie options={Comet} height={200} width={200} />
                 </Col>
             </Row>
             <Row id="dashboard-content">

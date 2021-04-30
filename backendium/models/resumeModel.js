@@ -1,3 +1,4 @@
+const resumeCommentSchema = require('./resumeCommentModel').schema;
 var mongoose = require('mongoose');
 
 var resumeSchema = {
@@ -16,7 +17,12 @@ var resumeSchema = {
     major: {
         type: String,
         required: true
-    }
+    },
+    visible: {
+        type: Boolean,
+        required: true
+    },
+    comments: [resumeCommentSchema]
 }
 
 const Resume = mongoose.model("Resume", resumeSchema);

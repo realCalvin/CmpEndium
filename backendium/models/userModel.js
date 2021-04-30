@@ -24,6 +24,10 @@ const userSchema = {
         type: String,
         required: true
     },
+    visible: {
+        type: Boolean,
+        required: true
+    },
     savedJobs: [savedJobSchema]
 }
 
