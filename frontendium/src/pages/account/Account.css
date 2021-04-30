@@ -23,14 +23,18 @@
   min-height: 35vh;
   max-height: 70vh;
   background-color: white;
-  color: #5d63d5;
   border: 1px solid rgb(206, 206, 206);
+  color: #5d63d5 !important;
   border-radius: 5px;
   overflow: auto;
   padding: 45px;
   box-shadow: 0 5px 20px rgba(255, 255, 255, 0.25);
   transition: transform 300ms, box-shadow 300ms;
   z-index: 2;
+}
+
+#account-info h2,h5{
+  color: #5d63d5 !important;
 }
 
 #profile {
@@ -60,15 +64,6 @@
 #resume {
   margin-top: 5px;
   margin-bottom: 5px;
-}
-
-#upload-resume-btn {
-  background-color: #ff97c9;
-  border: 1px solid rgb(206, 206, 206);
-  border-radius: 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-size: 20px;
 }
 
 #dropdown-basic-button {

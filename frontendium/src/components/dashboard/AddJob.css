@@ -1,0 +1,37 @@
+#AddJob {
+    padding: 20px;
+}
+
+.manual-job-row {
+    padding-bottom: 15px;
+}
+
+.manual-job-row .col-lg-3 {
+    margin-right: 10px;
+}
+
+.manual-job-row .ant-btn {
+    background-color: #ff97c9;
+    color: white;
+    border: 1px solid #ffd9ec;
+}
+
+.manual-job-row .ant-btn:hover {
+    background-color: #ff97c9;
+    color: white;
+    border: 1px solid #fa7eba;
+}
+
+.manual-job-row .ant-btn:focus{
+    background-color: #ff97c9;
+    color: white;
+    border: 1px solid #fa7eba;
+}
+
+.manual-saved-jobs-status {
+    color: black !important;
+    border: 1px solid rgb(212, 212, 212);
+    border-radius: 2px;
+    font-size: 14px;
+    padding: 5px 10px 5px 10px !important;
+}

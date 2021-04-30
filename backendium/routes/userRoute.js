@@ -107,7 +107,8 @@ app.post("/api/getUserInfo", (req, res) => {
                 username: result.username,
                 email: result.email,
                 name: result.name,
-                major: result.major
+                major: result.major,
+                visible: result.visible
             })
         })
 })

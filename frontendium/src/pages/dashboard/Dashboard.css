@@ -1,0 +1,61 @@
+#Dashboard {
+    color: black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#dashboard-banner {
+    color: white;
+    min-height: 140px;
+    height: fit-content;
+    width: 70%;
+    text-align: center;
+    align-items: center;
+    background: linear-gradient(120deg,#5555e3,rgb(121, 134, 231)) !important;
+    box-shadow: 0 5px 20px rgba(121, 134, 231, 0.698);
+    border-radius: 9px;
+    margin-top: 20px;
+    padding: 5px 0px 20px 0px;
+}
+
+#dashboard-banner div:nth-child(1){
+    margin-top: 40px;
+}
+
+#dashboard-banner div:nth-child(2){
+    margin: 5px 0px 20px 0px;
+}
+
+#dashboard-content {
+    min-height: 70%;
+    height: fit-content;
+    width: 70%;
+    border-radius: 9px;
+    margin: 20px 0px;
+    background-color: white;
+    border: 1px solid rgb(206, 206, 206);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    transition: transform 300ms, box-shadow 300ms;
+}
+
+#dashboard-tabs {
+    width: 100%;
+    padding: 30px;
+}
+
+.ant-tabs-tab {
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 660px) {
+    #dashboard-banner {
+        width: 90%;
+    }
+    
+    #dashboard-content {
+        width: 90%;
+    }
+}

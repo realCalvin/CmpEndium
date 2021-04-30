@@ -5,18 +5,19 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './Routes.js';
 import Navbar from './components/navbar/Navbar.js';
+import 'antd/dist/antd.css';
 
 const browserHistory = createBrowserHistory();
 
 function App() {
-  return (
-    <div className="App">
-      <Router history={browserHistory}>
-        <Navbar />
-        <Routes />
-      </Router>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Router history={browserHistory}>
+                <Navbar />
+                <Routes />
+            </Router>
+        </div>
+    );
 }
 
 export default App;

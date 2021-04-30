@@ -50,8 +50,15 @@
 
 .bottom-login-form-row {
     color: #6b7280;
-    font-size: 14px;
     display: inline-block;
+}
+
+.bottom-login-form-row p {
+    font-size: 14px !important;
+}
+
+.bottom-login-form-row a {
+    font-size: 14px !important;
 }
 
 .signin-error-message {

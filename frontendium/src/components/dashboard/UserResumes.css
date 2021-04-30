@@ -1,0 +1,48 @@
+#UserResumes .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#UserResumes .user-resume-btn {
+    position: absolute;
+    text-align: center;
+    top: 92%;
+    transform: translateY(-50%);
+    width: 100%;
+    z-index: 99;
+}
+
+#resume-upload-input {
+    border-radius: 8px !important;
+    background-color: white !important;
+    margin-left: 70px;
+    font-size: 16px;
+}
+
+#resume-upload-input input::-webkit-file-upload-button {
+    background: white;
+    color: black;
+    border: 1px solid rgb(155, 155, 155);
+    border-radius: 5px;
+}
+
+
+#upload-resume-btn {
+    background-color: #ff97c9;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+
+#share-resume-button {
+    border: 1px solid white;
+    background-color: rgb(118, 118, 250);
+    font-size: 14px;
+}
+
+#UserResumes .dropdown-item{
+    font-size: 14px;
+}

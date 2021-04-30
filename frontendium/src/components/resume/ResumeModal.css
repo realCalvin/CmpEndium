@@ -1,0 +1,19 @@
+.ant-modal .react-pdf__Page__canvas {
+    float:none; 
+    margin:auto;
+    /* width: 100% !important;
+    height: 100% !important; */
+}
+
+.comment-section-list {
+    height: 600px;
+    overflow-y: auto;
+}
+
+.comment-section-footer {
+    padding-top: 15px;
+}
+
+.comment-section-footer button{
+    margin-top: 5px;
+}

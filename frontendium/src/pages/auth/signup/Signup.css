@@ -123,6 +123,14 @@
     display: inline-block;
 }
 
+.bottom-signup-form-row p {
+    font-size: 14px !important;
+}
+
+.bottom-signup-form-row a {
+    font-size: 14px !important;
+}
+
 #signup-job-x-btn {
     border: none;
     background-color: transparent;

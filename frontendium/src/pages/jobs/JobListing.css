@@ -43,6 +43,10 @@
     z-index: 2;
 }
 
+#job-listing-body .ant-pagination {
+    float: right;
+}
+
 .job-listing-cards {
     width: 100%;
     margin: 15px 0;
@@ -61,6 +65,7 @@
 
 .job-listing-btns {
     display: inline-block;
+    font-size: 20px;
 }
 
 .job-listing-btn {

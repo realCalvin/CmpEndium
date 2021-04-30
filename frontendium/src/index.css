@@ -30,3 +30,15 @@ code {
   background-color: rgb(145, 145, 255);
   border-radius: 2px;
 }
+
+h1, h2, h6 {
+  color: white !important;
+}
+
+button, a {
+  font-size: 20px;
+}
+
+p {
+  font-size: 18px;
+}

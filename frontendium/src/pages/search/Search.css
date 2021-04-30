@@ -18,8 +18,8 @@
     z-index: 2;
 }
 
-#search-form {
-    color: #5D63D5;
+#search-form h4{
+    color: #5D63D5 !important;
 }
 
 #search-form h4 {
@@ -36,6 +36,7 @@
     border-radius: 5px;
     padding: 10px 0;
     margin: 10px 35%;
+    font-size: 14px !important;
 }
 
 #form-login-btn:hover {

@@ -1,24 +1,28 @@
+const resumeCommentSchema = require('./resumeCommentModel').schema;
 var mongoose = require('mongoose');
 
 var resumeSchema = {
     link: {
         type: String,
-        unique: true,
         required: true
     },
     uploadDate: {
         type: Date,
         required: true
     },
-    username: {
+    email: {
         type: String,
-        unique: true,
         required: true
     },
     major: {
         type: String,
         required: true
-    }
+    },
+    visible: {
+        type: Boolean,
+        required: true
+    },
+    comments: [resumeCommentSchema]
 }
 
 const Resume = mongoose.model("Resume", resumeSchema);
