@@ -4,6 +4,7 @@ import { Tabs } from 'antd';
 import { pdfjs } from 'react-pdf';
 import { currentEmail } from '../../api/Auth';
 import { getSavedJobs } from '../../api/Job';
+import { UserInfo } from '../../api/UserInfo';
 import SavedJobsTable from '../../components/dashboard/SavedJobsTable';
 import MyProgressCharts from '../../components/dashboard/MyProgressCharts';
 import UserResumes from '../../components/dashboard/UserResumes';
@@ -24,12 +25,21 @@ function Dashboard() {
         }
     };
 
+    const [userInfo, setUserInfo] = useState({
+        username: '',
+        email: '',
+        name: '',
+        major: '',
+        visible: ''
+    });
     const [jobs, setJobs] = useState([]);
     const { TabPane } = Tabs;
 
     useEffect(async () => {
         const user = currentEmail();
+        const userData = await UserInfo(user);
         const res = await getSavedJobs({ email: user });
+        setUserInfo(userData.data);
         setJobs(res.data.jobs.reverse());
     }, []);
 
@@ -37,7 +47,7 @@ function Dashboard() {
         <div id="Dashboard">
             <Row id="dashboard-banner">
                 <Col id="dashboard-banner-1" md={8}>
-                    <h1>Welcome back, Calvin!</h1>
+                    <h1>Welcome back, {userInfo.username}!</h1>
                     <h6>Manage and track your saved jobs.</h6>
                 </Col>
                 <Col id="dashboard-banner-2" md={2}>
