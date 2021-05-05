@@ -42,7 +42,7 @@ function ResumeModal(props) {
     return (
         <div className="ResumeModal">
             <Modal
-                title={resume.uploadDate}
+                title={resume.major}
                 width={1200}
                 style={{ top: 20 }}
                 visible={props.showModal}
