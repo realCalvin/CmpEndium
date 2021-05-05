@@ -89,10 +89,13 @@
 }
 
 .landing-page-descriptions {
+  display: flex;
+  align-items: center;
   background-color: rgb(251, 251, 251);
   color: #183055;
   height: 70vh;  
-  padding: 10rem 20%;
+  margin: 2% 10% 0% 10%;
+  text-align: left;
 }
 
 .landing-page-descriptions h3 {
@@ -101,6 +104,17 @@
 
 .landing-page-descriptions li {
   font-size: 18px;
+}
+
+.landing-page-descriptions img {
+  box-shadow: 5px 5px 15px rgba(121, 134, 231, 0.4);
+  border-radius: 10px;
+  transition: transform 300ms, box-shadow 300ms;
+}
+
+.landing-page-descriptions img:hover {
+  box-shadow: 10px 8px 20px rgba(121, 134, 231, 0.45);
+  border-radius: 10px;
 }
 
 .image-left {
@@ -139,7 +153,11 @@
 }
 
 /* MOBILE DEVICES */
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 700px) {
+  .landing-page-descriptions {
+    margin: 0% 1% 0% 1%;
+  }
+  
   .landing-content-h1 {
     font-size: 40px;
   }

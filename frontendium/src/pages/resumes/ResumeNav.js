@@ -11,7 +11,7 @@ export default function ResumeNav(props) {
             );
         });
         return (
-            <Col className="job-buttons" key={itr} sm={4} md={4} lg={2}>
+            <Col className="job-buttons" key={itr} xs={6} sm={4} md={4} lg={2}>
                 <DropdownButton className="job-button" title={jobItem[0]}>
                     {dropdownItems}
                 </DropdownButton>

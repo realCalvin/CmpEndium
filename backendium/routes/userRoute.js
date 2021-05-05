@@ -61,10 +61,12 @@ app.post("/api/register", (req, res) => {
                     email,
                     password: hashedPassword,
                     name,
-                    major
+                    major,
+                    visible: false
                 });
                 newUser.save((err, data) => {
                     if (err) {
+                        console.log(err);
                         let error = Object.keys(err.keyValue)[0];
                         if (error == 'username') {
                             return res.json({ success: false, error: 'user' });
@@ -74,6 +76,7 @@ app.post("/api/register", (req, res) => {
                         }
                     }
                     else {
+                        console.log(data);
                         jwt.sign({ email: email }, "secretkey", (err, token) => {
                             res.json({
                                 success: true,

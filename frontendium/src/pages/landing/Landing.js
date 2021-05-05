@@ -107,32 +107,31 @@ function Landing() {
                     </Row>
                 </a>
             </div>
-            <Row className="landing-page-descriptions" id="landing-find-page">
-                <Col md={12} lg={6}>
+            <Row className="landing-page-descriptions" id="landing-track-page">
+                <Col md={12} lg={5}>
                     <div className="lottie-icon-left">
                         <Lottie
-                            options={Find}
+                            options={Track}
                             height={150}
                             width={150}
                         />
                     </div>
-                    <h3>Find Your Dream Job</h3>
+                    <h3>Track Your Job Applications</h3>
                     <ul>
-                        <li>Filter out the job listings to find the job of your choice</li>
-                        <li>Read through the job description and requirements</li>
-                        <li>See if it is a fit for you</li>
-                        <li>Hit apply to be redirected to the company's website to apply for this position</li>
+                        <li>Add the jobs you applied to onto your profile</li>
+                        <li>Keep track of the status of the jobs you applied to</li>
+                        <li>View your progress via statistical graphs</li>
                     </ul>
                 </Col>
-                <Col md={12} lg={6}>
-                    <Image src={JobSearch} fluid />
+                <Col md={12} lg={7}>
+                    <Image src={Dashboard} fluid />
                 </Col>
             </Row>
             <Row className="landing-page-descriptions" id="landing-build-page">
-                <Col className="image-left" md={12} lg={6}>
+                <Col className="image-left" md={12} lg={7}>
                     <Image src={Resumes} fluid />
                 </Col>
-                <Col md={12} lg={6}>
+                <Col md={12} lg={5}>
                     <div className="lottie-icon-right">
                         <Lottie
                             options={Build}
@@ -147,24 +146,28 @@ function Landing() {
                         <li>Share your resume to help others who are and will be in your current position</li>
                     </ul>
                 </Col>
+                <Col className="image-right" md={12} lg={7}>
+                    <Image src={Resumes} fluid />
+                </Col>
             </Row>
-            <Row className="landing-page-descriptions" id="landing-track-page">
-                <Col md={12} lg={6}>
+            <Row className="landing-page-descriptions" id="landing-find-page">
+                <Col md={12} lg={5}>
                     <div className="lottie-icon-left">
                         <Lottie
-                            options={Track}
+                            options={Find}
                             height={150}
                             width={150}
                         />
                     </div>
-                    <h3>Track Your Job Applications</h3>
+                    <h3>Find Your Dream Job</h3>
                     <ul>
-                        <li>Add the jobs you applied to onto your profile</li>
-                        <li>Keep track of the status of the jobs you applied to</li>
+                        <li>Filter out the job listings to find the job of your choice</li>
+                        <li>Read through the job description and requirements</li>
+                        <li>Hit apply to be redirected to the company's website to apply for this position</li>
                     </ul>
                 </Col>
-                <Col md={12} lg={6}>
-                    <Image src={Dashboard} fluid />
+                <Col md={12} lg={7}>
+                    <Image src={JobSearch} fluid />
                 </Col>
             </Row>
         </div>
