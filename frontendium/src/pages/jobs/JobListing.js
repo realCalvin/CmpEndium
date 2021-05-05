@@ -4,7 +4,7 @@ import { Card, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { searchJobs, saveJob } from '../../api/Job';
-import { currentEmail } from '../../api/Auth';
+import { isAuthenticated, currentEmail } from '../../api/Auth';
 import SearchData from '../../images/lottie/search.json';
 import { Pagination } from 'antd';
 import Lottie from 'react-lottie';
@@ -23,6 +23,8 @@ function JobListing() {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+
+    const [authenticated] = useState(isAuthenticated().length !== 0);
 
     const [jobs, setJobs] = useState([]);
     const [loaded, setLoaded] = useState(false);
@@ -126,9 +128,14 @@ function JobListing() {
                             </Card.Text>
                         </Col>
                         <Col md={4} className="job-listing-btns">
-                            <button className="job-listing-btn" id={'job-listing-btn-' + itr} onClick={() => { handleSaveJob(event, job); }}>
-                                Save Job
-                            </button>
+                            {authenticated
+                                ? <>
+                                    <button className="job-listing-btn" id={'job-listing-btn-' + itr} onClick={() => { handleSaveJob(event, job); }}>
+                                        Save Job
+                                    </button>
+                                </>
+                                : <></>
+                            }
                             <br></br>
                             <a target="_blank" rel="noreferrer" href={job.link}>
                                 <button className="job-listing-btn">

@@ -6,7 +6,6 @@ import Signin from './pages/auth/signin/Signin.js';
 import Signup from './pages/auth/signup/Signup.js';
 import Search from './pages/search/Search.js';
 import JobListing from './pages/jobs/JobListing.js';
-import Account from './pages/account/Account.js';
 import Dashboard from './pages/dashboard/Dashboard.js';
 import AuthenticatedRoute from './components/route/AuthenticatedRoute';
 import UnauthenticatedRoute from './components/route/UnauthenticatedRoute';
@@ -15,7 +14,7 @@ import { isAuthenticated } from './api/Auth';
 export default function Routing() {
     const [authenticated, setAuthenticated] = useState(isAuthenticated());
 
-    const allRoutes = [
+    const authDependentRoutes = [
         {
             Component: Resumes,
             authentication: true,
@@ -32,31 +31,27 @@ export default function Routing() {
             path: '/signup'
         },
         {
-            Component: Search,
-            authentication: true,
-            path: '/search'
-        },
-        {
-            Component: Account,
-            authentication: true,
-            path: '/account'
-        },
-        {
-            Component: JobListing,
-            authentication: true,
-            path: '/jobs'
-        },
-        {
             Component: Dashboard,
             authentication: true,
             path: '/dashboard'
         }
     ];
 
+    const nonAuthDependentRoutes = [
+        {
+            Component: Search,
+            path: '/search'
+        },
+        {
+            Component: JobListing,
+            path: '/jobs'
+        }
+    ];
+
     return (
         <Switch>
-            {!authenticated ? <Route exact path="/" component={Landing}></Route> : <Route exact path="/" component={Dashboard}></Route>}
-            {allRoutes.map(({ Component, authentication, path }, index) => {
+            <Route exact path="/" component={Landing}></Route>
+            {authDependentRoutes.map(({ Component, authentication, path }, index) => {
                 if (authentication) {
                     return (
                         <AuthenticatedRoute
@@ -78,6 +73,16 @@ export default function Routing() {
                         />
                     );
                 }
+            })}
+            {nonAuthDependentRoutes.map(({ Component, path }, index) => {
+                return (
+                    <Route
+                        key={index}
+                        exact
+                        path={path}
+                        component={Component}
+                    />
+                );
             })}
             {/* TODO: Replace the path="/*" component to an "Error" page */}
             <Route path="/*" component={Landing} />

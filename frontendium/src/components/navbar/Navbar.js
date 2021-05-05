@@ -37,14 +37,15 @@ function Header() {
                     {!authenticated
                         ? <>
                             <Nav.Link className="nav-link" as={Link} eventKey="1" to="/">Home</Nav.Link>
+                            <Nav.Link className="nav-link" as={Link} eventKey="3" to="/search">Search Jobs</Nav.Link>
                             <Nav.Link className="nav-link" as={Link} eventKey="5" to="/signin">Sign In</Nav.Link>
                             <Nav.Link className="nav-link" as={Link} eventKey="6" to="/signup">Sign Up</Nav.Link>
                         </>
                         : <>
-                            <Nav.Link className="nav-link" as={Link} eventKey="1" to="/">Dashboard</Nav.Link>
-                            <Nav.Link className="nav-link" as={Link} eventKey="2" to="/search">Search Jobs</Nav.Link>
-                            <Nav.Link className="nav-link" as={Link} eventKey="3" to="/resumes">Resume</Nav.Link>
-                            <Nav.Link className="nav-link" as={Link} eventKey="4" to="/account">Account</Nav.Link>
+                            <Nav.Link className="nav-link" as={Link} eventKey="1" to="/">Home</Nav.Link>
+                            <Nav.Link className="nav-link" as={Link} eventKey="2" to="/dashboard">Dashboard</Nav.Link>
+                            <Nav.Link className="nav-link" as={Link} eventKey="3" to="/search">Search Jobs</Nav.Link>
+                            <Nav.Link className="nav-link" as={Link} eventKey="4" to="/resumes">Resume</Nav.Link>
                             <Nav.Link className="nav-link" eventKey="7" onClick={handleLogOut}>Log Out</Nav.Link>
                         </>
                     }
