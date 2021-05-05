@@ -7,10 +7,12 @@ import AstronautData from '../../images/lottie/astronaut';
 import FindData from '../../images/lottie/find';
 import BuildData from '../../images/lottie/build';
 import TrackData from '../../images/lottie/track';
-import AstronautImage from '../../images/Astronaut.png';
 import FindImage from '../../images/Find.png';
 import BuildImage from '../../images/Build.png';
 import TrackImage from '../../images/Track.png';
+import JobSearch from '../../images/JobSearch.png';
+import Resumes from '../../images/Resumes.png';
+import Dashboard from '../../images/Dashboard.png';
 
 function Landing() {
     const Astronaut = {
@@ -123,12 +125,12 @@ function Landing() {
                     </ul>
                 </Col>
                 <Col md={12} lg={6}>
-                    <Image src={AstronautImage} fluid />
+                    <Image src={JobSearch} fluid />
                 </Col>
             </Row>
             <Row className="landing-page-descriptions" id="landing-build-page">
                 <Col className="image-left" md={12} lg={6}>
-                    <Image src={AstronautImage} fluid />
+                    <Image src={Resumes} fluid />
                 </Col>
                 <Col md={12} lg={6}>
                     <div className="lottie-icon-right">
@@ -144,9 +146,6 @@ function Landing() {
                         <li>Cater your resume to fit the specific role of which you are applying for</li>
                         <li>Share your resume to help others who are and will be in your current position</li>
                     </ul>
-                </Col>
-                <Col className="image-right" md={12} lg={6}>
-                    <Image src={AstronautImage} fluid />
                 </Col>
             </Row>
             <Row className="landing-page-descriptions" id="landing-track-page">
@@ -165,7 +164,7 @@ function Landing() {
                     </ul>
                 </Col>
                 <Col md={12} lg={6}>
-                    <Image src={AstronautImage} fluid />
+                    <Image src={Dashboard} fluid />
                 </Col>
             </Row>
         </div>

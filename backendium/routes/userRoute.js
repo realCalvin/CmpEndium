@@ -64,6 +64,7 @@ app.post("/api/register", (req, res) => {
                     major
                 });
                 newUser.save((err, data) => {
+                    console.log(err);
                     if (err) {
                         let error = Object.keys(err.keyValue)[0];
                         if (error == 'username') {
