@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const resumeCommentSchema = new Schema({
@@ -10,6 +10,6 @@ const resumeCommentSchema = new Schema({
         type: String,
         required: true
     }
-})
+});
 
-module.exports = resumeComment = mongoose.model("resumeComment", resumeCommentSchema);
+module.exports = resumeComment = mongoose.model('resumeComment', resumeCommentSchema);

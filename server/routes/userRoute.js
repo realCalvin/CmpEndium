@@ -1,18 +1,18 @@
-const express = require("express"); const cors = require("cors");
-const bodyParser = require("body-parser");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/userModel");
+const express = require('express'); const cors = require('cors');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/userModel');
 
 const app = express();
 
 app.use(cors());
 // support parsing of application/json type post data
 app.use(bodyParser.json());
-//support parsing of application/x-www-form-urlencoded post data
+// support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post("/api/login", (req, res) => {
+app.post('/api/login', (req, res) => {
     const {
         email,
         password
@@ -23,26 +23,23 @@ app.post("/api/login", (req, res) => {
             if (result) {
                 bcrypt.compare(password, result.password, (err, bresult) => {
                     if (bresult) {
-                        jwt.sign({ email: email }, "secretkey", (err, token) => {
+                        jwt.sign({ email: email }, 'secretkey', (err, token) => {
                             res.json({
                                 success: true,
                                 token
                             });
                         });
-                    }
-                    else {
+                    } else {
                         return res.json({ success: false, error: 'password' });
                     }
-                })
-            }
-            else {
+                });
+            } else {
                 return res.json({ success: false, error: 'email' });
             }
-        })
-})
+        });
+});
 
-app.post("/api/register", (req, res) => {
-
+app.post('/api/register', (req, res) => {
     const {
         username,
         email,
@@ -52,8 +49,8 @@ app.post("/api/register", (req, res) => {
     } = req.body;
 
     const saltRounds = 10;
-    bcrypt.genSalt(saltRounds, function (err, salt) {
-        bcrypt.hash(req.body.password, salt, function (err, hashedPassword) {
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(req.body.password, salt, function(err, hashedPassword) {
             if (err) throw err;
             else {
                 const newUser = new User({
@@ -70,14 +67,12 @@ app.post("/api/register", (req, res) => {
                         let error = Object.keys(err.keyValue)[0];
                         if (error == 'username') {
                             return res.json({ success: false, error: 'user' });
-                        }
-                        else if (error == 'email') {
+                        } else if (error == 'email') {
                             return res.json({ success: false, error: 'email' });
                         }
-                    }
-                    else {
+                    } else {
                         console.log(data);
-                        jwt.sign({ email: email }, "secretkey", (err, token) => {
+                        jwt.sign({ email: email }, 'secretkey', (err, token) => {
                             res.json({
                                 success: true,
                                 token
@@ -88,21 +83,21 @@ app.post("/api/register", (req, res) => {
             }
         });
     });
-})
+});
 
-app.post("/api/checkUniqueUsername", (req, res) => {
+app.post('/api/checkUniqueUsername', (req, res) => {
     const { username } = req.body;
     return User.findOne({ username: username })
-        .then(result => { return res.json(result) })
-})
+        .then(result => { return res.json(result); });
+});
 
-app.post("/api/checkUniqueEmail", (req, res) => {
+app.post('/api/checkUniqueEmail', (req, res) => {
     const { email } = req.body;
     return User.findOne({ email: email })
-        .then(result => { return res.json(result) })
-})
+        .then(result => { return res.json(result); });
+});
 
-app.post("/api/getUserInfo", (req, res) => {
+app.post('/api/getUserInfo', (req, res) => {
     const { email } = req.body;
     return User.findOne({ email: email })
         .then(result => {
@@ -112,8 +107,8 @@ app.post("/api/getUserInfo", (req, res) => {
                 name: result.name,
                 major: result.major,
                 visible: result.visible
-            })
-        })
-})
+            });
+        });
+});
 
 module.exports = app;

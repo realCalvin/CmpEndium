@@ -1,8 +1,8 @@
-const express = require("express");
-const cors = require("cors");
-const User = require("../models/userModel");
-const Resume = require("../models/resumeModel.js");
-const path = require("path");
+const express = require('express');
+const cors = require('cors');
+const User = require('../models/userModel');
+const Resume = require('../models/resumeModel.js');
+const path = require('path');
 
 const app = express();
 app.use(cors());
@@ -13,13 +13,13 @@ const {
     PutObjectCommand,
     ListBucketsCommand,
     GetObjectCommand
-} = require("@aws-sdk/client-s3");
+} = require('@aws-sdk/client-s3');
 
 // Set the AWS region
-const REGION = "us-west-1";
+const REGION = 'us-west-1';
 
 // Set the bucket parameters
-const bucketName = "cmpendium";
+const bucketName = 'cmpendium';
 const bucketParams = { Bucket: bucketName };
 
 // Create an S3 client service object
@@ -33,22 +33,22 @@ const AWS = require('aws-sdk');
 AWS.config.update({
     accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
-    region: "us-west-1"
-})
+    region: 'us-west-1'
+});
 let aws3 = new AWS.S3({ params: { Bucket: bucketName } });
 
-//Check connection by listing bucket(s)
+// Check connection by listing bucket(s)
 const listBuckets = async () => {
     try {
         const data = await s3.send(new ListBucketsCommand({}));
-        console.log("Success", data.Buckets);
+        console.log('Success', data.Buckets);
     } catch (err) {
-        console.log("Error", err);
+        console.log('Error', err);
     }
-}
+};
 // listBuckets();
 
-app.post("/api/upload", async (req, res) => {
+app.post('/api/upload', async (req, res) => {
     const content = Buffer.from(req.body.data, 'base64');
     const email = req.body.email;
     const major = req.body.major;
@@ -60,38 +60,36 @@ app.post("/api/upload", async (req, res) => {
         Key: fileName,
         Body: content,
         ContentType: 'application/pdf'
-    }
+    };
     try {
         const results = new AWS.S3.ManagedUpload({ params: params });
-        results.send(function (err, data) {
+        results.send(function(err, data) {
             return res.json({ s3Url: data.Location, uploadDate: date });
-        })
-        console.log("Successfully uploaded data");
+        });
+        console.log('Successfully uploaded data');
     } catch (err) {
-        console.log("Error", err);
+        console.log('Error', err);
     }
-})
+});
 
-app.post("/api/delete", async (req, res) => {
+app.post('/api/delete', async (req, res) => {
     const keyName = req.key;
     const objectParams = { Bucket: bucketName, Key: keyName };
     try {
         const results = await aws3.send(new DeleteObjectCommand(objectParams));
         // console.log("Successfully uploaded data to " + bucketName + "/" + keyName);
-
     } catch (err) {
-        console.log("Error", err);
+        console.log('Error', err);
     }
-})
+});
 
-app.post("/api/retrieve", async (req, res) => {
+app.post('/api/retrieve', async (req, res) => {
     const { major } = req.body;
     const objectParams = { Bucket: bucketName, Prefix: major };
     try {
         aws3.listObjects(objectParams, (err, data) => {
             if (err) console.log(err, err.stack);
             else {
-
                 for (var d in data.Contents) {
                     // delete useless data
                     if (data.Contents[d].Size == 0) {
@@ -109,15 +107,14 @@ app.post("/api/retrieve", async (req, res) => {
                      * the console.log inside the headObject callback prints out the metadata
                      * but the console.log(data.Contents) doesnt have the name in it
                      */
-                    const params = { Bucket: bucketName, Key: data.Contents[d].Key }
+                    const params = { Bucket: bucketName, Key: data.Contents[d].Key };
                     // get metadata for each object and add the name from metadata to object
                     aws3.headObject(params, (err, metadata) => {
                         // console.log(metadata.Metadata.name)
                         // add Name field to object
-                        data.Contents[d]["Name"] = metadata.Metadata.name
-                    })
-                    data.Contents[d].Key = "https://cmpendium.s3-us-west-1.amazonaws.com/" + data.Contents[d].Key;
-
+                        data.Contents[d].Name = metadata.Metadata.name;
+                    });
+                    data.Contents[d].Key = 'https://cmpendium.s3-us-west-1.amazonaws.com/' + data.Contents[d].Key;
                 }
                 console.log(data.Contents);
 
@@ -126,9 +123,9 @@ app.post("/api/retrieve", async (req, res) => {
             }
         });
     } catch (err) {
-        console.log("Error", err);
+        console.log('Error', err);
     }
-})
+});
 
 app.post('/api/database/saveresume', async (req, res) => {
     const {
@@ -147,36 +144,36 @@ app.post('/api/database/saveresume', async (req, res) => {
     });
 
     newResume.save();
-})
+});
 
 app.post('/api/database/getuserresume', async (req, res) => {
     const { email } = req.body;
     return Resume.find({ email: email })
-        .then(result => { return res.json(result) });
-})
+        .then(result => { return res.json(result); });
+});
 
 app.post('/api/database/setshareresume', async (req, res) => {
     const { email, visible } = req.body;
-    await Resume.updateMany({ email: email }, {visible: visible});
+    await Resume.updateMany({ email: email }, { visible: visible });
     let currentUser = await User.findOne({ email: email });
     currentUser.visible = visible;
     await currentUser.save();
-})
+});
 
-app.post("/api/database/saveresumecomment", async (req, res) => {
+app.post('/api/database/saveresumecomment', async (req, res) => {
     const { _id, username, comment } = req.body;
     let currentResume = await Resume.findOne({ _id: _id });
     let comments = currentResume.comments;
-    comments.push({username: username, comment: comment});
+    comments.push({ username: username, comment: comment });
     currentResume.comments = comments;
     await currentResume.save();
-})
+});
 
-app.post("/api/database/getresumes", (req, res) => {
-    let query = (req.body.major==='All') ? {visible: true} : {major: req.body.major, visible: true};
+app.post('/api/database/getresumes', (req, res) => {
+    let query = (req.body.major === 'All') ? { visible: true } : { major: req.body.major, visible: true };
     Resume.find(query).then((resume) => {
         return res.json(resume);
-    })
-})
+    });
+});
 
 module.exports = app;

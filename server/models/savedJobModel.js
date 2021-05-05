@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const savedJobSchema = new Schema({
@@ -22,6 +22,6 @@ const savedJobSchema = new Schema({
         type: String,
         required: true
     }
-})
+});
 
-module.exports = savedJob = mongoose.model("savedJob", savedJobSchema);
+module.exports = savedJob = mongoose.model('savedJob', savedJobSchema);
