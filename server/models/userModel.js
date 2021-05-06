@@ -28,7 +28,9 @@ const userSchema = {
         type: Boolean,
         required: true
     },
-    savedJobs: [savedJobSchema]
+    savedJobs: [savedJobSchema],
+    resetPasswordToken: String,
+    resetPasswordExpire: Date
 };
 
 const User = mongoose.model('User', userSchema);
