@@ -32,7 +32,6 @@ async function getJobs(data) {
 }
 
 app.post('/api/database/search', async (req, res) => {
-    console.log(req.body);
     let jobs = await getJobs(req.body);
     return res.json({ jobs: jobs });
 });

@@ -89,3 +89,29 @@ export async function checkUniqueEmail(email) {
         return res;
     });
 }
+
+export async function resetPasswordCode(email) {
+    return axios.post('/api/resetpasswordcode', {
+        email
+    }).then(res => {
+        return res;
+    });
+}
+
+export async function validPasswordCode(email, confirmationCode) {
+    return axios.post('/api/validpasswordcode', {
+        email,
+        confirmationCode
+    }).then(res => {
+        return res;
+    });
+}
+
+export async function setPassword(email, password) {
+    return axios.post('/api/setpassword', {
+        email,
+        password
+    }).then(res => {
+        return res;
+    });
+}

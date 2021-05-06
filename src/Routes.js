@@ -4,6 +4,7 @@ import Landing from './pages/landing/Landing.js';
 import Resumes from './pages/resumes/Resumes.js';
 import Signin from './pages/auth/signin/Signin.js';
 import Signup from './pages/auth/signup/Signup.js';
+import ResetPassword from './pages/auth/resetpassword/ResetPassword.js';
 import Search from './pages/search/Search.js';
 import JobListing from './pages/jobs/JobListing.js';
 import Dashboard from './pages/dashboard/Dashboard.js';
@@ -29,6 +30,11 @@ export default function Routing() {
             Component: Signup,
             authentication: false,
             path: '/signup'
+        },
+        {
+            Component: ResetPassword,
+            authentication: false,
+            path: '/resetpassword'
         },
         {
             Component: Dashboard,

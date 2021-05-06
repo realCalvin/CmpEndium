@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Lottie from 'react-lottie';
-
 import { login } from '../../../api/Auth';
 import { Row, InputGroup, FormControl } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -105,7 +104,7 @@ function Signin() {
                         <hr></hr>
                         <Row className="bottom-login-form-row">
                             <p>Don't have an account? <Link to="signup">Sign Up</Link></p>
-                            <p>Forgot your password? <Link to="forgotpassword">Reset password</Link></p>
+                            <p>Forgot your password? <Link to="resetpassword">Reset password</Link></p>
                         </Row>
                     </div>
                 </motion.div>
