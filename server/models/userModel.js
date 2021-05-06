@@ -1,5 +1,5 @@
 const savedJobSchema = require('./savedJobModel').schema;
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const userSchema = {
     username: {
@@ -29,8 +29,8 @@ const userSchema = {
         required: true
     },
     savedJobs: [savedJobSchema]
-}
+};
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

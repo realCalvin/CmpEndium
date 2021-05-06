@@ -1,7 +1,7 @@
 const resumeCommentSchema = require('./resumeCommentModel').schema;
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var resumeSchema = {
+let resumeSchema = {
     link: {
         type: String,
         required: true
@@ -23,8 +23,8 @@ var resumeSchema = {
         required: true
     },
     comments: [resumeCommentSchema]
-}
+};
 
-const Resume = mongoose.model("Resume", resumeSchema);
+const Resume = mongoose.model('Resume', resumeSchema);
 
 module.exports = Resume;

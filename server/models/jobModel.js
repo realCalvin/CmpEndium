@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const jobSchema = {
     title: {
@@ -20,8 +20,8 @@ const jobSchema = {
         type: String,
         required: true
     }
-}
+};
 
-const Job = mongoose.model("Job", jobSchema);
+const Job = mongoose.model('Job', jobSchema);
 
 module.exports = Job;

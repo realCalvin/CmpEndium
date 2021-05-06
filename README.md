@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/RTX-Banana/DummyTHICCC.svg?style=svg&circle-token=58e3d315c93708ba9f0567748cb51e284e774b7a)](https://app.circleci.com/pipelines/github/RTX-Banana/DummyTHICCC)
 # Get Started for Development
 1. Run ```npm install``` in backendium and frontendium.
 2. Create file called ```.env``` in backendium.
@@ -15,4 +16,3 @@
    aws_secret_access_key=SECRET_ACCESS_KEY
    ```
 6. Navigate to frontendium and run ```npm run dev```.
-
