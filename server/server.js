@@ -66,7 +66,7 @@ AWS.config.getCredentials(function(err) {
     }
 });
 
-const port = 9000;
+const port = process.env.port || 9000;
 app.listen(port, function() {
     console.log('Express server is running on port 9000');
 });
