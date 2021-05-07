@@ -67,15 +67,19 @@ AWS.config.getCredentials(function(err) {
 });
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('../build'));
+    app.use(express.static(path.join(__dirname, '..', 'build')));
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+    });
+} else {
+    app.get('/', (req, res) => {
+        res.send('Api running');
     });
 }
 
 const port = process.env.PORT || 9000;
 app.listen(port, function() {
-    console.log('Express server is running on port 9000');
+    console.log('Express server is running');
 });
 
 module.exports = app;
