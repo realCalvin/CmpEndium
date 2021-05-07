@@ -66,7 +66,14 @@ AWS.config.getCredentials(function(err) {
     }
 });
 
-const port = process.env.port || 9000;
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('../build'));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+    });
+}
+
+const port = process.env.PORT || 9000;
 app.listen(port, function() {
     console.log('Express server is running on port 9000');
 });

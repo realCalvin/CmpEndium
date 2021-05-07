@@ -2,7 +2,7 @@
   "name": "cmpendium",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:9000",
+  "proxy": "https://cmpendium.herokuapp.com/",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.14.0",
     "@aws-sdk/node-http-handler": "^3.13.1",
@@ -62,11 +62,11 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "node server/server.js",
+    "start": "cd server && node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=FALSE npm install --prefix client",
     "server": "cd server && nodemon server.js",
     "client": "react-scripts start",
     "dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
