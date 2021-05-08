@@ -1,8 +1,11 @@
 {
   "name": "cmpendium",
+  "engines": {
+    "node": "14.16.1"
+  },
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://cmpendium.herokuapp.com/",
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.14.0",
     "@aws-sdk/node-http-handler": "^3.13.1",
@@ -32,7 +35,6 @@
     "framer-motion": "^3.10.6",
     "history": "^5.0.0",
     "http-errors": "^1.8.0",
-    "indeed-scraper": "^3.1.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.6",
     "mongoose": "^5.12.7",
@@ -53,12 +55,10 @@
     "react-lottie": "^1.2.3",
     "react-particles-js": "^3.4.1",
     "react-pdf": "^5.2.0",
-    "react-rounded-image": "^2.0.13",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "react-spinners": "^0.10.6",
-    "react-spring": "^8.0.27",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

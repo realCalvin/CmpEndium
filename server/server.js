@@ -44,7 +44,6 @@ try {
 
 let gracefulExit = function() {
     mongoose.connection.close(function() {
-        console.log('Mongoose default connection with DB :' + db_server + ' is disconnected through app termination');
         process.exit(0);
     });
 };

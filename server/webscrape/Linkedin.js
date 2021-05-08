@@ -15,7 +15,7 @@ async function linkedinScraper(jobInfo) {
     let submitButton = '.login__form_action_container > button';
 
     // Set Up Puppeteer Browser
-    await puppeteer.launch({ headless: true, defaultViewport: null })
+    await puppeteer.launch({ headless: true, defaultViewport: null, args: ['--no-sandbox'] })
         .then(async (browser) => {
             let page = await browser.newPage();
 

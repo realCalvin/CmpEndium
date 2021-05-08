@@ -9,7 +9,7 @@ async function careerBuilderScraper(jobInfo) {
     let careerBuilderLink = 'https://www.careerbuilder.com/jobs?keywords=' + keywords + '&location=' + location;
 
     // Set Up Puppeteer Browser
-    await puppeteer.launch({ headless: true })
+    await puppeteer.launch({ headless: true, args: ['--no-sandbox'] })
         .then(async (browser) => {
             let page = await browser.newPage();
             browser.on('targetcreated', async (target) => {

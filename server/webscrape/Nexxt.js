@@ -8,7 +8,7 @@ async function nexxtScraper(jobInfo) {
     let simplyHiredLink = 'https://www.nexxt.com/jobs/search?soid=1&k=' + keywords + '&l=' + location;
 
     // Set Up Puppeteer Browser
-    await puppeteer.launch({ headless: true })
+    await puppeteer.launch({ headless: true, args: ['--no-sandbox'] })
         .then(async (browser) => {
             let page = await browser.newPage();
             // Visit Up To Page N Of SimplyHired Job Search
