@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Menu, Dropdown, Tag } from 'antd';
+import { Table, Menu, Dropdown, Tag, message } from 'antd';
 import { currentEmail } from '../../api/Auth';
 import { handleJobStatus, handleDeleteJob } from '../../api/Job';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +8,8 @@ import { DownOutlined } from '@ant-design/icons';
 import './SavedJobsTable.css';
 
 function SavedJobsTable(props) {
-    const [jobs, setJobs] = useState([]);
+    let { jobs, setJobs } = props;
+    // const [jobs, setJobs] = useState([]);
     const [render, setRender] = useState(false);
 
     function dropdownMenu(status, id) {
@@ -41,6 +42,7 @@ function SavedJobsTable(props) {
                     tempJobs[i].status = status;
                     setJobs(tempJobs);
                     forceRender();
+                    message.success('Successfully updated job status!');
                 }
             }
         }
@@ -55,6 +57,7 @@ function SavedJobsTable(props) {
                     tempJobs.splice(i, 1);
                     setJobs(tempJobs);
                     forceRender();
+                    message.success('Successfully deleted job!');
                 }
             }
         }

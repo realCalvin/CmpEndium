@@ -33,7 +33,13 @@ function Dashboard() {
         visible: ''
     });
     const [jobs, setJobs] = useState([]);
+    const [render, setRender] = useState(false);
     const { TabPane } = Tabs;
+
+    function handleSetJobs(jobs) {
+        setJobs(jobs);
+        setRender(!render);
+    }
 
     useEffect(async () => {
         const user = currentEmail();
@@ -58,13 +64,13 @@ function Dashboard() {
                 <div id="dashboard-tabs">
                     <Tabs defaultActiveKey="1">
                         <TabPane tab="Saved Jobs" key="1">
-                            <SavedJobsTable jobs={jobs} />
+                            <SavedJobsTable jobs={jobs} setJobs={handleSetJobs} />
                         </TabPane>
                         <TabPane tab="Resumes" key="2">
                             <UserResumes />
                         </TabPane>
                         <TabPane tab="My Progress" key="3">
-                            <MyProgressCharts jobs={jobs} />
+                            <MyProgressCharts jobs={jobs} render={render} />
                         </TabPane>
                         <TabPane tab="+ Add Job" key="4">
                             <AddJob />

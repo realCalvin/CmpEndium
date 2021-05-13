@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { Modal, List, Typography, Input, Button, Divider } from 'antd';
+import { Modal, List, Typography, Input, Button, Divider, Popconfirm, message } from 'antd';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { saveResumeComment } from '../../api/Resume';
+import { saveResumeComment, deleteResume } from '../../api/Resume';
 import { currentEmail } from '../../api/Auth';
 import { UserInfo } from '../../api/UserInfo';
+
 import './ResumeModal.css';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -33,10 +34,17 @@ function ResumeModal(props) {
             comment: comment
         });
         setComment('');
+
+        message.success('Successfully commented on resume!');
     }
 
     function handleCancel() {
         props.setShowModal(false);
+    }
+
+    async function handleDeleteResume() {
+        await deleteResume({ id: resume._id });
+        window.location.reload(false);
     }
 
     return (
@@ -79,6 +87,17 @@ function ResumeModal(props) {
                                     placeholder="Provide resume feedback here"
                                 />
                                 <Button onClick={handleSubmitComment}>Submit</Button>
+                                {props.owner
+                                    ? <Popconfirm
+                                        title="Are you sure you want to delete this resume"
+                                        onConfirm={handleDeleteResume}
+                                        okText="Yes"
+                                        cancelText="No"
+                                    >
+                                        <Button type="primary" danger>Delete</Button>
+                                    </Popconfirm>
+                                    : <></>
+                                }
                             </div>
                         </div>
                     </Col>

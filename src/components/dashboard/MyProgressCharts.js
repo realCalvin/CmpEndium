@@ -4,7 +4,7 @@ import { Line, Pie } from 'react-chartjs-2';
 import './MyProgressCharts.css';
 
 function MyProgressCharts(props) {
-    const [jobs, setJobs] = useState([]);
+    const [jobs, setJobs] = useState(props.jobs);
 
     const [lineGraphLabels, setLineGraphLabels] = useState([]);
     const [lineGraphData, setLineGraphData] = useState([]);
@@ -44,8 +44,6 @@ function MyProgressCharts(props) {
         // start and end date
         const firstDate = new Date(jobs[0].date);
         const lastDate = new Date(jobs[jobs.length - 1].date);
-        console.log(lastDate);
-        console.log(firstDate);
 
         // count jobs applied for each day between start and end
         for (let i = 0; i < jobs.length; i++) {
@@ -125,14 +123,13 @@ function MyProgressCharts(props) {
         setPieChartData(pieData);
     }
 
-    useEffect(async () => {
+    useEffect(() => {
         setJobs(props.jobs);
-        if (jobs.length > 1) {
-            console.log(jobs);
+        if (jobs.length >= 1) {
             lineGraph();
             pieChart();
         }
-    }, [props.jobs, jobs]);
+    }, [props.render]);
 
     return (
         <div id="MyProgressCharts">

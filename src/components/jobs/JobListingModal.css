@@ -1,0 +1,30 @@
+.job-modal-btn {
+    background-color: rgb(118, 118, 250) !important;
+    color: white !important;
+    margin: 0px 5px;
+    border-radius: 4px !important;
+}
+
+.job-modal-btn:hover {
+    border-color: rgb(118, 118, 250) !important;
+    background-color: white !important;
+    color: rgb(118, 118, 250) !important;
+}
+
+.ant-modal-footer .fa-external-link-alt {
+    font-size: 10px;
+}
+
+.job-modal-label {
+    font-size: 18px;
+    font-weight: 550;
+}
+
+.job-modal-description {
+    height: 500px;
+    overflow-y: auto;
+}
+
+#job-modal-spinner {
+    text-align: center;
+}

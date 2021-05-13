@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Button, Accordion, Card, ListGroup } from 'react-bootstrap';
-import './Signup.css';
 import { jobMapping } from '../../../components/jobs/Jobs';
+import './Signup.css';
 
 function SignupBox2(props) {
     const [jobInfo, setJobInfo] = useState({ job: props.user.major });

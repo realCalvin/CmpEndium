@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Card, Row, Col } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { searchJobs, saveJob } from '../../api/Job';
 import { isAuthenticated, currentEmail } from '../../api/Auth';
 import SearchData from '../../images/lottie/search.json';
-import { Pagination } from 'antd';
+import { Pagination, message } from 'antd';
 import Lottie from 'react-lottie';
 import party from 'party-js';
 import BeatLoader from 'react-spinners/BeatLoader';
+import JobListingModal from '../../components/jobs/JobListingModal';
 import './JobListing.css';
 
 function JobListing() {
@@ -27,10 +26,18 @@ function JobListing() {
     const [authenticated] = useState(isAuthenticated().length !== 0);
 
     const [jobs, setJobs] = useState([]);
+    const [jobModal, setJobModal] = useState(false);
     const [loaded, setLoaded] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [jobKeyword, setJobKeywords] = useState('');
     const [jobLocation, setJobLocation] = useState('');
+    const [currentJob, setCurrentJob] = useState({
+        title: '',
+        location: '',
+        company: '',
+        description: '',
+        link: ''
+    });
 
     const jobsPerPage = 10;
 
@@ -39,15 +46,6 @@ function JobListing() {
     }
 
     async function handleSaveJob(e, job) {
-        const siteColors = ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a', '#ff7373'];
-        party.element(e.target, {
-            color: siteColors,
-            count: party.variation(25, 0.5),
-            size: party.minmax(6, 10),
-            velocity: party.minmax(-300, -600),
-            angularVelocity: party.minmax(6, 9)
-        });
-
         let date = new Date();
         const dd = String(date.getDate()).padStart(2, '0');
         const mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -63,6 +61,21 @@ function JobListing() {
             status: 'Applied'
         };
         await saveJob(jobData);
+        const siteColors = ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a', '#ff7373'];
+        party.element(e.target, {
+            color: siteColors,
+            count: party.variation(25, 0.5),
+            size: party.minmax(6, 10),
+            velocity: party.minmax(-300, -600),
+            angularVelocity: party.minmax(6, 9)
+        });
+        message.success('Successfully saved job!');
+    }
+
+    function handleViewJob(job) {
+        console.log(job);
+        setCurrentJob(job);
+        setJobModal(true);
     }
 
     // eslint-disable-next-line
@@ -128,20 +141,9 @@ function JobListing() {
                             </Card.Text>
                         </Col>
                         <Col md={4} className="job-listing-btns">
-                            {authenticated
-                                ? <>
-                                    <button className="job-listing-btn" id={'job-listing-btn-' + itr} onClick={() => { handleSaveJob(event, job); }}>
-                                        Save Job
-                                    </button>
-                                </>
-                                : <></>
-                            }
-                            <br></br>
-                            <a target="_blank" rel="noreferrer" href={job.link}>
-                                <button className="job-listing-btn">
-                                    Apply <FontAwesomeIcon className="login-fa-icon" icon={faExternalLinkAlt} />
-                                </button>
-                            </a>
+                            <button className="job-listing-btn" onClick={() => { handleViewJob(job); }}>
+                                View
+                            </button>
                         </Col>
                     </Row>
                 </Card.Body>
@@ -184,6 +186,13 @@ function JobListing() {
                     }
                 </div>
             </div>
+            <JobListingModal
+                currentJob={currentJob}
+                authenticated={authenticated}
+                jobModal={jobModal}
+                setJobModal={setJobModal}
+                handleSaveJob={handleSaveJob}
+            />
         </div>
     );
 }

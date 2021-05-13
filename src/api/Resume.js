@@ -67,3 +67,17 @@ export function getResumes(query) {
         return res;
     });
 }
+
+export function deleteResume(query) {
+    const {
+        id,
+        s3link
+    } = query;
+
+    return axios.post('/api/deleteresume', {
+        id,
+        s3link
+    }).then(res => {
+        return res;
+    });
+}

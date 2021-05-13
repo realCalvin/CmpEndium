@@ -1,9 +1,9 @@
 const express = require('express'); const cors = require('cors');
 const bodyParser = require('body-parser');
-const indeed = require('../webscrape/Indeed');
+const indeedScraper = require('../webscrape/Indeed');
+const simplyHiredScraper = require('../webscrape/SimplyHired');
 const linkedin = require('../webscrape/Linkedin');
 const careerbuilder = require('../webscrape/CareerBuilder');
-const simplyhired = require('../webscrape/SimplyHired');
 const themuse = require('../webscrape/TheMuse');
 const Job = require('../models/jobModel');
 const User = require('../models/userModel');
@@ -26,7 +26,7 @@ async function getJobs(data) {
         .then(dbJobs => {
             mongoDbJobs = dbJobs;
         });
-    const [indeedJobs, simplyHiredJobs] = await Promise.all([indeed.indeedScraper(data), simplyhired.simplyHiredScraper(data)]);
+    const [indeedJobs, simplyHiredJobs] = await Promise.all([indeedScraper.getBasicInfo(data), simplyHiredScraper.getBasicInfo(data)]);
     jobs = [].concat(indeedJobs, simplyHiredJobs, mongoDbJobs);
     return jobs;
 }
@@ -42,6 +42,7 @@ app.post('/api/savejob', async (req, res) => {
     jobs.push(req.body);
     currentUser.savedJobs = jobs;
     await currentUser.save();
+    return res.json({ success: true });
 });
 
 app.post('/api/database/getsavedjobs', async (req, res) => {
@@ -75,6 +76,31 @@ app.post('/api/database/deletejob', async (req, res) => {
         }
     }
     return res.json({ response: 'fail' });
+});
+
+app.post('/api/getjob', async (req, res) => {
+    const { title, location, company, description, link } = req.body.data;
+    let job = {
+        title: title,
+        location: location,
+        company: company,
+        description: description,
+        link: link
+    };
+    const website = link.split('.')[1];
+
+    let data;
+    if (website === 'indeed') {
+        data = await indeedScraper.getMoreInfo(link);
+        job.description = data.description;
+        job.link = data.link;
+    } else if (website === 'simplyhired') {
+        data = await simplyHiredScraper.getMoreInfo(link);
+        job.description = data.description;
+        job.link = data.link;
+    }
+
+    return res.json({ job: job });
 });
 
 module.exports = app;

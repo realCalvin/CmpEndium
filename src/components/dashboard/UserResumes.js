@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Button, Dropdown, DropdownButton } from 'react-bootstrap';
-import { Button as AntdButton } from 'antd';
+import { Button as AntdButton, message } from 'antd';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { currentEmail } from '../../api/Auth';
 import { UserInfo } from '../../api/UserInfo';
@@ -116,6 +116,7 @@ function UserResumes() {
                 velocity: party.minmax(-300, -600),
                 angularVelocity: party.minmax(6, 9)
             });
+            message.success('Successfully uploaded resume! Refresh page for changes.');
             setSuccessResume(true);
         } else {
             setEmptySubmit(true);
@@ -192,7 +193,7 @@ function UserResumes() {
                     <Dropdown.Item onClick={() => handleShareResume(false)}>No</Dropdown.Item>
                 </DropdownButton>
             </Row>
-            <ResumeModal currentResume={currentResume} showModal={showModal} setShowModal={setShowModal} />
+            <ResumeModal owner={true} currentResume={currentResume} showModal={showModal} setShowModal={setShowModal} />
         </div>
     );
 }

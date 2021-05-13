@@ -30,6 +30,7 @@ const bucketParams = { Bucket: bucketName };
 // });
 
 const AWS = require('aws-sdk');
+const { withSuccess } = require('antd/lib/modal/confirm');
 AWS.config.update({
     accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
@@ -72,15 +73,10 @@ app.post('/api/upload', async (req, res) => {
     }
 });
 
-app.post('/api/delete', async (req, res) => {
-    const keyName = req.key;
-    const objectParams = { Bucket: bucketName, Key: keyName };
-    try {
-        const results = await aws3.send(new DeleteObjectCommand(objectParams));
-        // console.log("Successfully uploaded data to " + bucketName + "/" + keyName);
-    } catch (err) {
-        console.log('Error', err);
-    }
+app.post('/api/deleteresume', async (req, res) => {
+    const { id } = req.body;
+    await Resume.deleteOne({ _id: id });
+    return res.json({ success: true });
 });
 
 app.post('/api/retrieve', async (req, res) => {
@@ -135,15 +131,18 @@ app.post('/api/database/saveresume', async (req, res) => {
         major
     } = req.body;
 
-    const newResume = new Resume({
-        link,
-        uploadDate,
-        email,
-        major,
-        visible: true
-    });
+    User.findOne({ email: email })
+        .then(res => {
+            const newResume = new Resume({
+                link,
+                uploadDate,
+                email,
+                major,
+                visible: res.visible
+            });
 
-    newResume.save();
+            newResume.save();
+        });
 });
 
 app.post('/api/database/getuserresume', async (req, res) => {

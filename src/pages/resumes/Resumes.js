@@ -40,7 +40,8 @@ function Resumes() {
     async function retrieveResumes(e) {
         setMajor(e.target.id);
         let resumeList = await getResumes({ major: e.target.id });
-        setResumes(resumeList.data);
+        setResumes(resumeList.data.reverse());
+        setCurrentPage(1);
     }
 
     function handleViewModal(resume) {
@@ -66,7 +67,7 @@ function Resumes() {
     useEffect(async () => {
         setMajor('All');
         let resumeList = await getResumes({ major: 'All' });
-        setResumes(resumeList.data);
+        setResumes(resumeList.data.reverse());
     }, []);
 
     const resumeList = currentResumes.map((resume, itr) => {
@@ -111,7 +112,7 @@ function Resumes() {
                 <Row>
                     {resumeList}
                 </Row>
-                <Pagination defaultCurrent={currentPage} total={resumes.length} showSizeChanger={false} onChange={handlePagination} />
+                <Pagination defaultCurrent={currentPage} total={resumes.length - 2} showSizeChanger={false} onChange={handlePagination} />
             </div>
             <ResumeModal currentResume={currentResume} showModal={showModal} setShowModal={setShowModal} />
         </div>

@@ -36,6 +36,14 @@ export function saveJob(data) {
     });
 }
 
+export function getJob(data) {
+    return axios.post('/api/getjob', {
+        data
+    }).then(res => {
+        return res;
+    });
+}
+
 export function getSavedJobs(data) {
     const {
         email
